@@ -3,6 +3,7 @@
 @import './utils/base';
 @import './utils/utils';
 @import './utils/visuallyHiden';
+@import './mixins/mixins';
 
 @import './components/header';
 @import './components/favorite-page';
@@ -13,3 +14,4 @@
 @import './components/footer';
 @import './components/calendar';
 @import './components/cards';
+@import './components/weather';

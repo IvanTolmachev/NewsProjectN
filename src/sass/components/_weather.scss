@@ -1,0 +1,123 @@
+.weather__thumb {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 32px;
+  box-sizing: border-box;
+
+  width: 288px;
+  height: 469px;
+
+  font-family: $wetherFontRoboto;
+  font-weight: 400;
+
+  color: $witeTextColor;
+  background-color: #4440f7;
+  mix-blend-mode: normal;
+  border-radius: 4px;
+
+  @include tablet {
+    width: 353px;
+    height: 675px;
+
+    padding-top: 40px;
+    padding-bottom: 60px;
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+
+  @include desktop {
+    width: 395px;
+  }
+}
+
+.weather__icon {
+  margin: auto;
+
+  width: 128px;
+  height: 128px;
+
+  border-radius: 50%;
+  background: linear-gradient(180deg, #fa6c21 0%, rgba(255, 211, 88, 0.2) 100%);
+  box-shadow: inset 0px 20px 65px #fa6c21;
+
+  @include tablet {
+    width: 165px;
+    height: 165px;
+  }
+}
+
+.weather__info {
+  display: flex;
+  align-items: center;
+}
+
+.weather__temp {
+  font-size: 42px;
+  margin-right: 8px;
+
+  @include tablet {
+    font-size: 64px;
+  }
+}
+
+.weather__add-info {
+  border-left: 1px solid #ffffff;
+}
+
+.weather__cond {
+  font-size: 24px;
+  margin-left: 8px;
+  margin-bottom: 5px;
+
+  @include tablet {
+    font-size: 36px;
+  }
+}
+
+.weather__location {
+  font-size: 14px;
+  margin-left: 8px;
+
+  width: auto;
+  max-width: 180px;
+  overflow-wrap: break-word;
+
+  padding: 9.5px 11.22px;
+
+  background: $wetherBtnColor;
+  border-radius: 10px;
+
+  @include tablet {
+    font-size: 20px;
+  }
+}
+
+.weather__date {
+  text-align: center;
+  font-size: 28px;
+
+  margin-bottom: 26px;
+
+  @include tablet {
+    font-size: 36px;
+  }
+}
+
+.weather__week {
+  font-size: 16px;
+  color: inherit;
+
+  width: auto;
+
+  padding: 8px 14px;
+
+  background: $wetherBtnColor;
+  border-radius: 10px;
+  border: none;
+
+  @include tablet {
+    font-size: 20px;
+  }
+}
