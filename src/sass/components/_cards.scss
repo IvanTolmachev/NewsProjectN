@@ -10,7 +10,7 @@
   background-color: rgb(141, 129, 129);
 }
 .wrap-image__text {
-  position: absolute;
+  // position: absolute;
   top: 40px;
   left: 8px;
   background-color: rgba(68, 64, 247, 0.7);
@@ -54,7 +54,8 @@
 
 .wrap-image__icon {
   display: block;
-  background-color: aqua;
+  fill: currentColor;
+  // background-color: aqua;
   /* position: absolute;
   top: 8px;
   right: 13px; */
