@@ -1,13 +1,17 @@
-let button = document.getElementById('categories-toggler');
+import debounce from 'lodash.debounce';
 
-button.addEventListener('click', function () {
+const showHideCategoriesBtn = document.getElementById('categories-toggler');
+const categoriesContainer = document.querySelector('.categories__container');
+
+showHideCategoriesBtn.addEventListener('click', function () {
   document.querySelector('.filter').classList.toggle('filter--open');
 });
 
-//window.addEventListener('resize', debounce(restart, 150));
 window.addEventListener('resize', debounce(restart, 300));
 
-moveForward();
+restart();
+
+// === function
 
 function moveForward() {
   let listElements = Array.from(
@@ -21,9 +25,9 @@ function moveForward() {
   });
 
   if (!invisibleElements.length) {
-    button.setAttribute('hidden', true);
+    showHideCategoriesBtn.setAttribute('hidden', true);
   } else {
-    button.removeAttribute('hidden');
+    showHideCategoriesBtn.removeAttribute('hidden');
   }
 
   //button.innerHTML = invisibleElements.length;
@@ -31,9 +35,9 @@ function moveForward() {
 
 function moveBackward() {
   let menuListElements = Array.from(
-      document.querySelectorAll('#categories-hide .categories__item')
-    ),
-    list = document.getElementById('categories-show');
+    document.querySelectorAll('#categories-hide .categories__item')
+  );
+  let list = document.getElementById('categories-show');
 
   menuListElements.forEach(function (item) {
     list.appendChild(item);
@@ -41,16 +45,13 @@ function moveBackward() {
   // console.log(menuListElements);
 }
 
-function restart() {
-  moveBackward();
-  moveForward();
-}
-
 function getInvisible(listElements) {
   let list = document.getElementById('categories-show');
   let space = (document.documentElement.clientWidth - 1280) / 2;
+
   space = space > 0 ? space : 0;
-  console.log(space);
+
+  //  console.log(space);
 
   let invisible = listElements.filter(function (item) {
     if (
@@ -60,22 +61,21 @@ function getInvisible(listElements) {
       return item;
     }
   });
-  console.log(invisible);
+  //console.log(invisible);
   return invisible;
 }
 
-function debounce(func, wait, immediate) {
-  var timeout;
-  return function () {
-    var context = this,
-      args = arguments;
-    var later = function () {
-      timeout = null;
-      if (!immediate) func.apply(context, args);
-    };
-    var callNow = immediate && !timeout;
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-    if (callNow) func.apply(context, args);
-  };
+function restart() {
+  moveBackward();
+  moveForward();
+  const menuListElements = Array.from(
+    document.querySelectorAll('#categories-show .categories__item')
+  );
+  if (!menuListElements.length) {
+    showHideCategoriesBtn.textContent = 'Categories';
+    categoriesContainer.classList.add('no-categories');
+  } else {
+    showHideCategoriesBtn.textContent = 'Other';
+    categoriesContainer.classList.remove('no-categories');
+  }
 }

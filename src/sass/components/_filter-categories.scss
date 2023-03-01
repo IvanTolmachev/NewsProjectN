@@ -12,8 +12,28 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  row-gap: 1px;
   width: max-content;
+
+  // border: 1px solid #000;
+  border-radius: 20px;
+  background: #f8f8f8;
+  padding: 10px 20px;
+}
+
+#categories-hide .categories__item {
+  border: none;
+  text-align: start;
+  padding: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    text-decoration-line: underline;
+    background-color: inherit;
+    color: $primarySwitchColor;
+  }
 }
 
 .categories__item,
@@ -24,20 +44,23 @@
   font-size: 12px;
   line-height: 1.3334;
 
-  color: var(--accent-color);
+  color: $primarySwitchColor;
 
   text-align: center;
   padding: 7px 21px;
   border: 1 solid;
-  border-color: var(--accent-color);
+  border-color: $primarySwitchColor;
   border-radius: 20px;
+  cursor: pointer;
+
   transition: $durationFunction $timingFunction;
   transition-property: background-color, border-color;
 
-  &:hover {
-    background-color: var(--accent-color);
-    color: var(--button-text-color);
-    border-color: var(--accent-color);
+  &:hover,
+  &:focus {
+    background-color: $primarySwitchColor;
+    color: $witeTextColor;
+    border-color: $primarySwitchColor;
   }
 }
 #menu-calendar.filter__btn {
@@ -83,6 +106,9 @@
   margin-left: 16px;
 }
 
+.categories__container.no-categories {
+  margin-left: 0px;
+}
 .calendar {
   display: flex;
   flex-wrap: nowrap;
