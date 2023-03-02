@@ -1,0 +1,91 @@
+.toggleWrapper {
+    position: absolute;
+    top: 49px;
+    right: 0px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.switch {
+    display: inline-block;
+    position: relative;
+    width: 40px;
+    height: 20px;
+
+
+    &__input {
+        opacity: 0;
+        height: 0;
+        width: 0;
+    }
+}
+
+
+
+.switch__slider {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $witeTextColor;
+    border: 0.6 solid $primarySwitchColor;
+    border-radius: 20px;
+    transition: background-color 500ms $timingFunction;
+
+}
+
+.switch__slider::before {
+    content: ' ';
+    position: absolute;
+    cursor: pointer;
+
+    left: 1px;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background-color: $primarySwitchColor;
+    transition: transform $durationFunction $timingFunction;
+}
+
+.switch__input:focus+.switch__slider {
+    box-shadow: 0 0 3px $primarySwitchColor;
+
+}
+
+.switch__input:checked+.switch__slider {
+    background-color: $hoverColor;
+    border: 1px solid $witeTextColor;
+    border-radius: 20px;
+    transition: background-color $durationFunction $timingFunction;
+
+    &::before {
+        background-color: $witeTextColor;
+
+    }
+}
+
+.switch__input:checked+.switch__slider::before {
+    transform: translateX(20px);
+    transition: transform 500ms $timingFunction;
+
+}
+
+.toggle-label {
+    font-family: 'Poppins';
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.33;
+
+    &.light {
+        color: $primarySwitchColor;
+    }
+
+    &.dark {
+        color: $secondarySwitchColor
+    }
+}
