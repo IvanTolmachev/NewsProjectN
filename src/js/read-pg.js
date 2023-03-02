@@ -1,3 +1,4 @@
+import getCards from './api_cards';
 
 const dropBtnRef = document.getElementById('dropBtn-js'); 
 const dropIcon = document.querySelector('.icon-down-read-pg'); 
