@@ -14,7 +14,7 @@ async function createCards() {
   createMarkup(data);
 }
 createCards();
-function createMarkup(arr) {
+ function createMarkup(arr) {
   const markup = arr
     .map(({ id, url, title, section, abstract, published_date, media }) => {
       let imgUrl = media.map(media => media['media-metadata'][2].url);
@@ -48,3 +48,5 @@ function createMarkup(arr) {
     .join('');
   refs.gallery.insertAdjacentHTML('beforeend', markup);
 }
+
+
