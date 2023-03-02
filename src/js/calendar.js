@@ -6,12 +6,12 @@ const btnEl = document.querySelector('.calendar__btn');
 const spanEl = document.querySelector('.calendar-btn-span');
 const modalEl = document.querySelector('.modal');
 const todayBtn = document.querySelector('.today-btn');
-//const todayBtn = document.querySelector('#menu-calendar');
 
 const yearBtn = document.querySelector('.next-year');
 const yearsDiv = document.querySelector('.years ul');
 
 btnEl.addEventListener('click', () => {
+  // btnEl.classList.remove('rotate');
   return modalEl.classList.toggle('is-shown')
     ? btnEl.classList.add('btn-is-active')
     : btnEl.classList.remove('btn-is-active');
@@ -24,18 +24,18 @@ let date = new Date();
 let currYear = date.getFullYear();
 let currMonth = date.getMonth();
 const months = [
-  'January',
-  'February',
-  'March',
-  'April',
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
   'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
 ];
 
 function renderCalendar() {
@@ -47,17 +47,16 @@ function renderCalendar() {
 
   for (let i = firstDayofMonth; i > 0; i--) {
     // creating li of previous month last days
-    liTag += `<li><button type="button" class="button inactive" id="inactive" disabled>${
-      lastDateofLastMonth - i + 1
-    }</button></li>`;
+    liTag += `<li><button type="button" class="button inactive" id="inactive" disabled>${lastDateofLastMonth - i + 1
+      }</button></li>`;
   }
   for (let i = 1; i <= lastDateofMonth; i++) {
     // creating li of all days of current month
     // adding active class to li if the current day, month, and year matched
     let isToday =
       i === date.getDate() &&
-      currMonth === date.getMonth() &&
-      currYear === date.getFullYear()
+        currMonth === date.getMonth() &&
+        currYear === date.getFullYear()
         ? 'current-month-day'
         : '';
     let isCurrentDay = i === date.getDate() ? 'active' : '';
@@ -65,9 +64,8 @@ function renderCalendar() {
   }
   for (let i = lastDayofMonth; i < 7; i++) {
     // creating li of next month first days
-    liTag += `<li><button type="button" class="button inactive" id="inactive" disabled>${
-      i - lastDayofMonth + 1
-    }</button></li>`;
+    liTag += `<li><button type="button" class="button inactive" id="inactive" disabled>${i - lastDayofMonth + 1
+      }</button></li>`;
   }
 
   currentDate.innerHTML = `${months[currMonth]} ${currYear}`; // passing current mon and yr as currentDate text
