@@ -18,31 +18,29 @@ function createMarkup(arr) {
   const markup = arr
     .map(({ id, url, title, section, abstract, published_date, media }) => {
       let imgUrl = media.map(media => media['media-metadata'][2].url);
-      let newDateStr = published_date.replace(/-/g, '/');
-
       return `
-       <li class="card">
+       <div class="card" id="${id}">
         <div class="wrap-image">
           <img
             src="${imgUrl}"
             alt="photo"
-           class="wrap-image__photo"
+            width="250"
+            height="250"
+            class="wrap-image__photo"
           />
           <p class="wrap-image__text">${section}</p>
-          <button type="button" id="${id}" class="wrap-image__btn"><span class="js-favorite-btn-text">Add to favorite</span>
+          <button type="button" class="wrap-image__btn"><span class="js-favorite-btn-text">Add to favorite</span>
            <svg class="wrap-image__icon" width="16" height="16">
                 <use href ='${iconHeart}#icon-heart'></use>
               </svg></button>
         </div>
         <h2 class="card__title">${title}</h2>
-        <p class="card__description">${
-          abstract.length > 112 ? abstract.slice(0, 113) + '...' : abstract
-        }</p>
+        <p class="card__description">${abstract}</p>
         <div class="wrap-info">
-          <p class="wrap-info__time">${newDateStr}</p>
+          <p class="wrap-info__time">${published_date}</p>
           <a href="${url}" class="wrap-info__link">Read more</a>
         </div>
-      </li>
+      </div>
         `;
     })
     .join('');
