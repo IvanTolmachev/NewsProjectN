@@ -1,6 +1,6 @@
 <div class="categories">
   <ul id="categories-show" class="categories__list">
-    <li class="categories__item">Admin</li>
+    <!-- <li class="categories__item">Admin</li>
     <li class="categories__item">Arts</li>
     <li class="categories__item">Automobiles</li>
     <li class="categories__item">Books</li>
@@ -19,17 +19,30 @@
     <li class="categories__item">Home Page</li>
     <li class="categories__item">Job Market</li>
     <li class="categories__item">Lens</li>
-    <li class="categories__item">Fashion</li>
+    <li class="categories__item">Fashion</li> -->
   </ul>
   <div class="categories__container">
-    <button id="categories-toggler" class="filter__btn">Other</button>
-    <div class="filter">
+    <button id="categories-toggler" class="filter__btn">
+      <span>Others</span>
+      <svg class="categories__icon" width="14" height="14">
+        <use href="./images/icon.svg#icon-arrow-down"></use>
+      </svg>
+    </button>
+    <div class="filter visually-hidden">
       <ul id="categories-hide"></ul>
     </div>
   </div>
 
   <div class="calendar">
-    <span> Search date news</span>
-    <button id="menu-calendar" class="filter__btn">22/22/22</button>
+    <span class="calendar__text"> Search date news</span>
+    <button id="menu-calendar" class="calendar__btn">
+      <svg class="categories__icon" width="20" height="20">
+        <use href="./images/icon.svg#icon-calendar"></use>
+      </svg>
+      <span>22/22/22</span>
+      <svg class="categories__icon" width="14" height="14">
+        <use href="./images/icon.svg#icon-arrow-down"></use>
+      </svg>
+    </button>
   </div>
 </div>
