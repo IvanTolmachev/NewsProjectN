@@ -1,4 +1,9 @@
-import getCards from './api_cards';
+// import axios from 'axios';
+// import { createCards, createMarkup }  from './cards';
+
+// getCards(); 
+
+// console.log(createCards());  
 
 const dropBtnRef = document.getElementById('dropBtn-js'); 
 const dropIcon = document.querySelector('.icon-down-read-pg'); 
@@ -10,4 +15,12 @@ dropBtnRef.addEventListener('click', function () {
   });
 //   window.addEventListener('resize', debounce(restart, 250));
 
- 
+// newsListRef.insertAdjacentHTML('beforeend', markupCards());
+
+// const readMoreBtn = document.querySelector('.wrap-info__link'); 
+
+// readMoreBtn.addEventListener('click', onSavedCard);
+
+// function onSavedCard() {
+
+// }
