@@ -1,5 +1,4 @@
 import './js/cards';
 import './js/api_cards';
-import './js/caledar';
+import './js/calendar';
 import './js/filter-categories';
-
