@@ -2,20 +2,32 @@ import debounce from 'lodash.debounce';
 import axios from 'axios';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
+const categories = document.querySelector('.categories');
 const showHideCategoriesBtn = document.getElementById('categories-toggler');
 const categoriesContainer = document.querySelector('.categories__container');
-const butIcon = document.querySelector('.categories__icon');
+const categoriesIcon = document.querySelector(
+  '#categories-toggler .categories__icon'
+);
 const filterItems = document.querySelector('.filter');
+const calendarBtn = document.getElementById('menu-calendar');
 const calendarText = document.querySelector('.calendar__text');
+const calendarIcon = document.querySelector('#menu-calendar .categories__icon');
 
-const SECTION_URL = 'section-list';
-
+const SECTION_URL = '/news/v3/content/section-list';
+const CURRENT_SECTION_URL = '/news/v3/content/section-list';
 const sectionParams = {
   searchString: '',
   'api-key': 'VPd8ESOXXGRNi6SUHc4QYJMXdqmRVK3K',
 };
 
 //== function
+function makeURL(params, subUrl) {
+  const BASE_URL = `https://api.nytimes.com/svc`;
+
+  const urlParams = new URLSearchParams(params);
+
+  return `${BASE_URL}/${subUrl}.json?${urlParams}`;
+}
 
 async function getData(url, timeout) {
   const controller = new AbortController();
@@ -26,14 +38,6 @@ async function getData(url, timeout) {
   clearTimeout(id);
 
   return response;
-}
-
-function makeURL(params, subUrl) {
-  const BASE_URL = `https://api.nytimes.com/svc/news/v3/content`;
-
-  const urlParams = new URLSearchParams(params);
-
-  return `${BASE_URL}/${subUrl}.json?${urlParams}`;
 }
 
 async function makeSection(params, subUrl) {
@@ -114,11 +118,27 @@ function sortSections(count) {
   listShow.append(...elementShow);
   listHide.append(...elementHide);
 }
+//!=== listener
 
-showHideCategoriesBtn.addEventListener('click', function () {
+showHideCategoriesBtn.addEventListener('click', () => {
   filterItems.classList.toggle('visually-hidden');
-  butIcon.classList.toggle('rotate');
+  categoriesIcon.classList.toggle('rotate');
 });
+
+calendarBtn.addEventListener('click', () => {
+  //filterItems.classList.toggle('visually-hidden');
+  calendarIcon.classList.toggle('rotate');
+});
+
+categories.addEventListener('click', e => {
+  if (e.target.nodeName !== 'LI') {
+    return;
+  }
+  categoriesIcon.classList.remove('rotate');
+  filterItems.classList.add('visually-hidden');
+  console.log(e.target.dataset.section);
+});
+
 window.addEventListener('resize', debounce(restart, 250));
 
 makeSection(sectionParams, SECTION_URL);
