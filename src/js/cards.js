@@ -24,9 +24,7 @@ function createMarkup(arr) {
           <img
             src="${imgUrl}"
             alt="photo"
-            width="250"
-            height="250"
-            class="wrap-image__photo"
+           class="wrap-image__photo"
           />
           <p class="wrap-image__text">${section}</p>
           <button type="button" class="wrap-image__btn"><span class="js-favorite-btn-text">Add to favorite</span>
