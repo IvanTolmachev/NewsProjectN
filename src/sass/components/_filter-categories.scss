@@ -63,13 +63,14 @@
   margin-right: 10px;
 }
 
-.filter__btn svg {
-  fill: currentColor;
-}
+// .filter__btn svg {
+//   fill: currentColor;
+// }
 .categories__icon.rotate {
   transform: rotate(-180deg);
 }
 .categories__icon {
+  fill: currentColor;
   transform: rotate(0deg);
   transition: transform $durationFunction $timingFunction;
 }
@@ -164,8 +165,8 @@
   font-size: 14px;
   line-height: 1.5;
 
-  color: $primaryTextColor;
-
+  //color: $primaryTextColor;
+  color: #a2a2a2;
   text-align: center;
   padding: 5px 22px;
   border: 1 solid;
@@ -181,5 +182,19 @@
     background-color: $primarySwitchColor;
     color: $witeTextColor;
     border-color: $primarySwitchColor;
+    & .calendar__icon {
+      fill: currentColor;
+    }
   }
+  & span {
+    // color: #f8f8f8;
+    padding: 0 12px;
+  }
+  & .calendar__icon {
+    fill: $primarySwitchColor;
+  }
+}
+
+.calendar__icon {
+  fill: currentColor;
 }
