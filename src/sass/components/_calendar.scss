@@ -1,162 +1,3 @@
-// @media screen and (min-width: 320px) {
-//     .calendar {
-//         width: 320px;
-//     }
-
-//     .calendar-label {
-//         display: none;
-//     }
-
-//     .calendar-btn {
-//         width: 152px;
-//     }
-
-//     .wrapper {
-//         top: 32;
-//         left: -65;
-//     }
-// }
-
-// @media screen and (min-width: 768px) {
-//     .calendar {
-//         width: 768px;
-//     }
-
-//     .calendar-label {
-//         display: none;
-//     }
-
-//     .calendar-btn {
-//         width: 152px;
-//     }
-
-//     .wrapper {
-//         top: 31;
-//         left: -65;
-//     }
-// }
-
-// @media screen and (min-width: 1280px) {
-//     .calendar {
-//         width: 1280px;
-//     }
-
-//     .calendar-label {
-//         display: block;
-//         margin-right: 37px;
-//         font-weight: 700;
-//         font-size: 18px;
-//         line-height: 1.39;
-
-//         color: $primaryTextColor;
-//     }
-
-//     .calendar-btn {
-//         width: 168px;
-//     }
-
-//     .wrapper {
-//         top: 31;
-//         left: 210;
-//     }
-// }
-
-// // div calendar
-// .calendar {
-//     position: relative;
-//     display: flex;
-//     justify-content: flex-end;
-//     margin: 0;
-//     padding: 0;
-//     box-sizing: border-box;
-
-//     font-family: 'Manrope';
-//     font-style: sans-serif;
-// }
-
-// // button calendar
-// .calendar-btn {
-//     display: flex;
-//     align-items: center;
-//     justify-content: space-between;
-
-//     height: 31px;
-
-//     border: 1px solid $primaryTextColor;
-//     border-radius: 20px;
-//     background-color: $TextColor;
-
-//     font-weight: 400;
-//     font-size: 14px;
-//     line-height: 1.5;
-//     color: $CalendarTextColor;
-//     transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-
-//     cursor: url(../images/cursor-hand.svg), pointer;
-// }
-
-// .icon-calendar {
-//   width: 19px;
-//   height: 19px;
-//   fill: $primarySwitchColor;
-//   transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-// }
-
-// .icon-chevron {
-//   width: 15px;
-//   height: 15px;
-//   fill: $CalendarTextColor;
-//   transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-// }
-
-.calendar-btn.btn-is-active {
-  background-color: #4440f6;
-  border: 1px solid #4440f6;
-  color: $witeTextColor;
-}
-
-// return to current date button
-// .today-btn {
-//   display: flex;
-//   align-items: center;
-//   height: 31px;
-//   border: 1px solid $primaryTextColor;
-//   border-radius: 20px;
-//   background-color: $TextColor;
-//   color: $CalendarTextColor;
-//   transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-
-//   cursor: url(../images/cursor-hand.svg), pointer;
-// }
-
-// .icon-today {
-//   width: 19px;
-//   height: 19px;
-//   fill: $primarySwitchColor;
-//   transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-// }
-
-// hover/focus on buttons
-// .calendar-btn:hover,
-// .calendar-btn:focus,
-// .today-btn:hover,
-// .today-btn:focus {
-//   background-color: #4440f6;
-//   border: 1px solid #4440f6;
-//   color: $witeTextColor;
-// }
-
-// .calendar-btn.btn-is-active > .icon-calendar,
-// .calendar-btn.btn-is-active > .icon-chevron,
-// .calendar-btn:hover > .icon-calendar,
-// .calendar-btn:hover > .icon-chevron,
-// .calendar-btn:focus > .icon-calendar,
-// .calendar-btn:focus > .icon-chevron,
-// .today-btn:hover .icon-today,
-// .today-btn:focus .icon-today {
-//   fill: $witeTextColor;
-// }
-
 // wrapper modal (actually it is calendar)
 .wrapper {
   position: absolute;
@@ -167,13 +8,12 @@
 
 .modal {
   position: absolute;
-
   z-index: 999;
   width: 250px;
   height: 250px;
-  background: $witeTextColor;
-  border-radius: 10px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  background-color: $witeTextColor;
+  border-radius: 20px;
+  box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.1);
 
   transform: translateY(-200%);
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -203,19 +43,26 @@
   color: $shopNowButton;
 }
 
+.current-date {
+  margin-right: 6px;
+}
+
 .date {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-}
+ }
 
-.next-year {
+ .date span {
+  fill: $hoverColor;
+   display: flex;
+ }
+
+.next-year,.prev-year  {
   cursor: pointer;
-  margin-left: 5px;
-  margin-right: 10px;
   color: $primarySwitchColor;
-}
+ }
 
 .years {
   position: absolute;
@@ -224,7 +71,7 @@
   top: 0;
   background: $witeTextColor;
 
-  cursor: url(../images/cursor-hand.svg), pointer;
+  cursor: pointer;
 }
 
 .years ul {
@@ -238,24 +85,28 @@
   background: $witeTextColor;
 }
 
-// header icons
-.icons {
+#prev,
+#next,
+.prev-year,
+.next-year {
+  color: $primarySwitchColor;
+   cursor: pointer;
+}
+
+.calendar-icons {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 18px;
+  color: $hoverColor;
 }
 
-#prev,
-#next {
-  width: 20px;
-  height: auto;
-  color: $primarySwitchColor;
-  font-size: 22px;
-  cursor: url(../images/cursor-hand.svg), pointer;
+.calendar-icons span {
+  fill: $hoverColor;
+  display: flex;
 }
 
-.icons span:last-child {
-  margin-right: -10px;
+.calendar-icons span:hover {
+  background: $witeTextColor;
 }
 
 .calendar-grid {
@@ -309,7 +160,13 @@
   border: none;
   padding: 0px;
   background-color: transparent;
-  cursor: url(../images/cursor-hand.svg), pointer;
+  cursor: pointer;
+
+  font-family: $primaryFontManrope;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.785;
+    letter-spacing: 0.38px;
 }
 
 .button.inactive,

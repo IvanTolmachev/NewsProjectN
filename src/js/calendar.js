@@ -1,14 +1,32 @@
+// import CalendarDates from "calendar-dates";
+// const calendarDates = new CalendarDates();
+
+// const main = async () => {
+//   const arr = [];
+//   for (const meta of await calendarDates.getDates(new Date())) {
+//     arr.push(meta)
+//   }
+//   return arr;
+// };
+
+// main().then((data) => {
+//   console.log(data)
+// })
+//   .catch((error) => console.log(error));
+
 const daysTag = document.querySelector('.days');
 const currentDate = document.querySelector('.current-date');
-const prevNextIcon = document.querySelectorAll('.icons span');
+const prevNextIcon = document.querySelectorAll('.calendar-icons span');
+
+const calendarIcon = document.querySelector('#menu-calendar .categories__icon');
 
 const btnEl = document.querySelector('.calendar__btn');
 const spanEl = document.querySelector('.calendar-btn-span');
 const modalEl = document.querySelector('.modal');
 const todayBtn = document.querySelector('.today-btn');
-//const todayBtn = document.querySelector('#menu-calendar');
 
-const yearBtn = document.querySelector('.next-year');
+const yearBtnPrev = document.querySelector('.prev-year');
+const yearBtnNext = document.querySelector('.next-year');
 const yearsDiv = document.querySelector('.years ul');
 
 btnEl.addEventListener('click', () => {
@@ -47,17 +65,16 @@ function renderCalendar() {
 
   for (let i = firstDayofMonth; i > 0; i--) {
     // creating li of previous month last days
-    liTag += `<li><button type="button" class="button inactive" id="inactive" disabled>${
-      lastDateofLastMonth - i + 1
-    }</button></li>`;
+    liTag += `<li><button type="button" class="button inactive" id="inactive" disabled>${lastDateofLastMonth - i + 1
+      }</button></li>`;
   }
   for (let i = 1; i <= lastDateofMonth; i++) {
     // creating li of all days of current month
     // adding active class to li if the current day, month, and year matched
     let isToday =
       i === date.getDate() &&
-      currMonth === date.getMonth() &&
-      currYear === date.getFullYear()
+        currMonth === date.getMonth() &&
+        currYear === date.getFullYear()
         ? 'current-month-day'
         : '';
     let isCurrentDay = i === date.getDate() ? 'active' : '';
@@ -65,9 +82,8 @@ function renderCalendar() {
   }
   for (let i = lastDayofMonth; i < 7; i++) {
     // creating li of next month first days
-    liTag += `<li><button type="button" class="button inactive" id="inactive" disabled>${
-      i - lastDayofMonth + 1
-    }</button></li>`;
+    liTag += `<li><button type="button" class="button inactive" id="inactive" disabled>${i - lastDayofMonth + 1
+      }</button></li>`;
   }
 
   currentDate.innerHTML = `${months[currMonth]} ${currYear}`; // passing current mon and yr as currentDate text
@@ -83,8 +99,11 @@ function renderCalendar() {
 
 function onDaysTagClick(e) {
   const currentActiveDate = document.querySelector('.active');
+
   if (currentActiveDate) {
     currentActiveDate.classList.remove('active');
+    calendarIcon.classList.remove('rotate');
+    currYear = date.getFullYear();
   }
   e.target.classList.add('active');
 }
@@ -138,19 +157,33 @@ function onPrevNextIconClick() {
 }
 onPrevNextIconClick();
 
-function onYearBtnClick() {
-  yearBtn.addEventListener('click', () => {
+function onYearBtnPrevClick() {
+  yearBtnPrev.addEventListener('click', () => {
     currYear -= 1;
     renderCalendar();
-
-    let saveDate = JSON.parse(localStorage.getItem('VALUE'));
-    let rendCurrentDays = daysTag.childNodes;
-
-    rendCurrentDays.forEach(el => {
-      if (el.textContent === saveDate) {
-        el.classList.add('active');
-      }
-    });
+    renderCurrentDays();
   });
 }
-onYearBtnClick();
+onYearBtnPrevClick();
+
+
+function onYearBtnNextClick() {
+  yearBtnNext.addEventListener('click', () => {
+    currYear += 1;
+    renderCalendar();
+    renderCurrentDays();
+  });
+}
+onYearBtnNextClick();
+
+
+function renderCurrentDays() {
+  let saveDate = JSON.parse(localStorage.getItem('VALUE'));
+  let rendCurrentDays = daysTag.childNodes;
+
+  rendCurrentDays.forEach(el => {
+    if (el.textContent === saveDate) {
+      el.classList.add('active');
+    }
+  });
+}

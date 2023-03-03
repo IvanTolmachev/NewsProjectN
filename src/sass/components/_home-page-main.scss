@@ -1,0 +1,25 @@
+.section_home {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  @media screen and (min-width: 768px) {
+    padding-top: 48px;
+    padding-bottom: 30px;
+  }
+  @media screen and (min-width: 1280px) {
+    padding-top: 28px;
+    padding-bottom: 60px;
+  }
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 28px;
+  @media screen and (min-width: 768px) {
+    gap: 30px;
+  }
+  @media screen and (min-width: 1280px) {
+    gap: 31px;
+  }
+}

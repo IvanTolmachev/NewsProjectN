@@ -1,2 +1,2 @@
-// import './js/favorite';
-// import './js/createMarkupFavorite';
+import './js/favorite';
+import './js/createMarkupFavorite';
