@@ -21,7 +21,7 @@ function createMarkup(arr) {
       let newDateStr = published_date.replace(/-/g, '/');
 
       return `
-       <li class="card">
+       <li class="card js-card-item" data-target-id="${id}">
         <div class="wrap-image">
           <img
             src="${imgUrl}"
@@ -29,9 +29,9 @@ function createMarkup(arr) {
            class="wrap-image__photo"
           />
           <p class="wrap-image__text">${section}</p>
-          <button type="button" id="${id}" class="wrap-image__btn"><span class="js-favorite-btn-text">Add to favorite</span>
-           <svg class="wrap-image__icon" width="16" height="16">
-                <use href ='${iconHeart}#icon-heart'></use>
+          <button type="button" class="wrap-image__btn js-tartet-favorite"><span class="js-tartet-favorite">Add to favorite</span>
+           <svg class="wrap-image__icon js-tartet-favorite" width="16" height="16">
+                <use href ='${iconHeart}#icon-heart' class="js-tartet-favorite"></use>
               </svg></button>
         </div>
         <h2 class="card__title">${title}</h2>
