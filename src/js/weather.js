@@ -6,6 +6,7 @@ const weatherDate = document.querySelector('.weather__date');
 const weatherIcon = document.querySelector('.weather__icon');
 
 // Обновления элементов HTML
+
 function updateWeatherInfo(weatherData) {
   weatherTemp.textContent = `${Math.round(weatherData.main.temp)}°C`;
   weatherCond.textContent = weatherData.weather[0].description;
@@ -19,7 +20,15 @@ function updateWeatherInfo(weatherData) {
     year: 'numeric',
   })}`;
   const iconCode = weatherData.weather[0].icon;
-  const iconUrl = `http://openweathermap.org/img/w/${iconCode}.png`;
+  // const iconHeart = new URL(
+  //   `../images/wether-icons/${iconCode}-min.png`,
+  //   import.meta.url
+  // );
+  const iconHeart = new URL(
+    `../images/wether-icons/01d-min.png`,
+    import.meta.url
+  );
+  const iconUrl = `${iconHeart}`;
   weatherIcon.setAttribute('src', iconUrl);
 }
 
