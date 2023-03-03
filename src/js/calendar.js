@@ -114,6 +114,10 @@ function onTodayBtnClick() {
       date.getMonth() + 1
     )}/${date.getFullYear()}`;
     currentDate.innerHTML = `${months[date.getMonth()]} ${date.getFullYear()}`;
+    date = new Date();
+    currYear = date.getFullYear();
+    currMonth = date.getMonth();
+    renderCalendar()
   });
 }
 
