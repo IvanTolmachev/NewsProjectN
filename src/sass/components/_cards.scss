@@ -17,6 +17,7 @@
     width: calc((100% - 64px) / 3);
   }
 }
+
 .wrap-image {
   position: relative;
   background-color: $cardImgBgColor;
@@ -69,7 +70,7 @@
 
 .wrap-image__photo {
   object-fit: cover;
-
+  height: 395px;
   border-radius: 4px;
 }
 
