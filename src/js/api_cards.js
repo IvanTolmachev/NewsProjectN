@@ -12,3 +12,9 @@ export async function getSearchCards() {
   const requestData = await axios.get(URL);
   return requestData;
 }
+
+export async function getDifferentCategories() {
+  const URL = `https://api.nytimes.com/svc/news/v3/content/inyt/automobiles.json?api-key=7p9CJylKpjl89QHHczOefIddo1AI47yw`;
+  const requestData = await axios.get(URL);
+  return requestData;
+}
