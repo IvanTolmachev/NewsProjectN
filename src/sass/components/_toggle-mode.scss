@@ -13,11 +13,12 @@
     width: 40px;
     height: 20px;
 
-
     &__input {
-        opacity: 0;
-        height: 0;
-        width: 0;
+        // opacity: 0;
+        // height: 0;
+        // width: 0;
+        // pointer-events: none;
+
     }
 }
 
@@ -88,4 +89,53 @@
     &.dark {
         color: $secondarySwitchColor
     }
+}
+
+
+body {
+    background-color: var(--color-bg);
+}
+
+.header-container {
+    border-bottom: 1px solid var(--border-botton);
+}
+
+.logo,
+.menu-link {
+    color: var(--header-text-color);
+}
+
+.gallery,
+.card__description {
+    color: var(--gallery-text-color);
+}
+
+.toggle-label {
+    &.light {
+        color: var(--toggle-label-light);
+        opacity: 0.4;
+    }
+
+    &.dark {
+        color: var(--toggle-label-dark);
+    }
+}
+
+html.light {
+    --color-bg: #F4F4F4;
+    --border-botton: rgba(0, 0, 0, 0.2) --header-text-color: #111321;
+    --gallery-text-color: #111321;
+    --toggle-label-light: #4B48DB;
+    --toggle-label-dark: #5F6775;
+}
+
+
+
+html.dark {
+    --color-bg: #2E2E2E;
+    --border-botton: rgba(244, 244, 244, 0.2);
+    --header-text-color: #F4F4F4;
+    --gallery-text-color: #F4F4F4;
+    --toggle-label-light: #F4F4F4;
+    --toggle-label-dark: #4440F7;
 }
