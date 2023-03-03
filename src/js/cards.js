@@ -1,4 +1,4 @@
-import getCards from './api_cards';
+import { getCards } from './api_cards';
 import axios from 'axios';
 
 const iconHeart = new URL('../images/icon.svg', import.meta.url);
@@ -29,7 +29,8 @@ function createMarkup(arr) {
            class="wrap-image__photo"
           />
           <p class="wrap-image__text">${section}</p>
-          <button type="button" class="wrap-image__btn js-tartet-favorite"><span class="js-tartet-favorite">Add to favorite</span>
+          <button type="button" class="wrap-image__btn js-tartet-favorite">
+          <span class="wrap-image__btn-text js-tartet-favorite">Add to favorite</span>
            <svg class="wrap-image__icon js-tartet-favorite" width="16" height="16">
                 <use href ='${iconHeart}#icon-heart' class="js-tartet-favorite"></use>
               </svg></button>
