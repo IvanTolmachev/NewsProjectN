@@ -5,4 +5,4 @@ import './js/filter-categories';
 import './js/home-page';
 import './js/weather';
 import './js/toggle-mode';
-// import './js/add-to-favorite';
+import './js/add-to-favorite';
