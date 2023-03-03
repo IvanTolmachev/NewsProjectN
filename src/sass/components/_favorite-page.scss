@@ -1,4 +1,12 @@
+.favorite{
+    display: flex;
+    gap: 32px;
+}
+
 svg.fill-heard {
     fill: $primarySwitchColor;
 }
 
+// li[data-target-id] span.js-tartet-favorite {
+
+// }
