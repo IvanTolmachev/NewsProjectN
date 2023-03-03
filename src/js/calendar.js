@@ -1,17 +1,35 @@
+// import CalendarDates from "calendar-dates";
+// const calendarDates = new CalendarDates();
+
+// const main = async () => {
+//   const arr = [];
+//   for (const meta of await calendarDates.getDates(new Date())) {
+//     arr.push(meta)
+//   }
+//   return arr;
+// };
+
+// main().then((data) => {
+//   console.log(data)
+// })
+//   .catch((error) => console.log(error));
+
 const daysTag = document.querySelector('.days');
 const currentDate = document.querySelector('.current-date');
-const prevNextIcon = document.querySelectorAll('.icons span');
+const prevNextIcon = document.querySelectorAll('.calendar-icons span');
+
+const calendarIcon = document.querySelector('#menu-calendar .categories__icon');
 
 const btnEl = document.querySelector('.calendar__btn');
 const spanEl = document.querySelector('.calendar-btn-span');
 const modalEl = document.querySelector('.modal');
 const todayBtn = document.querySelector('.today-btn');
 
-const yearBtn = document.querySelector('.next-year');
+const yearBtnPrev = document.querySelector('.prev-year');
+const yearBtnNext = document.querySelector('.next-year');
 const yearsDiv = document.querySelector('.years ul');
 
 btnEl.addEventListener('click', () => {
-  // btnEl.classList.remove('rotate');
   return modalEl.classList.toggle('is-shown')
     ? btnEl.classList.add('btn-is-active')
     : btnEl.classList.remove('btn-is-active');
@@ -24,18 +42,18 @@ let date = new Date();
 let currYear = date.getFullYear();
 let currMonth = date.getMonth();
 const months = [
-  'Jan',
-  'Feb',
-  'Mar',
-  'Apr',
+  'January',
+  'February',
+  'March',
+  'April',
   'May',
-  'Jun',
-  'Jul',
-  'Aug',
-  'Sep',
-  'Oct',
-  'Nov',
-  'Dec',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
 ];
 
 function renderCalendar() {
@@ -81,8 +99,11 @@ function renderCalendar() {
 
 function onDaysTagClick(e) {
   const currentActiveDate = document.querySelector('.active');
+
   if (currentActiveDate) {
     currentActiveDate.classList.remove('active');
+    calendarIcon.classList.remove('rotate');
+    currYear = date.getFullYear();
   }
   e.target.classList.add('active');
 }
@@ -136,19 +157,33 @@ function onPrevNextIconClick() {
 }
 onPrevNextIconClick();
 
-function onYearBtnClick() {
-  yearBtn.addEventListener('click', () => {
+function onYearBtnPrevClick() {
+  yearBtnPrev.addEventListener('click', () => {
     currYear -= 1;
     renderCalendar();
-
-    let saveDate = JSON.parse(localStorage.getItem('VALUE'));
-    let rendCurrentDays = daysTag.childNodes;
-
-    rendCurrentDays.forEach(el => {
-      if (el.textContent === saveDate) {
-        el.classList.add('active');
-      }
-    });
+    renderCurrentDays();
   });
 }
-onYearBtnClick();
+onYearBtnPrevClick();
+
+
+function onYearBtnNextClick() {
+  yearBtnNext.addEventListener('click', () => {
+    currYear += 1;
+    renderCalendar();
+    renderCurrentDays();
+  });
+}
+onYearBtnNextClick();
+
+
+function renderCurrentDays() {
+  let saveDate = JSON.parse(localStorage.getItem('VALUE'));
+  let rendCurrentDays = daysTag.childNodes;
+
+  rendCurrentDays.forEach(el => {
+    if (el.textContent === saveDate) {
+      el.classList.add('active');
+    }
+  });
+}
