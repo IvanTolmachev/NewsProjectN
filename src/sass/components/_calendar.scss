@@ -8,13 +8,12 @@
 
 .modal {
   position: absolute;
-
   z-index: 999;
   width: 250px;
   height: 250px;
-  background: $witeTextColor;
-  border-radius: 10px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  background-color: $witeTextColor;
+  border-radius: 20px;
+  box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.1);
 
   transform: translateY(-200%);
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -44,19 +43,26 @@
   color: $shopNowButton;
 }
 
+.current-date {
+  margin-right: 6px;
+}
+
 .date {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-}
+ }
 
-.next-year {
+ .date span {
+  fill: $hoverColor;
+   display: flex;
+ }
+
+.next-year,.prev-year  {
   cursor: pointer;
-  margin-left: 5px;
-  margin-right: 10px;
   color: $primarySwitchColor;
-}
+ }
 
 .years {
   position: absolute;
@@ -79,24 +85,28 @@
   background: $witeTextColor;
 }
 
-// header icons
-.icons {
+#prev,
+#next,
+.prev-year,
+.next-year {
+  color: $primarySwitchColor;
+   cursor: pointer;
+}
+
+.calendar-icons {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 18px;
+  color: $hoverColor;
 }
 
-#prev,
-#next {
-  width: 20px;
-  height: auto;
-  color: $primarySwitchColor;
-  font-size: 22px;
-  cursor: pointer;
+.calendar-icons span {
+  fill: $hoverColor;
+  display: flex;
 }
 
-.icons span:last-child {
-  margin-right: -10px;
+.calendar-icons span:hover {
+  background: $witeTextColor;
 }
 
 .calendar-grid {
@@ -151,6 +161,12 @@
   padding: 0px;
   background-color: transparent;
   cursor: pointer;
+
+  font-family: $primaryFontManrope;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.785;
+    letter-spacing: 0.38px;
 }
 
 .button.inactive,
