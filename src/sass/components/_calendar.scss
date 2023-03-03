@@ -5,10 +5,8 @@
   min-height: 250px;
   height: 100%;
   overflow: hidden;
-  // border-radius: 20px;
   padding: 20px 16px;
-  // box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.1);
-}
+  }
 
 .calendar .wrapper {
   top: 33px;
@@ -21,7 +19,7 @@
 
 .modal {
   position: absolute;
-   z-index: 999;
+  z-index: 999;
   width: 250px;
   min-height: 250px;
   height: 100%;
@@ -34,6 +32,7 @@
 }
 
 .is-shown {
+  border-radius: 20px;
   opacity: 1;
   top: 0;
   left: 0;
@@ -47,6 +46,8 @@
   align-items: center;
   padding: 27px 16px 0px 16px;
   justify-content: space-between;
+  border-top-right-radius: 50%;
+  border-top-left-radius: 50%;
 }
 
 .calendar-header .current-date {
@@ -73,10 +74,10 @@
    display: flex;
  }
 
-.next-year,.prev-year  {
-  cursor: pointer;
-  color: $primarySwitchColor;
- }
+// .next-year,.prev-year  {
+//   cursor: pointer;
+//   color: $primarySwitchColor;
+//  }
 
 .years {
   position: absolute;
@@ -121,7 +122,7 @@
 .calendar-icons span:hover,
 .calendar-icons span:focus
  {
-  background: $whiteTextColor;
+  background-color: $calendarBgColor;
 }
 
 .calendar-grid {
