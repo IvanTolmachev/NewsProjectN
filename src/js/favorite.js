@@ -16,14 +16,16 @@ async function getApiData() {
 }
 
 function saveApiData(arrey) {
-  arrey.map(({ id, url, title, section, abstract, published_date }) => {
+  arrey.map(({ id, url, title, section, abstract, published_date, media }) => {
     const item = {};
+    let imgUrl = media.map(media => media['media-metadata'][2].url);
     item['id'] = `${id}`;
     item['url'] = `${url}`;
     item['title'] = `${title}`;
     item['section'] = `${section}`;
-    item['description'] = `${abstract}`;
+    item['abstract'] = `${abstract}`;
     item['published_date'] = `${published_date}`;
+    item['imgUrl'] = `${imgUrl}`;
     savedApiData.push(item);
     // localStorage.setItem(STORAGE_KEY, JSON.stringify(savedApiData));
 

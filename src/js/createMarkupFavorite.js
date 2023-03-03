@@ -17,7 +17,7 @@ export default function createMarkupFavorite() {
   let markup = "";
   
   markup = storageData
-    .map(({ id, section, src, title, description, published_date, url }) => {
+    .map(({ id, section, imgUrl, title, abstract, published_date, url }) => {
         // if (identifier !== Number(id)) {
             
         //     return
@@ -25,14 +25,12 @@ export default function createMarkupFavorite() {
       return `<li class="card js-card-item" data-target-id=${id}>
         <div class="wrap-image">
           <img
-            src="${src}"
-            alt=""
-            width="250"
-            height="250"
+            src="${imgUrl}"
+            alt="photo"
             class="wrap-image__photo"
           />
           <p class="wrap-image__text">${section}</p>
-          <button type="button"  class="wrap-image__btn js-tartet-favorite"><span class="js-favorite-btn-text js-tartet-favorite">Add to favorite</span>
+          <button type="button"  class="wrap-image__btn js-tartet-favorite"><span class="js-favorite-btn-text js-tartet-favorite">Remove from favorite</span>
                     <svg class="wrap-image__icon js-tartet-favorite" width="16" height="16">
                             <use class="js-tartet-favorite" href ='./images/icon.svg#icon-heart'></use>
                         </svg>
@@ -40,7 +38,7 @@ export default function createMarkupFavorite() {
         
         </div>
             <h2 class="card__title">${title}</h2>
-            <p class="">${description}</p>
+            <p class="card__description">${abstract.length > 112 ? abstract.slice(0, 113) + '...' : abstract}</p>
             <div class="wrap-info">
                 <p class="wrap-info__time">${published_date}</p>
                 <a href="${url}" class="wrap-info__link">Read more</a>
