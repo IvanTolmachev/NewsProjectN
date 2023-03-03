@@ -55,6 +55,15 @@
   }
 }
 
+.wrap-image__btn-text {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+
+  color: $primaryTextColor;
+}
+
 .wrap-image__photo {
   object-fit: cover;
   border-radius: 4px;
