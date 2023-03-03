@@ -1,6 +1,7 @@
 .header {
-  width: 100%;
+
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  width: 100%;
 }
 
 .header-container {
@@ -10,16 +11,15 @@
 }
 
 .logo {
-  max-width: 111px;
-  color: $primaryTextColor;
-  display: inline-block;
   text-transform: uppercase;
-  padding: 24px 0;
+padding: 24px 0;
+  color: $primaryTextColor;
+  
   font-weight: 700;
   font-size: 24px;
   line-height: 1.38;
   cursor: pointer;
-  // text-align: center;
+ 
   @media screen and (min-width: 768px) {
     width: 768px;
     font-size: 32px;
@@ -39,7 +39,7 @@
 }
 
 .header-navigation {
-  gap: 69px;
+  gap: 44px;
 
   @media screen and (max-width: 767px) {
     display: none;
@@ -47,10 +47,21 @@
 
   @media screen and (min-width: 768px) {
     display: flex;
+    padding-top: 48px;
+    padding-bottom: 36px;
+  }
+  @media screen and (min-width: 1280px){
+    display: flex;
+    gap:69px;
+    padding-top: 55px;
+    padding-bottom: 33px;
+
+
   }
 }
 .menu-link {
-  display: inline;
+  font-family:'Manrope';
+
   font-weight: 700;
   font-size: 16px;
   color: $primaryTextColor;
@@ -64,27 +75,76 @@
   &:focus {
     text-shadow: $boxShadow;
   }
-  @media screen and (max-width: 1279px) {
-    gap: 44px;
-  }
   @media screen and (min-width: 1280px) {
     width: 1280px;
     font-size: 18px;
     gap: 69px;
   }
 }
-.container-nav {
-  align-items: baseline;
-}
-// .header-navigation{
-// gap: 69px;
-// }
-// .menu-item{
 
-// }
-.toggle {
+.search-form{
   display: flex;
+  align-items: center;
 }
+
+.search{
+
+  position: relative;
+  width: 30px;
+}
+.menu-icon-btn{
+  display: block;
+  cursor: pointer;
+ 
+
+}
+.btn-search{
+  background: none;
+  box-shadow: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  appearance: none;
+  position: relative;
+  width: 15px;
+
+
+
+}
+.input-text{
+  width: 173px;
+  padding: 5px 10px 5px 45px;
+  box-sizing: border-box;
+ border: none;
+  border: 1px solid $primaryTextColor;
+  font-family: 'Poppins';
+font-weight: 400;
+font-size: 14px;
+line-height: 1.71;
+color: $primaryTextColor;
+border-radius: 20px;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+transition: box-shadow $durationFunction $timingFunction;
+  &:hover,
+  &:focus {
+   box-shadow: $boxShadow;
+  }
+  @media screen and (min-width: 768px){
+    width: 288px;
+  }
+
+
+}
+.btn-search{
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
+}
+
 
 // form{
 //     @media screen and (min-width: 480px) {

@@ -7,7 +7,7 @@
     <nav class="header-nav">
       <a class="logo" href="./index.html">News</a>
     </nav>
-    <div class="burger-menu"></div>
+    
     <nav class="container-nav">
       <ul class="header-navigation">
         <li class="menu-item">
@@ -21,15 +21,24 @@
         </li>
       </ul>
     </nav>
-    <form class="search-form" id="search-form">
-      <input
-        type="text"
-        name="searchQuery"
-        autocomplete="off"
-        placeholder="Search..."
-      />
-      <button type="submit" class="btn">Search</button>
-    </form>
+    <div class="search">
+      <form class="search-form" id="search-form">
+        <!-- <svg  class="menu-icon" width="15px" height="15px">
+          <use href="/src/images/icon.svg#icon-bx_search"></use>
+        </svg> -->
+        <input class="input-text"
+          type="text"
+          name="searchQuery"
+          autocomplete="off"
+          placeholder="Search..."
+        />
+        <button type="submit" class="btn-search" ><svg  class="menu-icon-btn" width="15px" height="15px">
+          <use href="/src/images/icon.svg#icon-bx_search"></use>
+        </svg></button>
+      </form>
+
+    </div>
+   
     <!-- <div class="darkmode">
             <label class="toggle">
               <p class="toggle__text">Light</p>
