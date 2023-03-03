@@ -38,9 +38,9 @@
   width: 128px;
   height: 128px;
 
-  border-radius: 50%;
-  background: linear-gradient(180deg, #fa6c21 0%, rgba(255, 211, 88, 0.2) 100%);
-  box-shadow: inset 0px 20px 65px #fa6c21;
+  // border-radius: 50%;
+  // background: linear-gradient(180deg, #fa6c21 0%, rgba(255, 211, 88, 0.2) 100%);
+  // box-shadow: inset 0px 20px 65px #fa6c21;
 
   @include tablet {
     width: 165px;
@@ -71,18 +71,23 @@
   margin-left: 8px;
   margin-bottom: 5px;
 
+  text-transform: capitalize;
+
   @include tablet {
     font-size: 36px;
   }
 }
 
-.weather__location {
+.weather__location--thumb {
   font-size: 14px;
   margin-left: 8px;
 
   width: auto;
   max-width: 180px;
   overflow-wrap: break-word;
+
+  display: flex;
+  align-items: center;
 
   padding: 9.5px 11.22px;
 
@@ -91,6 +96,18 @@
 
   @include tablet {
     font-size: 20px;
+  }
+}
+
+.weather__location--icon {
+  fill: $witeTextColor;
+  margin-right: 8px;
+  width: 18px;
+  height: 18px;
+
+  @include tablet {
+    width: 27px;
+    height: 27px;
   }
 }
 
