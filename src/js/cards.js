@@ -7,14 +7,14 @@ const refs = {
   gallery: document.querySelector('.gallery'),
 };
 
-async function createCards() {
+export async function createCards() {
   const response = await getCards();
   const data = response.data.results;
   console.log(data);
   createMarkup(data);
 }
 createCards();
- function createMarkup(arr) {
+export function createMarkup(arr) {
   const markup = arr
     .map(({ id, url, title, section, abstract, published_date, media }) => {
       let imgUrl = media.map(media => media['media-metadata'][2].url);
