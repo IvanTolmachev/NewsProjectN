@@ -1,3 +1,13 @@
+.dropbtn {
+  margin-top: 60px;
+  background-color: transparent;
+  color: $primaryTextColor;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  display: block;
+}
+  
   .icon-down-read-pg.rotate {
     transform: rotate(-180deg);
   }
@@ -5,26 +15,20 @@
     transform: rotate(0deg);
     transition: transform $durationFunction $timingFunction;
   }
+  
 
-  .news-list {
-    @mixin tablet {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 30px;
-    }
-    @mixin tablet-only {
-        flex-wrap: wrap;
-        display: flex;
-        gap: 32px;
-    }
-  }
-
-.dropbtn {
-    margin-top: 60px;
-    background-color: transparent;
-    color: $primaryTextColor;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
+  .news-list.show {
     display: block;
-}
+    
+
+    @mixin tablet {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+  }
+  @mixin tablet-only {
+      flex-wrap: wrap;
+      display: flex;
+      gap: 32px;
+  }
+  }
