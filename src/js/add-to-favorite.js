@@ -5,60 +5,47 @@ const STORAGE_KEY = 'favoriteNews';
 const favoriteNews=[]
 const gallery=document.querySelector('.gallery') 
 
-console.log("🚀 ~ gallery", gallery)
+// console.log("🚀 ~ gallery", gallery)
 
 gallery.addEventListener("click", getFavoriteId);
 
 export default function getFavoriteId(evt) {
-    console.log("evt.target.nodeName", evt.target.nodeName);
-    console.log("evt.target.classList", evt.target.classList);
+    // console.log("evt.target.nodeName", evt.target.nodeName);
+    // console.log("evt.target.classList", evt.target.classList);
     
     if(evt.target.classList.contains("js-tartet-favorite")){
       const id=evt.target.closest(".js-card-item").dataset.targetId
-      console.log("🚀 ~ addToFavorite ~ id:", id)
+      // console.log("🚀 ~ addToFavorite ~ id:", id)
       saveFavotiteNew(id)
     }
 }
 
 function saveFavotiteNew(id) {
-    console.log("🚀 ~ saveFavotiteNewToStorage ~ id:", id)
-    console.log("🚀 ~ savedApiData:", savedApiData)
+    // console.log("🚀 ~ saveFavotiteNewToStorage ~ id:", id)
+    // console.log("🚀 ~ savedApiData:", savedApiData)
     const favoriteNew =savedApiData.find(item=>item.id===id)
 
      
 
-    favoriteNews.push(favoriteNew)
+    // favoriteNews.push(favoriteNew)
 
-    // if (favoriteNews.length<1){
-    //     favoriteNews.push(favoriteNew)
-
-    // }
-
-    
-    
-    
-    // favoriteNews.forEach(element => {
-    //     console.log("🚀 ~ saveFavotiteNew ~ element:", element)
-        
-    //      if (favoriteNews.length > 1 & Number(element.id)!==Number(id))  { 
-    //         console.log('aaaaaaaaaaaaaaaaaaaaaaaaa');
-    //         favoriteNews.push(favoriteNew);
-    //      }
-
-    //     return favoriteNews
-    // });
-
-
+    if (favoriteNews.length<1){
+        favoriteNews.push(favoriteNew)
+    } 
+    // console.log(favoriteNews.every(el=>Number(el.id)!==Number(id)));
+    if(favoriteNews.every(el=>Number(el.id)!==Number(id))) {
+      favoriteNews.push(favoriteNew)
+    }
 
        console.log("🚀 ~ favoriteNews:", favoriteNews)
         
         localStorage.setItem(STORAGE_KEY, JSON.stringify(favoriteNews));
 
-    
 
-    const favoriteBtnText=document.querySelector('span.js-tartet-favorite') 
+    const favoriteBtnText=document.querySelector(`li[data-target-id='${id}'] span.js-tartet-favorite`) 
     const heardIcon=document.querySelector('svg.js-tartet-favorite.wrap-image__icon')
-    console.log("🚀 ~ heardIcon:", heardIcon)
+    // console.log("🚀 ~ saveFavotiteNew ~ favoriteBtnText:", favoriteBtnText)
+    // console.log("🚀 ~ heardIcon:", heardIcon)
     changeFavoriteBtnText(favoriteBtnText)
     changeHeardColor(heardIcon)
     
@@ -80,7 +67,9 @@ function saveFavotiteNew(id) {
 
 
 
+// const a=[123]
 
+// console.log(a.some(el=>el>2));
 
    
    
