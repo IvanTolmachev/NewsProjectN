@@ -1,6 +1,6 @@
 import debounce from 'lodash.debounce';
-import axios from 'axios';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
+import { makeData, createCard } from './apiNews';
 
 const categories = document.querySelector('.categories');
 const showHideCategoriesBtn = document.getElementById('categories-toggler');
@@ -13,51 +13,53 @@ const calendarBtn = document.getElementById('menu-calendar');
 const calendarText = document.querySelector('.calendar__text');
 const calendarIcon = document.querySelector('#menu-calendar .categories__icon');
 
-const SECTION_URL = '/news/v3/content/section-list';
-const CURRENT_SECTION_URL = '/news/v3/content/section-list';
-const sectionParams = {
-  searchString: '',
-  'api-key': 'VPd8ESOXXGRNi6SUHc4QYJMXdqmRVK3K',
+const sectionList = {
+  baseUrl: `https://api.nytimes.com/svc/news/v3/content/`,
+  subUrl: 'section-list',
+  params: {
+    'api-key': 'VPd8ESOXXGRNi6SUHc4QYJMXdqmRVK3K',
+  },
 };
 
-//== function
-function makeURL(params, subUrl) {
-  const BASE_URL = `https://api.nytimes.com/svc`;
+const sectionNews = {
+  baseUrl: `https://api.nytimes.com/svc/news/v3/content/all/`,
+  subUrl: '',
+  params: {
+    'api-key': 'VPd8ESOXXGRNi6SUHc4QYJMXdqmRVK3K',
+    limit: 10,
+    offset: 0,
+  },
+};
+
+//https://api.nytimes.com/svc/mostpopular/v2/viewed/{period}.json
+const mostPopularNews = {
+  baseUrl: `https://api.nytimes.com/svc/mostpopular/v2/viewed/`,
+  subUrl: '1',
+  params: {
+    'api-key': 'VPd8ESOXXGRNi6SUHc4QYJMXdqmRVK3K',
+  },
+};
+
+//https://api.nytimes.com/svc/search/v2/articlesearch.json
+
+const articleSearchNews = {
+  baseUrl: `https://api.nytimes.com/svc/search/v2/`,
+  subUrl: 'articlesearch',
+  params: {
+    'api-key': 'VPd8ESOXXGRNi6SUHc4QYJMXdqmRVK3K',
+
+    page: 1,
+    q: '',
+    sort: 'newest',
+  },
+};
+
+//?===== function  backEnd
+function makeURL(searhParam) {
+  const { baseUrl, subUrl, params } = searhParam;
 
   const urlParams = new URLSearchParams(params);
-
-  return `${BASE_URL}/${subUrl}.json?${urlParams}`;
-}
-
-async function getData(url, timeout) {
-  const controller = new AbortController();
-  const id = setTimeout(() => controller.abort(), timeout);
-  const response = await axios.get(url, {
-    signal: controller.signal,
-  });
-  clearTimeout(id);
-
-  return response;
-}
-
-async function makeSection(params, subUrl) {
-  const listShow = document.getElementById('categories-show');
-  const URL = makeURL(params, subUrl);
-  // console.log(URL);
-
-  try {
-    const Data = await getData(URL, 2500);
-
-    if (Data.data.status !== 'OK') {
-      throw new Error(Data.data.status);
-    }
-
-    listShow.innerHTML = Data.data.results.map(rendeSection).join('');
-    restart();
-  } catch (error) {
-    const msg = error.name === 'CanceledError' ? 'Get timeout' : error;
-    Notify.failure(`Oops ${msg}`);
-  }
+  return `${baseUrl}${subUrl}.json?${urlParams}`;
 }
 
 function rendeSection(item) {
@@ -66,6 +68,65 @@ function rendeSection(item) {
   return `<li class="categories__item" data-section=${section}>${display_name}</li>
   `;
 }
+
+async function makeSection(url) {
+  const listShow = document.getElementById('categories-show');
+
+  try {
+    const Data = await makeData(url);
+
+    listShow.innerHTML = Data.map(rendeSection).join('');
+    restart();
+  } catch (error) {
+    const msg = error.name === 'CanceledError' ? 'Get timeout' : error;
+    Notify.failure(`Oops ${msg}`);
+  }
+}
+
+function dataSectionNormalize(item) {
+  const { uri, url, title, section, abstract, published_date, multimedia } =
+    item;
+  //const id = uri;
+  const imgUrl = multimedia[2].url; //! перевірка на null
+  const newDateStr = published_date
+    .slice(0, published_date.indexOf('T'))
+    .trim()
+    .split('-')
+    .reverse()
+    .join('/');
+  return { id: uri, url, title, section, abstract, imgUrl, newDateStr };
+}
+
+function dataArticleSearchNormalize(item) {
+  const {
+    uri,
+    web_url,
+    headline: { main },
+    section_name,
+    abstract,
+    pub_date,
+    multimedia,
+  } = item;
+  //const id = uri;
+  const imgUrl = `https://static01.nyt.com/${multimedia[2].url}`; //! перевірка на null
+  const newDateStr = pub_date
+    .slice(0, pub_date.indexOf('T'))
+    .trim()
+    .split('-')
+    .reverse()
+    .join('/');
+  return {
+    id: uri,
+    url: web_url,
+    title: main,
+    section: section_name,
+    abstract,
+    imgUrl,
+    newDateStr,
+  };
+}
+
+//?===== function  render
 
 function restart() {
   let maxWidth = document
@@ -118,6 +179,7 @@ function sortSections(count) {
   listShow.append(...elementShow);
   listHide.append(...elementHide);
 }
+
 //!=== listener
 
 showHideCategoriesBtn.addEventListener('click', () => {
@@ -126,7 +188,6 @@ showHideCategoriesBtn.addEventListener('click', () => {
 });
 
 calendarBtn.addEventListener('click', () => {
-  //filterItems.classList.toggle('visually-hidden');
   calendarIcon.classList.toggle('rotate');
 });
 
@@ -134,85 +195,46 @@ categories.addEventListener('click', e => {
   if (e.target.nodeName !== 'LI') {
     return;
   }
+  const listItem = categories.querySelectorAll('li');
+
+  listItem.forEach(item => item.classList.remove('activ'));
   categoriesIcon.classList.remove('rotate');
   filterItems.classList.add('visually-hidden');
-  console.log(e.target.dataset.section);
+  e.target.classList.add('activ');
+
+  sectionNews.subUrl = e.target.dataset.section;
+
+  (async () => {
+    const gallery = document.querySelector('.gallery');
+    const URL = makeURL(sectionNews);
+    const news = await makeData(URL);
+    const items = news.map(dataSectionNormalize);
+
+    gallery.innerHTML = items.map(createCard).join('');
+  })();
+});
+
+const clacKlac = document.querySelector('#search-form .btn');
+
+clacKlac.addEventListener('click', e => {
+  e.preventDefault();
+
+  articleSearchNews.params.q = 'Ukraine';
+
+  const URL = makeURL(articleSearchNews);
+
+  (async () => {
+    const gallery = document.querySelector('.gallery');
+    const news = await makeData(URL);
+    const items = news.map(dataArticleSearchNormalize);
+
+    gallery.innerHTML = items.map(createCard).join('');
+  })();
 });
 
 window.addEventListener('resize', debounce(restart, 250));
 
-makeSection(sectionParams, SECTION_URL);
+//! ===== main
 
-// restart();
-
-// // === function
-
-// function moveForward() {
-//   let listElements = Array.from(
-//       document.querySelectorAll('#categories-show .categories__item')
-//     ),
-//     invisibleElements = getInvisible(listElements),
-//     menuList = document.getElementById('categories-hide');
-
-//   invisibleElements.forEach(function (item) {
-//     menuList.appendChild(item);
-//   });
-
-//   if (!invisibleElements.length) {
-//     showHideCategoriesBtn.setAttribute('hidden', true);
-//   } else {
-//     showHideCategoriesBtn.removeAttribute('hidden');
-//   }
-
-//   //button.innerHTML = invisibleElements.length;
-// }
-
-// function moveBackward() {
-//   let menuListElements = Array.from(
-//     document.querySelectorAll('#categories-hide .categories__item')
-//   );
-//   let list = document.getElementById('categories-show');
-
-//   menuListElements.forEach(function (item) {
-//     list.appendChild(item);
-//   });
-//   // console.log(menuListElements);
-// }
-
-// function getInvisible(listElements) {
-//   let list = document.getElementById('categories-show');
-//   let maxWidth = document.querySelector('.categories').style.maxWidth;
-//   let space = maxWidth;
-
-//   space = space > 0 ? space : 0;
-
-//   //  console.log(space);
-
-//   let invisible = listElements.filter(function (item) {
-//     if (
-//       item.getBoundingClientRect().left + item.getBoundingClientRect().width >
-//       list.getBoundingClientRect().width - space
-//     ) {
-//       return item;
-//     }
-//   });
-//   //console.log(invisible);
-//   return invisible;
-// }
-
-// function restart() {
-//   moveBackward();
-//   moveForward();
-//   const menuListElements = Array.from(
-//     document.querySelectorAll('#categories-show .categories__item')
-//   );
-//   if (!menuListElements.length) {
-//     showHideCategoriesBtn.querySelector('span').textContent = 'Categories';
-//     categoriesContainer.classList.add('no-categories');
-//     showHideCategoriesBtn.classList.add('mobile');
-//   } else {
-//     showHideCategoriesBtn.querySelector('span').textContent = 'Others';
-//     categoriesContainer.classList.remove('no-categories');
-//     showHideCategoriesBtn.classList.remove('mobile');
-//   }
-// }
+const URL = makeURL(sectionList);
+makeSection(URL);

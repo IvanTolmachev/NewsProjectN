@@ -97,7 +97,7 @@
 
   transition: $durationFunction $timingFunction;
   transition-property: background-color, border-color;
-
+  &.activ,
   &:hover,
   &:focus {
     background-color: $primarySwitchColor;
@@ -105,6 +105,12 @@
     border-color: $primarySwitchColor;
   }
 }
+
+// .categories__item.activ {
+//   background-color: $primarySwitchColor;
+//   color: $witeTextColor;
+//   border-color: $primarySwitchColor;
+// }
 
 #menu-calendar.filter__btn {
   padding-right: 30px;
@@ -148,7 +154,7 @@
   align-items: center;
 }
 
-.wrapper {
+.calendar .wrapper {
   top: 36px;
   right: 0;
 
@@ -178,7 +184,7 @@
   //color: $primaryTextColor;
   color: #a2a2a2;
   text-align: center;
-  padding: 5px 22px;
+  padding: 5px 12px;
   border: 1 solid;
   border-color: $primaryTextColor;
   border-radius: 20px;
