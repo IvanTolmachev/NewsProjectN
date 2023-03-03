@@ -1,63 +1,59 @@
 // import axios from 'axios';
-import { getCards } from './api_cards';
-console.log("🚀 ~ getCards:", getCards)
+// import { getCards } from './api_cards';
+import { savedApiData } from './favorite'; 
 
-
-const savedCards = []; 
-
-async function getApiData() {
-  const response = await getCards();
-  const data = response.data.results;
-  console.log(data);
-  createSaveCards(data);
-}
+// console.log(savedApiData); 
+const STORAGE_KEY = 'readedNews';
+// const readedNews = [];
 
 const dropBtnRef = document.getElementById('dropBtn-js'); 
 const dropIcon = document.querySelector('.icon-down-read-pg'); 
 const newsListRef = document.querySelector('.news-list'); 
-
+const gallery = document.querySelector('.gallery'); 
 dropBtnRef.addEventListener('click', function () {
-    newsListRef.classList.toggle('show');
-    dropIcon.classList.toggle('rotate');
-  });
+  newsListRef.classList.toggle('show');
+  dropIcon.classList.toggle('rotate');
+});
 
+gallery.addEventListener('click', getReadedNewsId);
 
+function getReadedNewsId(event) {
+  event.preventDefault();
 
+  if(event.target.classList.contains("wrap-info__link")){
+    const id=event.target.closest(".js-card-item").dataset.targetId
 
-function createSaveCards(array) {
-
-  array.map(({ id, url, title, section, abstract, published_date }) => {
-      const item = {}
-      item['id'] = `${id}`;
-      item['url'] = `${url}`;
-      item['title'] = `${title}`;
-      item['section'] = `${section}`;
-      item['description'] = `${abstract}`;
-      item['published_date'] = `${published_date}`;
-      savedCards.push(item);
-      // localStorage.setItem(STORAGE_KEY, JSON.stringify(savedApiData));
-
-      // console.log("🚀 ~ arrey.map ~ item:", item)
-      
-  })
-  // console.log('savedApiData', savedApiData);
+    saveReadedNew(id);
+  }
 }
-getApiData();
+
+function saveReadedNew(id) {
+  const valuesStorage = {
+    readedNews: [],
+    date: new Date(),
+  }
+
+  const readedNew = savedApiData.find(item=>item.id===id)
+
+  if (readedNews.length<1){
+    valuesStorage.readedNews.push(readedNew)
+} 
+
+if(valuesStorage.readedNews.every(el=>Number(el.id)!==Number(id))) {
+  valuesStorage.readedNews.push(readedNew)
+}
+
+const valuesStorageJSON = JSON.stringify(valuesStorage); 
+console.log("valuesStorageJSON:", valuesStorageJSON); 
+
+localStorage.setItem(STORAGE_KEY, valuesStorageJSON); 
+}
 
 
 
 
 
-// console.log(createCards());
-// console.log(createMarkup()); 
-//   window.addEventListener('resize', debounce(restart, 250));
 
-// newsListRef.insertAdjacentHTML('beforeend', markupCards());
-
-// const readMoreBtn = document.querySelector('.wrap-info__link'); 
-// console.log("🚀 ~ readMoreBtn:", readMoreBtn)
-
-// readMoreBtn.addEventListener('click', onSavedCard);
 
 // function onSavedCard(event) {
 //   console.log(event); 

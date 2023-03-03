@@ -1,4 +1,4 @@
-import {savedApiData} from './favorite'
+import { savedApiData } from './favorite'
 // console.log("🚀 ~ savedApiData:", savedApiData)
 
 const STORAGE_KEY = 'favoriteNews';
