@@ -4,11 +4,10 @@
 4. Перемикач теми -->
 <header class="header">
   <div class="container header-container">
-    <nav class="header-nav">
-      <a class="logo" href="./index.html">News</a>
-    </nav>
-    
+    <!-- <nav class="header-nav"> -->
     <nav class="container-nav">
+      <a class="logo" href="./index.html">News</a>
+      <!-- </nav> -->
       <ul class="header-navigation">
         <li class="menu-item">
           <a class="menu-link" href="./index.html">Home</a>
@@ -23,35 +22,20 @@
     </nav>
     <div class="search">
       <form class="search-form" id="search-form">
-        <!-- <svg  class="menu-icon" width="15px" height="15px">
-          <use href="/src/images/icon.svg#icon-bx_search"></use>
-        </svg> -->
-        <input class="input-text"
+        <input
+          class="input-text"
           type="text"
           name="searchQuery"
           autocomplete="off"
-          placeholder="Search..."
+          placeholder="Search |"
         />
-        <button type="submit" class="btn-search" ><svg  class="menu-icon-btn" width="15px" height="15px">
-          <use href="/src/images/icon.svg#icon-bx_search"></use>
-        </svg></button>
+        <button type="submit" class="btn-search">
+          <svg class="menu-icon-btn" width="20px" height="20px">
+            <use href="/src/images/icon.svg#icon-bx_search"></use>
+          </svg>
+        </button>
       </form>
-
     </div>
-   
-    <!-- <div class="darkmode">
-            <label class="toggle">
-              <p class="toggle__text">Light</p>
-              <input
-                js-toggle
-                class="toggle__input"
-                aria-label="toggle dark mode"
-                type="checkbox"
-              />
-              <span class="toggle__fake"></span>
-              <p class="toggle__text">Dark</p>
-            </label>
-          </div> -->
     <include src="./partials/toggle-mode.html"></include>
   </div>
 </header>
