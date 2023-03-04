@@ -1,3 +1,3 @@
 import './js/favorite';
 import './js/createMarkupFavorite';
-// import 'remove-from-favorite';
+import './js/remove-from-favorite';
