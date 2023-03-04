@@ -1,8 +1,11 @@
 import debounce from 'lodash.debounce';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { makeData, createCard, dataSectionNormalize } from './apiNews';
+import { sectionList, sectionNews, makeURL } from './apiUrl';
 
-import { makeData, createCard } from './apiNews';
-
+const gallery = document.querySelector('.gallery');
 const categories = document.querySelector('.categories');
+const listShow = document.getElementById('categories-show');
 const showHideCategoriesBtn = document.getElementById('categories-toggler');
 const categoriesContainer = document.querySelector('.categories__container');
 const categoriesIcon = document.querySelector(
@@ -13,55 +16,6 @@ const calendarBtn = document.getElementById('menu-calendar');
 const calendarText = document.querySelector('.calendar__text');
 const calendarIcon = document.querySelector('#menu-calendar .categories__icon');
 
-const sectionList = {
-  baseUrl: `https://api.nytimes.com/svc/news/v3/content/`,
-  subUrl: 'section-list',
-  params: {
-    'api-key': 'VPd8ESOXXGRNi6SUHc4QYJMXdqmRVK3K',
-  },
-};
-
-const sectionNews = {
-  baseUrl: `https://api.nytimes.com/svc/news/v3/content/all/`,
-  subUrl: '',
-  params: {
-    'api-key': 'VPd8ESOXXGRNi6SUHc4QYJMXdqmRVK3K',
-    limit: 10,
-    offset: 0,
-  },
-};
-
-//https://api.nytimes.com/svc/mostpopular/v2/viewed/{period}.json
-const mostPopularNews = {
-  baseUrl: `https://api.nytimes.com/svc/mostpopular/v2/viewed/`,
-  subUrl: '1',
-  params: {
-    'api-key': 'VPd8ESOXXGRNi6SUHc4QYJMXdqmRVK3K',
-  },
-};
-
-//https://api.nytimes.com/svc/search/v2/articlesearch.json
-
-const articleSearchNews = {
-  baseUrl: `https://api.nytimes.com/svc/search/v2/`,
-  subUrl: 'articlesearch',
-  params: {
-    'api-key': 'VPd8ESOXXGRNi6SUHc4QYJMXdqmRVK3K',
-
-    page: 1,
-    q: '',
-    sort: 'newest',
-  },
-};
-
-//?===== function  backEnd
-function makeURL(searhParam) {
-  const { baseUrl, subUrl, params } = searhParam;
-
-  const urlParams = new URLSearchParams(params);
-  return `${baseUrl}${subUrl}.json?${urlParams}`;
-}
-
 function rendeSection(item) {
   const { display_name, section } = item;
 
@@ -70,11 +24,8 @@ function rendeSection(item) {
 }
 
 async function makeSection(url) {
-  const listShow = document.getElementById('categories-show');
-
   try {
     const Data = await makeData(url);
-
     listShow.innerHTML = Data.map(rendeSection).join('');
     restart();
   } catch (error) {
@@ -83,47 +34,18 @@ async function makeSection(url) {
   }
 }
 
-function dataSectionNormalize(item) {
-  const { uri, url, title, section, abstract, published_date, multimedia } =
-    item;
-  //const id = uri;
-  const imgUrl = multimedia[2].url; //! перевірка на null
-  const newDateStr = published_date
-    .slice(0, published_date.indexOf('T'))
-    .trim()
-    .split('-')
-    .reverse()
-    .join('/');
-  return { id: uri, url, title, section, abstract, imgUrl, newDateStr };
-}
+async function makeSectionNews(url) {
+  try {
+    const news = await makeData(url);
+    const items = news.map(dataSectionNormalize);
 
-function dataArticleSearchNormalize(item) {
-  const {
-    uri,
-    web_url,
-    headline: { main },
-    section_name,
-    abstract,
-    pub_date,
-    multimedia,
-  } = item;
-  //const id = uri;
-  const imgUrl = `https://static01.nyt.com/${multimedia[2].url}`; //! перевірка на null
-  const newDateStr = pub_date
-    .slice(0, pub_date.indexOf('T'))
-    .trim()
-    .split('-')
-    .reverse()
-    .join('/');
-  return {
-    id: uri,
-    url: web_url,
-    title: main,
-    section: section_name,
-    abstract,
-    imgUrl,
-    newDateStr,
-  };
+    const weather = document.querySelector('.weather__thumb');
+    gallery.innerHTML = items.map(createCard).join('');
+    gallery.prepend(weather);
+  } catch (error) {
+    const msg = error.name === 'CanceledError' ? 'Get timeout' : error;
+    Notify.failure(`Oops ${msg}`);
+  }
 }
 
 //?===== function  render
@@ -139,11 +61,11 @@ function restart() {
   if (!count) {
     showHideCategoriesBtn.querySelector('span').textContent = 'Categories';
     categoriesContainer.classList.add('no-categories');
-    showHideCategoriesBtn.classList.add('mobile');
+    // showHideCategoriesBtn.classList.add('mobile');
   } else {
     showHideCategoriesBtn.querySelector('span').textContent = 'Others';
     categoriesContainer.classList.remove('no-categories');
-    showHideCategoriesBtn.classList.remove('mobile');
+    // showHideCategoriesBtn.classList.remove('mobile');
   }
   if (!(count > 4)) {
     calendarText.classList.add('visually-hidden');
@@ -195,7 +117,7 @@ categories.addEventListener('click', e => {
   if (e.target.nodeName !== 'LI') {
     return;
   }
-  const listItem = categories.querySelectorAll('li');
+  const listItem = categories.querySelectorAll('.categories__item');
 
   listItem.forEach(item => item.classList.remove('activ'));
   categoriesIcon.classList.remove('rotate');
@@ -203,33 +125,8 @@ categories.addEventListener('click', e => {
   e.target.classList.add('activ');
 
   sectionNews.subUrl = e.target.dataset.section;
-
-  (async () => {
-    const gallery = document.querySelector('.gallery');
-    const URL = makeURL(sectionNews);
-    const news = await makeData(URL);
-    const items = news.map(dataSectionNormalize);
-
-    gallery.innerHTML = items.map(createCard).join('');
-  })();
-});
-
-const clacKlac = document.querySelector('#search-form .btn');
-
-clacKlac.addEventListener('click', e => {
-  e.preventDefault();
-
-  articleSearchNews.params.q = 'Ukraine';
-
-  const URL = makeURL(articleSearchNews);
-
-  (async () => {
-    const gallery = document.querySelector('.gallery');
-    const news = await makeData(URL);
-    const items = news.map(dataArticleSearchNormalize);
-
-    gallery.innerHTML = items.map(createCard).join('');
-  })();
+  const URL = makeURL(sectionNews);
+  makeSectionNews(URL);
 });
 
 window.addEventListener('resize', debounce(restart, 250));
@@ -238,3 +135,17 @@ window.addEventListener('resize', debounce(restart, 250));
 
 const URL = makeURL(sectionList);
 makeSection(URL);
+
+// const iconCode = 'd04';
+// // const iconHeart = new URL(
+// //   `../images/wether-icons/${iconCode}-min.png`,
+// //   import.meta.url
+// // );
+
+// //@import '../../src/images/wether-icons/01d-min.png'
+
+//const filename = new URL('../images/we', import.meta.url);
+// // const test = '../.../src/images/wether-icons/01d-min.png';
+// // const iconHeart = new URL(test, import.meta.url);
+
+//console.log(iconHeart);

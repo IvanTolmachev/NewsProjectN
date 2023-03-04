@@ -1,3 +1,20 @@
+//@import '~node_modules/modern-normalize/modern-normalize.css';
+:root {
+  --bthBgColor: #f4f4f4;
+
+  --mainBgcolor: #f4f4f4;
+  --countCard: 1;
+  --gapCard: 30px;
+  @media screen and (min-width: 768px) {
+    --countCard: 2;
+    --gapCard: 30px;
+  }
+  @media screen and (min-width: 1280px) {
+    --countCard: 3;
+    --gapCard: 30px;
+  }
+}
+
 #categories-show {
   padding: 0;
   margin: 0;
@@ -18,6 +35,7 @@
   padding-right: 10px;
   overflow-y: scroll;
   scroll-behavior: smooth;
+  background-color: $calendarBgColor;
 }
 
 #categories-hide .categories__item {
@@ -26,6 +44,7 @@
   padding: 5px;
   // border-radius: 4px;
   cursor: pointer;
+  background-color: $calendarBgColor;
 
   &:hover,
   &:focus {
@@ -33,10 +52,23 @@
     background-color: inherit;
     color: $primarySwitchColor;
   }
+  &.activ {
+    background-color: $primarySwitchColor;
+  }
 }
-#categories-toggler.mobile {
-  padding: 7px 12px;
+
+// #categories-toggler.mobile {
+
+//   padding: 7px 12px;
+
+// }
+
+#categories-toggler {
+  @media screen and (min-width: 1280px) {
+    padding: 7px 12px;
+  }
 }
+
 .filter {
   clip: auto;
   height: 300px;
@@ -48,7 +80,7 @@
   left: 0;
   width: max-content;
   position: absolute;
-  background: #f8f8f8;
+  background: $calendarBgColor;
   border: 1px solid #000;
   border-radius: 20px;
   padding-top: 20px;
@@ -87,7 +119,7 @@
   line-height: 1.3334;
 
   color: $primarySwitchColor;
-
+  background-color: var(--bthBgColor);
   text-align: center;
   padding: 7px 22px;
   border: 1 solid;
@@ -140,6 +172,7 @@
   position: relative;
   margin-right: auto;
   margin-left: 16px;
+  z-index: 3;
 }
 
 .categories__container.no-categories {
@@ -154,14 +187,14 @@
   align-items: center;
 }
 
-.calendar .wrapper {
-  top: 36px;
-  right: 0;
+// .calendar .wrapper {
+//   top: 36px;
+//   right: 0;
 
-  @media screen and (min-width: 1280px) {
-    right: 36px;
-  }
-}
+//   @media screen and (min-width: 1280px) {
+//     right: 36px;
+//   }
+// }
 
 .calendar__text {
   white-space: nowrap;
@@ -183,6 +216,7 @@
 
   //color: $primaryTextColor;
   color: #a2a2a2;
+  background-color: var(--bthBgColor);
   text-align: center;
   padding: 5px 12px;
   border: 1 solid;
@@ -217,4 +251,20 @@
 
 .calendar__icon {
   fill: currentColor;
+}
+
+//==============
+.container .gallery {
+  background-color: var(--mainBgcolor);
+  @include grid(var(--gapCard), var(--countCard));
+  & .card {
+    width: auto;
+    height: auto;
+  }
+  & .weather__thumb {
+    grid-column-start: var(--countCard);
+    grid-column-end: var(--countCard);
+    grid-row-start: 1;
+    grid-row-end: 1;
+  }
 }
