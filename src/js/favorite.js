@@ -1,12 +1,8 @@
 import { getCards } from './api_cards';
+// import { getFavoriteId } from './add-to-favorite';
 
 //  const STORAGE_KEY = 'favoriteNews';
-export const savedApiData = [];
 
-// export {savedApiData}
-// const refs={
-//     favorite: document.querySelector('.favorite')
-// }
 
 async function getApiData() {
   const response = await getCards();
@@ -14,7 +10,7 @@ async function getApiData() {
   //   console.log(data);
   saveApiData(data);
 }
-
+export const savedApiData = [];
 function saveApiData(arrey) {
   arrey.map(({ id, url, title, section, abstract, published_date, media }) => {
     const item = {};
@@ -34,3 +30,10 @@ function saveApiData(arrey) {
   // console.log('savedApiData', savedApiData);
 }
 getApiData();
+
+const favoriteList= document.querySelector('.favorite')
+
+// favoriteList.addEventListener('click', getFavoriteId)
+
+
+
