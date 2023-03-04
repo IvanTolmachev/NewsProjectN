@@ -2,6 +2,7 @@ import debounce from 'lodash.debounce';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { makeData, createCard, dataSectionNormalize } from './apiNews';
 import { sectionList, sectionNews, makeURL } from './apiUrl';
+import { savedApiData } from './favorite';
 
 const gallery = document.querySelector('.gallery');
 const categories = document.querySelector('.categories');
@@ -29,22 +30,31 @@ async function makeSection(url) {
     listShow.innerHTML = Data.map(rendeSection).join('');
     restart();
   } catch (error) {
-    const msg = error.name === 'CanceledError' ? 'Get timeout' : error;
-    Notify.failure(`Oops ${msg}`);
+    //console.log(error);
+    // const msg = error.name === 'CanceledError' ? 'Get timeout' : error;
+    // Notify.failure(`Oops ${msg}`);
   }
 }
 
 async function makeSectionNews(url) {
   try {
     const news = await makeData(url);
+    // console.log(news.length);
     const items = news.map(dataSectionNormalize);
+
+    // while (savedApiData.length) {
+    //   savedApiData.pop();
+    // }
+    savedApiData.length = 0;
+    savedApiData.push([...items]);
+    // console.log(savedApiData);
 
     const weather = document.querySelector('.weather__thumb');
     gallery.innerHTML = items.map(createCard).join('');
     gallery.prepend(weather);
   } catch (error) {
-    const msg = error.name === 'CanceledError' ? 'Get timeout' : error;
-    Notify.failure(`Oops ${msg}`);
+    // const msg = error.name === 'CanceledError' ? 'Get timeout' : error;
+    // Notify.failure(`Oops ${msg}`);
   }
 }
 
@@ -61,16 +71,9 @@ function restart() {
   if (!count) {
     showHideCategoriesBtn.querySelector('span').textContent = 'Categories';
     categoriesContainer.classList.add('no-categories');
-    // showHideCategoriesBtn.classList.add('mobile');
   } else {
     showHideCategoriesBtn.querySelector('span').textContent = 'Others';
     categoriesContainer.classList.remove('no-categories');
-    // showHideCategoriesBtn.classList.remove('mobile');
-  }
-  if (!(count > 4)) {
-    calendarText.classList.add('visually-hidden');
-  } else {
-    calendarText.classList.remove('visually-hidden');
   }
 
   sortSections(count);
@@ -105,7 +108,7 @@ function sortSections(count) {
 //!=== listener
 
 showHideCategoriesBtn.addEventListener('click', () => {
-  filterItems.classList.toggle('visually-hidden');
+  filterItems.classList.toggle('filter-show');
   categoriesIcon.classList.toggle('rotate');
 });
 
@@ -114,19 +117,22 @@ calendarBtn.addEventListener('click', () => {
 });
 
 categories.addEventListener('click', e => {
-  if (e.target.nodeName !== 'LI') {
-    return;
+  if (
+    e.target.nodeName === 'LI' &&
+    e.target.classList.contains('categories__item')
+  ) {
+    const listItem = categories.querySelectorAll('.categories__item');
+
+    listItem.forEach(item => item.classList.remove('activ'));
+    e.target.classList.add('activ');
+    categoriesIcon.classList.remove('rotate');
+    filterItems.classList.remove('filter-show');
+
+    sectionNews.subUrl = e.target.dataset.section;
+    sectionNews.params.limit = 8;
+    const URL = makeURL(sectionNews);
+    makeSectionNews(URL);
   }
-  const listItem = categories.querySelectorAll('.categories__item');
-
-  listItem.forEach(item => item.classList.remove('activ'));
-  categoriesIcon.classList.remove('rotate');
-  filterItems.classList.add('visually-hidden');
-  e.target.classList.add('activ');
-
-  sectionNews.subUrl = e.target.dataset.section;
-  const URL = makeURL(sectionNews);
-  makeSectionNews(URL);
 });
 
 window.addEventListener('resize', debounce(restart, 250));
@@ -135,17 +141,3 @@ window.addEventListener('resize', debounce(restart, 250));
 
 const URL = makeURL(sectionList);
 makeSection(URL);
-
-// const iconCode = 'd04';
-// // const iconHeart = new URL(
-// //   `../images/wether-icons/${iconCode}-min.png`,
-// //   import.meta.url
-// // );
-
-// //@import '../../src/images/wether-icons/01d-min.png'
-
-//const filename = new URL('../images/we', import.meta.url);
-// // const test = '../.../src/images/wether-icons/01d-min.png';
-// // const iconHeart = new URL(test, import.meta.url);
-
-//console.log(iconHeart);

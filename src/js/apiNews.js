@@ -14,7 +14,6 @@ export async function getData(url, timeout = 5000) {
     signal: controller.signal,
   });
   clearTimeout(id);
-
   return response;
 }
 
@@ -41,7 +40,10 @@ export async function makeData(url) {
     return Data.data.results;
   } catch (error) {
     const msg = error.name === 'CanceledError' ? 'Get timeout' : error;
-    Notify.failure(`Oops ${msg}`);
+    console.log(msg);
+    const gallery = document.querySelector('.gallery');
+    gallery.innerHTML = '';
+    // Notify.failure(`Oops ${msg}`);
   }
 }
 
