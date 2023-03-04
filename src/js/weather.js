@@ -7,7 +7,7 @@ const weatherIcon = document.querySelector('.weather__icon');
 
 // Обновления элементов HTML
 
-function updateWeatherInfo(weatherData) {
+async function updateWeatherInfo(weatherData) {
   weatherTemp.textContent = `${Math.round(weatherData.main.temp)}°C`;
   weatherCond.textContent = weatherData.weather[0].description;
   weatherLocation.textContent = weatherData.name;
@@ -20,16 +20,17 @@ function updateWeatherInfo(weatherData) {
     year: 'numeric',
   })}`;
   const iconCode = weatherData.weather[0].icon;
-  // const iconHeart = new URL(
-  //   `../images/wether-icons/${iconCode}-min.png`,
+  let urlIcons = `../images/wether-icons/${iconCode}-min.png`;
+  // let urlIcons = `../images/wether-icons/02n-min.png`;
+
+  // console.log(urlIcons);
+  const urlIcon = new URL(urlIcons, import.meta.url);
+  // const urlIcon = new URL(
+  //   `../images/wether-icons/02n-min.png`,
   //   import.meta.url
   // );
-  const iconHeart = new URL(
-    `../images/wether-icons/01d-min.png`,
-    import.meta.url
-  );
-  const iconUrl = `${iconHeart}`;
-  weatherIcon.setAttribute('src', iconUrl);
+
+  weatherIcon.setAttribute('src', urlIcon);
 }
 
 // Получение координат пользователя
