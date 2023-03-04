@@ -96,7 +96,7 @@ body {
     background-color: var(--color-bg);
 }
 
-.header-container {
+.header {
     border-bottom: 1px solid var(--border-botton);
 }
 
@@ -105,10 +105,11 @@ body {
     color: var(--header-text-color);
 }
 
-.gallery,
+.card__title,
 .card__description {
     color: var(--gallery-text-color);
 }
+
 
 .toggle-label {
     &.light {
@@ -127,6 +128,7 @@ html.light {
     --gallery-text-color: #111321;
     --toggle-label-light: #4B48DB;
     --toggle-label-dark: #5F6775;
+    --bthBgColor: #f4f4f4;
 }
 
 
@@ -138,4 +140,5 @@ html.dark {
     --gallery-text-color: #F4F4F4;
     --toggle-label-light: #F4F4F4;
     --toggle-label-dark: #4440F7;
+    --bthBgColor: #ffffff;
 }
