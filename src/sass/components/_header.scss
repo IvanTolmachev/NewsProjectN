@@ -1,35 +1,51 @@
 .header {
-
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  margin-top: 24px;
+  height: 81px;
+  // position: fixed;
+  // z-index: 999;
+  border-bottom: 1px solid $borderHeaderColor;
   width: 100%;
 }
 
 .header-container {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
+  // justify-content: space-between;
+  align-items: center;
+}
+
+.container-nav {
+  display: flex;
 }
 
 .logo {
+  margin-right: auto;
   text-transform: uppercase;
-padding: 24px 0;
+  // padding: 24px 0;
+
   color: $primaryTextColor;
-  
+
   font-weight: 700;
   font-size: 24px;
   line-height: 1.38;
   cursor: pointer;
- 
-  @media screen and (min-width: 768px) {
-    width: 768px;
+  @include tablet {
     font-size: 32px;
-    padding: 32px 0;
+    margin-right: 48px;
+  }
+  @include desktop {
+    font-size: 42px;
+    margin-right: 102px;
+  }
+  @media screen and (min-width: 768px) {
+    // width: 768px;
+    // font-size: 32px;
+    // padding: 32px 0;
   }
   @media screen and (min-width: 1280px) {
-    width: 1280px;
-    font-size: 42px;
-    line-height: 1.36;
-    padding: 28px 0;
+    // width: 1280px;
+    // font-size: 42px;
+    // line-height: 1.36;
+    // padding: 28px 0;
   }
   transition: text-shadow $durationFunction $timingFunction;
   &:hover,
@@ -40,111 +56,116 @@ padding: 24px 0;
 
 .header-navigation {
   gap: 44px;
-
-  @media screen and (max-width: 767px) {
-    display: none;
-  }
-
-  @media screen and (min-width: 768px) {
+  display: none;
+  @include tablet {
     display: flex;
-    padding-top: 48px;
-    padding-bottom: 36px;
+    align-items: center;
   }
-  @media screen and (min-width: 1280px){
-    display: flex;
-    gap:69px;
-    padding-top: 55px;
-    padding-bottom: 33px;
-
-
+  @include desktop {
+    // display: flex;
+    // align-items: center;
+    gap: 69px;
   }
 }
-.menu-link {
-  font-family:'Manrope';
 
+.menu-link {
+  font-family: 'Manrope';
+  // display: flex;
   font-weight: 700;
   font-size: 16px;
   color: $primaryTextColor;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  // padding-top: 10px;
+  // padding-bottom: 10px;
   line-height: 1.38;
-  position: relative;
+  // position: relative;
 
   transition: text-shadow $durationFunction $timingFunction;
   &:hover,
   &:focus {
     text-shadow: $boxShadow;
   }
-  @media screen and (min-width: 1280px) {
-    width: 1280px;
+
+  @include desktop {
+    // width: 1280px;
     font-size: 18px;
-    gap: 69px;
+    // gap: 69px;
   }
 }
 
-.search-form{
+.search-form {
+  position: relative;
   display: flex;
   align-items: center;
 }
 
-.search{
-
-  position: relative;
-  width: 30px;
+.search {
+  @include tablet {
+    margin-left: 32px;
+    margin-right: 24px;
+  }
+  @include desktop {
+    margin-left: 147px;
+    margin-right: 137px;
+  }
+  // position: relative;
+  // width: 30px;
 }
-.menu-icon-btn{
-  display: block;
-  cursor: pointer;
- 
-
-}
-.btn-search{
+// .menu-icon-btn {
+//   display: block;
+//   cursor: pointer;
+// }
+.btn-search {
+  width: 20px;
+  height: 20px;
   background: none;
-  box-shadow: none;
+  // box-shadow: none;
   border: none;
   cursor: pointer;
   padding: 0;
   margin: 0;
   appearance: none;
-  position: relative;
-  width: 15px;
-
-
-
+  // position: relative;
+  // width: 15px;
 }
-.input-text{
+.input-text {
+  display: none;
   width: 173px;
-  padding: 5px 10px 5px 45px;
+  padding: 5px 20px 5px 48px;
   box-sizing: border-box;
- border: none;
+  border: none;
   border: 1px solid $primaryTextColor;
   font-family: 'Poppins';
-font-weight: 400;
-font-size: 14px;
-line-height: 1.71;
-color: $primaryTextColor;
-border-radius: 20px;
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-transition: box-shadow $durationFunction $timingFunction;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.71;
+  color: $primaryTextColor;
+  border-radius: 20px;
+
+  // position: absolute;
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
+  transition: box-shadow $durationFunction $timingFunction;
   &:hover,
   &:focus {
-   box-shadow: $boxShadow;
+    box-shadow: $boxShadow;
   }
-  @media screen and (min-width: 768px){
+
+  @include tablet {
+    display: block;
+    width: 213px;
+  }
+  @include desktop {
     width: 288px;
   }
-
-
 }
-.btn-search{
-  @media screen and (max-width: 767px) {
-    display: none;
+
+.btn-search {
+  @include tablet {
+    position: absolute;
+    left: 12px;
   }
 }
-
 
 // form{
 //     @media screen and (min-width: 480px) {
