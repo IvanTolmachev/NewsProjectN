@@ -1,8 +1,9 @@
 
 const favorite = document.querySelector(".favorite");
-console.log("🚀 ~ favorite:", favorite)
-// const container = document.querySelector(".container");
+// console.log("🚀 ~ favorite:", favorite)
 
+// const container = document.querySelector(".container");
+const iconHeart = new URL('../images/icon.svg', import.meta.url);
 
 // localStorage.setItem("test", JSON.stringify(localStorageDataTest));
 
@@ -30,9 +31,9 @@ export default function createMarkupFavorite() {
             class="wrap-image__photo"
           />
           <p class="wrap-image__text">${section}</p>
-          <button type="button"  class="wrap-image__btn js-tartet-favorite"><span class="js-favorite-btn-text js-tartet-favorite">Remove from favorite</span>
-                    <svg class="wrap-image__icon js-tartet-favorite" width="16" height="16">
-                            <use class="js-tartet-favorite" href ='./images/icon.svg#icon-heart'></use>
+          <button type="button"  class="wrap-image__btn js-is-favorite"><span class="js-is-favorite">Remove from favorite</span>
+                    <svg class="wrap-image__icon js-is-favorite" width="16" height="16">
+                            <use class="js-is-favorite" href ='./images/icon.svg#icon-heart'></use>
                         </svg>
                 </button>
         
