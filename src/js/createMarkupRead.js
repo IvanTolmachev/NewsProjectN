@@ -2,7 +2,7 @@ const dropBtnRef = document.getElementById('dropBtn-js');
 const dropIcon = document.querySelector('.icon-down-read-pg'); 
 const newsListRef = document.querySelector('.news-list'); 
 
-// console.log("🚀 ~ newsListRef:", newsListRef);
+console.log("🚀 ~ newsListRef:", newsListRef);
 
 dropBtnRef.addEventListener('click', function () {
   newsListRef.classList.toggle('show');
@@ -12,12 +12,17 @@ dropBtnRef.addEventListener('click', function () {
 
 const STORAGE_KEY = 'readNews';
 
+// ++++++++++++++++++++++++
+
+
+
 export default function createMarkupRead() {
     const storageJson = localStorage.getItem(STORAGE_KEY);
     console.log("🚀 ~ createMarkupRead ~ storageJson:", storageJson)
     const storageData = JSON.parse(storageJson); 
     console.log("🚀 ~ createMarkupRead ~ storageData:", storageData)
   
+
     let markup = "";
     
     markup = storageData
@@ -55,3 +60,5 @@ export default function createMarkupRead() {
   }
   
   createMarkupRead(); 
+
+
