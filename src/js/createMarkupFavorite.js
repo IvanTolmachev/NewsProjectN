@@ -1,8 +1,9 @@
 
 const favorite = document.querySelector(".favorite");
+// console.log("🚀 ~ favorite:", favorite)
 
 // const container = document.querySelector(".container");
-
+const iconHeart = new URL('../images/icon.svg', import.meta.url);
 
 // localStorage.setItem("test", JSON.stringify(localStorageDataTest));
 
