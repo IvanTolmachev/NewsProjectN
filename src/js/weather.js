@@ -5,6 +5,7 @@ const weatherLocation = document.querySelector('.weather__location');
 const weatherDate = document.querySelector('.weather__date');
 const weatherIcon = document.querySelector('.weather__icon');
 
+import wIcon from '../images/wether-icons/*.png';
 // Обновления элементов HTML
 
 async function updateWeatherInfo(weatherData) {
@@ -20,17 +21,8 @@ async function updateWeatherInfo(weatherData) {
     year: 'numeric',
   })}`;
   const iconCode = weatherData.weather[0].icon;
-  let urlIcons = `../images/wether-icons/${iconCode}-min.png`;
-  // let urlIcons = `../images/wether-icons/02n-min.png`;
-
-  // console.log(urlIcons);
-  const urlIcon = new URL(urlIcons, import.meta.url);
-  // const urlIcon = new URL(
-  //   `../images/wether-icons/02n-min.png`,
-  //   import.meta.url
-  // );
-
-  weatherIcon.setAttribute('src', urlIcon);
+  let urlIcons = wIcon[`${iconCode}`];
+  weatherIcon.setAttribute('src', urlIcons);
 }
 
 // Получение координат пользователя

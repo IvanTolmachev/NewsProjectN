@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  justify-content: space-between;
   padding: 32px;
   box-sizing: border-box;
 
@@ -33,8 +33,6 @@
 }
 
 .weather__icon {
-  margin: auto;
-
   width: 128px;
   height: 128px;
 
