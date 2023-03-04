@@ -1,3 +1,10 @@
+// вызов mixin-a
+// .any-class {
+//   @include phones {
+//     background-color: red;
+//   }
+// }
+
 // -------------- Миксин для адаптивки -------------
 @mixin desktop {
   @media screen and (min-width: 1280px) {
@@ -35,12 +42,6 @@
     @content;
   }
 }
-// вызов mixin-a
-// .any-class {
-//   @include phones {
-//     background-color: red;
-//   }
-// }
 
 // --------------------- Миксин для анимации -----------------
 

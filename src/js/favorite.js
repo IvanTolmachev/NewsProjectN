@@ -1,8 +1,7 @@
-import { getCards } from './api_cards';
+import { getCards } from './cards';
 // import { getFavoriteId } from './add-to-favorite';
 
 //  const STORAGE_KEY = 'favoriteNews';
-
 
 async function getApiData() {
   const response = await getCards();
@@ -31,9 +30,6 @@ function saveApiData(arrey) {
 }
 getApiData();
 
-const favoriteList= document.querySelector('.favorite')
+const favoriteList = document.querySelector('.favorite');
 
 // favoriteList.addEventListener('click', getFavoriteId)
-
-
-

@@ -1,5 +1,4 @@
 import './js/cards';
-import './js/api_cards';
 import './js/calendar';
 import './js/filter-categories';
 import './js/home-page';
@@ -9,3 +8,4 @@ import './js/add-to-favorite';
 import './js/search_cards';
 import './js/form';
 import './js/add-to-read';
+import './js/pagination';
