@@ -3,16 +3,16 @@
   --bthBgColor: #f4f4f4;
 
   --mainBgcolor: #f4f4f4;
-  --countCard: 1;
-  --gapCard: 30px;
-  @media screen and (min-width: 768px) {
-    --countCard: 2;
-    --gapCard: 30px;
-  }
-  @media screen and (min-width: 1280px) {
-    --countCard: 3;
-    --gapCard: 30px;
-  }
+  // --countCard: 1;
+  // --gapCard: 30px;
+  // @media screen and (min-width: 768px) {
+  //   --countCard: 2;
+  //   --gapCard: 30px;
+  // }
+  // @media screen and (min-width: 1280px) {
+  //   --countCard: 3;
+  //   --gapCard: 30px;
+  // }
 }
 
 #categories-show {
@@ -251,20 +251,4 @@
 
 .calendar__icon {
   fill: currentColor;
-}
-
-//==============
-.container .gallery {
-  background-color: var(--mainBgcolor);
-  @include grid(var(--gapCard), var(--countCard));
-  & .card {
-    width: auto;
-    height: auto;
-  }
-  & .weather__thumb {
-    grid-column-start: var(--countCard);
-    grid-column-end: var(--countCard);
-    grid-row-start: 1;
-    grid-row-end: 1;
-  }
 }
