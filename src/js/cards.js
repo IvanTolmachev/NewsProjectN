@@ -1,19 +1,32 @@
-import { getCards } from './api_cards';
 import axios from 'axios';
+
+export async function getCards() {
+  const URL = `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=7p9CJylKpjl89QHHczOefIddo1AI47yw`;
+  const requestData = await axios.get(URL);
+  return requestData;
+}
 
 const iconHeart = new URL('../images/icon.svg', import.meta.url);
 
 const refs = {
   gallery: document.querySelector('.gallery'),
 };
+export const savedApiData = [];
 
 export async function createCards() {
-  const response = await getCards();
-  const data = response.data.results;
-  console.log(data);
-  createMarkup(data);
+  try {
+    const response = await getCards();
+    const data = response.data.results;
+    // console.log(data);
+    createMarkup(data);
+    saveApiData(data);
+  } catch (error) {
+    console.error('Error from backend:', error);
+  }
 }
+
 createCards();
+
 export function createMarkup(arr) {
   const markup = arr
     .map(({ id, url, title, section, abstract, published_date, media }) => {
@@ -50,4 +63,18 @@ export function createMarkup(arr) {
   refs.gallery.insertAdjacentHTML('beforeend', markup);
 }
 
-
+function saveApiData(arrey) {
+  arrey.map(({ id, url, title, section, abstract, published_date, media }) => {
+    const item = {};
+    let imgUrl = media.map(media => media['media-metadata'][2].url);
+    item['id'] = `${id}`;
+    item['url'] = `${url}`;
+    item['title'] = `${title}`;
+    item['section'] = `${section}`;
+    item['abstract'] = `${abstract}`;
+    item['published_date'] = `${published_date}`;
+    item['imgUrl'] = `${imgUrl}`;
+    savedApiData.push(item);
+  });
+  // console.log('savedApiData', savedApiData);
+}

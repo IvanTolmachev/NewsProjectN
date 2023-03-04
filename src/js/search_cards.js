@@ -1,13 +1,23 @@
 import axios from 'axios';
-import { getSearchCards } from './api_cards';
+
+export async function getSearchCards() {
+  const URL =
+    'https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=7p9CJylKpjl89QHHczOefIddo1AI47yw';
+  const requestData = await axios.get(URL);
+  return requestData;
+}
 
 const iconHeart = new URL('../images/icon.svg', import.meta.url);
 
 async function createSearchCards() {
-  const response = await getSearchCards();
-  console.log(response);
-  const data = response.data.response.docs;
-  createMarkup(data);
+  try {
+    const response = await getSearchCards();
+    console.log(response);
+    const data = response.data.response.docs;
+    createMarkup(data);
+  } catch (error) {
+    console.error('Error from backend:', error);
+  }
 }
 
 createSearchCards();
