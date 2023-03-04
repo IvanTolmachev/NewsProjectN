@@ -10,10 +10,12 @@ const gallery=document.querySelector('.gallery')
 gallery.addEventListener("click", getFavoriteId);
 
 export default function getFavoriteId(evt) {
+  evt.preventDefault(); 
     // console.log("evt.target.nodeName", evt.target.nodeName);
-    // console.log("evt.target.classList", evt.target.classList);
-    
+    // console.log("evt.target.classList", evt.target.classList); 
+
     if(evt.target.classList.contains("js-tartet-favorite")){
+
       const id=evt.target.closest(".js-card-item").dataset.targetId
       // console.log("🚀 ~ addToFavorite ~ id:", id)
       saveFavotiteNew(id)
@@ -21,11 +23,10 @@ export default function getFavoriteId(evt) {
 }
 
 function saveFavotiteNew(id) {
+
     // console.log("🚀 ~ saveFavotiteNewToStorage ~ id:", id)
     // console.log("🚀 ~ savedApiData:", savedApiData)
     const favoriteNew =savedApiData.find(item=>item.id===id)
-
-     
 
     // favoriteNews.push(favoriteNew)
 

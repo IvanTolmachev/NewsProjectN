@@ -1,2 +1,3 @@
-import './js/read-pg';
+import './js/read';
+import './js/createMarkupRead'; 
 

@@ -12,3 +12,6 @@ console.log(galleryItem);
 gallery.prepend(weather);
 
 // gallery.append(weather);
+
+
+
