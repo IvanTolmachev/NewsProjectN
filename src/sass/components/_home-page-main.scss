@@ -1,3 +1,15 @@
+:root {
+  --countCard: 1;
+  --gapCard: 28px;
+  @media screen and (min-width: 768px) {
+    --countCard: 2;
+    --gapCard: 30px;
+  }
+  @media screen and (min-width: 1280px) {
+    --countCard: 3;
+    --gapCard: 31px;
+  }
+}
 .section_home {
   padding-top: 40px;
   padding-bottom: 40px;
@@ -10,16 +22,16 @@
     padding-bottom: 60px;
   }
 }
-
-.gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 28px;
-  @media screen and (min-width: 768px) {
-    gap: 30px;
+.container .gallery {
+  @include grid(var(--gapCard), var(--countCard));
+  & .card {
+    width: auto;
+    height: auto;
   }
-  @media screen and (min-width: 1280px) {
-    gap: 31px;
+  & .weather__thumb {
+    grid-column-start: var(--countCard);
+    grid-column-end: var(--countCard);
+    grid-row-start: 1;
+    grid-row-end: 1;
   }
 }
