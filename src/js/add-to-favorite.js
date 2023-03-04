@@ -33,26 +33,28 @@ function saveFavotiteNew(id) {
     const favoriteSvg=document.querySelector(`li[data-target-id='${id}'] svg.js-tartet-favorite`)
     const favoriteUse=document.querySelector(`li[data-target-id='${id}'] use.js-tartet-favorite`)
     const heardIcon=document.querySelector('svg.js-tartet-favorite.wrap-image__icon')
+    const storageNews=JSON.parse(localStorage.getItem(STORAGE_KEY))
   
     // if(favoriteNews.length===0 || favoriteNews.every(el=>Number(el.id)!==Number(id))) {
-    //   favoriteNews.push(favoriteNew)
+     
     // }
-    // favoriteNews.push(favoriteNew)
-    // console.log("🚀 ~ favoriteNews:", favoriteNews)
-    // localStorage.setItem(STORAGE_KEY, JSON.stringify(favoriteNews));
-
-    const storageNews=JSON.parse(localStorage.getItem(STORAGE_KEY))
 
     if(!storageNews){
-      
       const firstNew=[]
       firstNew.push(favoriteNew)
       localStorage.setItem(STORAGE_KEY, JSON.stringify(firstNew));
 
-    } else {
+    } else if(storageNews.every(el=>Number(el.id)!==Number(id))) {
       storageNews.push(favoriteNew)
       localStorage.setItem(STORAGE_KEY, JSON.stringify(storageNews));
     }
+    // favoriteNews.push(favoriteNew)
+    // console.log("🚀 ~ favoriteNews:", favoriteNews)
+    // localStorage.setItem(STORAGE_KEY, JSON.stringify(favoriteNews));
+
+    
+
+    
     
     favoriteBtnText.classList.replace("js-tartet-favorite","js-is-favorite")
     favoriteBtn.classList.replace("js-tartet-favorite","js-is-favorite")
