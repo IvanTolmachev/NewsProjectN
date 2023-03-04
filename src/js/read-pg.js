@@ -2,9 +2,13 @@
 // import { getCards } from './api_cards';
 import { savedApiData } from './favorite'; 
 
-// console.log(savedApiData); 
+// console.log(savedApiData);
+
+
 const STORAGE_KEY = 'readedNews';
-const readedNews = [];
+// const readedNews = [];
+
+let valuesStorage = {}; 
 
 const dropBtnRef = document.getElementById('dropBtn-js'); 
 const dropIcon = document.querySelector('.icon-down-read-pg'); 
@@ -31,27 +35,41 @@ export default function getReadedNewsId(event) {
 }
 
 function saveReadedNew(id) {
-  // const valuesStorage = {
-  //   readedNews: [],
-  //   date: new Date(),
-  // }
+ let valuesStorage = {
+    readedNews: [],
+    date: new Date(),
+  }
+
+  console.log(valuesStorage); 
 
   const readedNew = savedApiData.find(item=>item.id===id)
 
   if (readedNews.length<1){
-    readedNews.push(readedNew)
+    valuesStorage.readedNews.push(readedNew)
 } 
 
-if(readedNews.every(el=>Number(el.id)!==Number(id))) {
-  readedNews.push(readedNew)
+if(valuesStorage.readedNews.every(el=>Number(el.id)!==Number(id))) {
+  valuesStorage.readedNews.push(readedNew)
 }
 }
 
-const valuesStorageJSON = JSON.stringify(readedNews); 
+const valuesStorageJSON = JSON.stringify(valuesStorage); 
 console.log("valuesStorageJSON:", valuesStorageJSON); 
 
 localStorage.setItem(STORAGE_KEY, valuesStorageJSON); 
-console.log(readedNews); 
+console.log(valuesStorage.date); 
 // *************************************
 
 
+
+
+
+// **************Я поставила****************
+// gallery.addEventListener('click', funcBtn);
+
+// function funcBtn(ev) {
+//     if(ev.target.classList.contains("wrap-info__link")) {
+//         ev.preventDefault(); 
+//         console.log('I button')
+//     }
+// }
