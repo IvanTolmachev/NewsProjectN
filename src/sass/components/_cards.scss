@@ -1,12 +1,13 @@
 .card {
-  // display: flex;
-  // flex-direction: column;
-  // gap: 20px;
-  // width: 288px;
-
   width: 100%;
   // height: 630px;
-
+  border-radius: 4px;
+  transition: box-shadow $durationFunction $timingFunction;
+  &:hover,
+  &:focus {
+    box-shadow: 2px 6px 6px rgba(0, 0, 0, 0.12), 2px 8px 8px rgba(0, 0, 0, 0.06),
+      4px 8px 10px rgba(0, 0, 0, 0.16);
+  }
   @include tablet {
     width: calc((100% - 32px) / 2);
     // width: 353px;
@@ -20,6 +21,7 @@
 
 .wrap-image {
   position: relative;
+
   background-color: $cardImgBgColor;
   border-radius: 4px;
   height: 395px;
@@ -46,6 +48,8 @@
   right: 8px;
   border-radius: 20px;
   min-width: 126px;
+  padding-left: 10px;
+  padding-right: 10px;
   height: 28px;
   border: transparent;
   color: $primaryTextColor;
@@ -85,6 +89,7 @@
   min-height: 100px;
   display: block;
   overflow: hidden;
+  padding: 0 4px 0 4px;
 
   @include tablet {
     font-size: 32px;
@@ -101,6 +106,7 @@
   margin-bottom: 20px;
   display: block;
   min-height: 57px;
+  padding: 0 4px 0 4px;
 
   color: $primaryTextColor;
   @include tablet {
@@ -112,13 +118,14 @@
 
 .wrap-image__icon {
   display: block;
-  fill: currentColor;
+  fill: transparent;
+  stroke: $hoverColor;
 }
 
 .wrap-info {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 0;
+  margin: 0 4px 10px 4px;
 }
 
 .wrap-info__time {
@@ -137,7 +144,6 @@
 .wrap-info__link {
   font-size: 14px;
   line-height: 19px;
-
   color: $hoverColor;
   @include tablet {
     font-size: 16px;
