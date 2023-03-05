@@ -1,3 +1,4 @@
+import './js/navigations';
 import './js/cards';
 import './js/calendar';
 import './js/filter-categories';

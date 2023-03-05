@@ -1,5 +1,5 @@
 
-const favorite = document.querySelector(".favorite");
+const favoriteList = document.querySelector(".favorite");
 // console.log("🚀 ~ favorite:", favorite)
 
 // const container = document.querySelector(".container");
@@ -14,11 +14,11 @@ export default function createMarkupFavorite() {
     const storageData=JSON.parse(storageDataJson)
     console.log("🚀 ~ storageData:", storageData)
 
-  
+
   let markup = "";
   
   markup = storageData
-    .map(({ id, section, imgUrl, title, abstract, published_date, url }) => {
+    .map(({ id, section, imgUrl, title, abstract, newDateStr, url }) => {
         // if (identifier !== Number(id)) {
             
         //     return
@@ -31,24 +31,26 @@ export default function createMarkupFavorite() {
             class="wrap-image__photo"
           />
           <p class="wrap-image__text">${section}</p>
-          <button type="button"  class="wrap-image__btn js-is-favorite"><span class="js-is-favorite">Remove from favorite</span>
-                    <svg class="wrap-image__icon js-is-favorite" width="16" height="16">
-                            <use class="js-is-favorite" href ='./images/icon.svg#icon-heart'></use>
-                        </svg>
-                </button>
+          <button type="button"  class="wrap-image__btn js-is-favorite">
+            <span class="wrap-image__btn-text js-is-favorite">Remove from favorite</span>
+              <svg class="wrap-image__icon js-is-favorite fill-heard" width="16" height="16">
+                <use class="js-is-favorite" href ='${iconHeart}#icon-heart'></use>
+              </svg>
+          </button>
         
         </div>
             <h2 class="card__title">${title}</h2>
             <p class="card__description">${abstract.length > 112 ? abstract.slice(0, 113) + '...' : abstract}</p>
             <div class="wrap-info">
-                <p class="wrap-info__time">${published_date}</p>
+                <p class="wrap-info__time">${newDateStr}</p>
                 <a href="${url}" class="wrap-info__link">Read more</a>
             </div>
       </li>`;
     })
     .join("");
     // console.log("🚀 ~ createMarkupFavorite ~ markup:", markup)
-  favorite.insertAdjacentHTML("beforeend", markup);
+    favoriteList.insertAdjacentHTML("beforeend", markup);
 }
 
 createMarkupFavorite();
+
