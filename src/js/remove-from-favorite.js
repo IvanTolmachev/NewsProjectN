@@ -20,28 +20,38 @@ function getFavoriteId(evt) {
   }
 }
 
-// function removeFromFavorite(id) {
-//     const favoriteBtnText=document.querySelector(`li[data-target-id='${id}'] span.js-is-favorite`)
-//     const favoriteBtn=document.querySelector(`li[data-target-id='${id}'] button.js-is-favorite`)
-//     const favoriteSvg=document.querySelector(`li[data-target-id='${id}'] svg.js-is-favorite`)
-//     const favoriteUse=document.querySelector(`li[data-target-id='${id}'] use.js-is-favorite`)
+function removeFromFavorite(id) {
+  const favoriteBtnText = document.querySelector(
+    `li[data-target-id='${id}'] span.js-is-favorite`
+  );
+  const favoriteBtn = document.querySelector(
+    `li[data-target-id='${id}'] button.js-is-favorite`
+  );
+  const favoriteSvg = document.querySelector(
+    `li[data-target-id='${id}'] svg.js-is-favorite`
+  );
+  const favoriteUse = document.querySelector(
+    `li[data-target-id='${id}'] use.js-is-favorite`
+  );
 
-//     // const removedNewIndex=favoriteNews.findIndex(item => Number(item.id) === Number(id))
-//     // favoriteNews.splice(removedNewIndex, 1)
-//     // localStorage.setItem(STORAGE_KEY, JSON.stringify(favoriteNews));
+  // const removedNewIndex=favoriteNews.findIndex(item => Number(item.id) === Number(id))
+  // favoriteNews.splice(removedNewIndex, 1)
+  // localStorage.setItem(STORAGE_KEY, JSON.stringify(favoriteNews));
 
-//     const storageNews=JSON.parse(localStorage.getItem(STORAGE_KEY))
-//     const removedNewIndex=storageNews.findIndex(item => Number(item.id) === Number(id))
-//     storageNews.splice(removedNewIndex, 1)
-//     localStorage.setItem(STORAGE_KEY, JSON.stringify(storageNews));
+  const storageNews = JSON.parse(localStorage.getItem(STORAGE_KEY));
+  const removedNewIndex = storageNews.findIndex(
+    item => Number(item.id) === Number(id)
+  );
+  storageNews.splice(removedNewIndex, 1);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(storageNews));
 
-//     favoriteBtnText.classList.replace("js-is-favorite","js-tartet-favorite")
-//     favoriteBtn.classList.replace("js-is-favorite","js-tartet-favorite")
-//     favoriteSvg.classList.replace("js-is-favorite","js-tartet-favorite")
-//     favoriteUse.classList.replace("js-is-favorite","js-tartet-favorite")
+  favoriteBtnText.classList.replace('js-is-favorite', 'js-tartet-favorite');
+  favoriteBtn.classList.replace('js-is-favorite', 'js-tartet-favorite');
+  favoriteSvg.classList.replace('js-is-favorite', 'js-tartet-favorite');
+  favoriteUse.classList.replace('js-is-favorite', 'js-tartet-favorite');
 
-//     changeFavoriteBtnText(favoriteBtnText)
-//   }
+  changeFavoriteBtnText(favoriteBtnText);
+}
 
 function changeFavoriteBtnText(ref) {
   ref.textContent =
