@@ -2,7 +2,7 @@ import axios from 'axios';
 import { API_KEY } from './apiUrl';
 
 export async function getCards() {
-  const URL = `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=${API_KEY}`;
+  const URL = `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=Ju3nrJG9qDHWiub5XETntTPMI7gK30uz`;
   const requestData = await axios.get(URL);
   return requestData;
 }
@@ -52,7 +52,7 @@ export function createMarkup(arr) {
           <p class="wrap-image__text">${section}</p>
           <button type="button"  class="wrap-image__btn js-is-favorite">
           <span class="wrap-image__btn-text js-is-favorite ">Remove from favorite</span>
-            <svg class="wrap-image__icon js-is-favorite fill-heard" width="16" height="16">
+            <svg class="js-is-favorite fill-heard" width="16" height="16">
                 <use class="js-is-favorite" href ='${iconHeart}#icon-heart'></use>
             </svg>
           </button>
