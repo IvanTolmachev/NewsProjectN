@@ -1,12 +1,12 @@
 
-import { createCards } from './cards';
+import { createMarkup } from './cards';
 
 
 //  const btnMoreRead = document.querySelector('.dropbtn'); 
 const dropIcon = document.querySelector('.icon-down-read-pg'); 
 const newsListRef = document.querySelector('.news-list'); 
 const dateListRef = document.querySelector('.date-list');
-// console.log("🚀 ~ newsListRef:", newsListRef);
+const errorRequest = document.querySelector('.errorRequest');
 
 
 dateListRef.addEventListener('click', function () {
@@ -15,6 +15,8 @@ dateListRef.addEventListener('click', function () {
 });
 
 const STORAGE_KEY = 'readNews';
+const STORAGE_KEY_FAV = 'favoriteNews';
+const storageNews = JSON.parse(localStorage.getItem(STORAGE_KEY_FAV));
 
 // ++++++++++++++++++++++++
 
@@ -27,50 +29,29 @@ export default function createMarkupRead() {
     let markup = "";
     
     markup = storageData
-      .map(({ id, section, imgUrl, title, abstract, published_date, url }) => {
- 
-        return `<li class="card js-card-item" data-target-id=${id}>
-          <div class="wrap-image">
-            <img
-              src="${imgUrl}"
-              alt="photo"
-              class="wrap-image__photo"
-            />
-            <p class="wrap-image__text">${section}</p>
-            <button type="button"  class="wrap-image__btn js-tartet-favorite"><span class="js-favorite-btn-text js-tartet-favorite">Remove from favorite</span>
-                      <svg class="wrap-image__icon js-tartet-favorite" width="16" height="16">
-                              <use class="js-tartet-favorite" href ='./images/icon.svg#icon-heart'></use>
-                          </svg>
-                  </button>
-          
-          </div>
-              <h2 class="card__title">${title}</h2>
-              <p class="card__description">${abstract.length > 112 ? abstract.slice(0, 113) + '...' : abstract}</p>
-              <div class="wrap-info">
-                  <p class="wrap-info__time">${published_date}</p>
-                  <a href="${url}" class="wrap-info__link">Read more</a>
-              </div>
-        </li>`;
-      })
+    .map(createMarkup)
       .join("");
       // console.log("🚀 ~ createMarkupFavorite ~ markup:", markup)
     newsListRef.insertAdjacentHTML("beforeend", markup);
-
+    // if(newsListRef === '') {
+    //   errorRequest.classList.add('visually-hidden');   
+    // }
+  readDateCard(storageData.readDateNew); 
   }
   
 
 
-  // function readDateCard(items) {
-  //   console.log(items); 
-   
-//   dateMarkup = `<li class="dropbtn calendar-btn-span">
-//   <span class="btn-span">${date}</span>
-//     <svg class="icon-down-read-pg" width="15" height="9">
-//         <use href="/src/icon.svg#icon-arrow-down"></use>
-//       </svg>
-// </li>`
-// return dateMarkup; 
-// }
-// dateListRef.insertAdjacentHTML('beforeend', dateMarkup);
+  function readDateCard(items) {
+    console.log(items); 
+    const markup = items.map(({ readDateNew }) => {
+      return `<li class="dropbtn calendar-btn-span">
+      <span class="btn-span">${readDateNew}</span>
+        <svg class="icon-down-read-pg" width="15" height="9">
+            <use href="/src/icon.svg#icon-arrow-down"></use>
+          </svg>
+  </li>`
+  }).sort((a, b) => b - a).join(""); 
+  dateListRef.insertAdjacentHTML('beforeend', markup); 
+}
 
 
