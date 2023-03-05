@@ -188,6 +188,8 @@
 .button.inactive,
 #inactive {
   color: rgba(60, 60, 67, 0.1);
+  cursor: default;
+  user-select: none;
 }
 
 .days li .button.active {
