@@ -1,13 +1,13 @@
 import axios from 'axios';
-// import {STORAGE_KEY} from './add-to-favorite'
+import { API_KEY } from './apiUrl';
 
 export async function getCards() {
-  const URL = `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=7p9CJylKpjl89QHHczOefIddo1AI47yw`;
+  const URL = `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=${API_KEY}`;
   const requestData = await axios.get(URL);
   return requestData;
 }
 const STORAGE_KEY = 'favoriteNews';
-const storageNews=JSON.parse(localStorage.getItem(STORAGE_KEY))
+const storageNews = JSON.parse(localStorage.getItem(STORAGE_KEY));
 const iconHeart = new URL('../images/icon.svg', import.meta.url);
 
 const refs = {
@@ -37,7 +37,10 @@ export function createMarkup(arr) {
       //Проверка есть ли эта новость в Favorite
       // checkIsNewFavorite(id)
       // console.log("🚀 ~ storageNews:", storageNews)
-      if(Boolean(storageNews) & storageNews.some(el=>Number(el.id)===Number(id))) {
+      if (
+        Boolean(storageNews) &
+        storageNews.some(el => Number(el.id) === Number(id))
+      ) {
         // console.log(" Перевірка! Есть favorite новости")
         return `<li class="card js-card-item" data-target-id=${id}>
         <div class="wrap-image">
@@ -56,15 +59,18 @@ export function createMarkup(arr) {
         
         </div>
             <h2 class="card__title">${title}</h2>
-            <p class="card__description">${abstract.length > 112 ? abstract.slice(0, 113) + '...' : abstract}</p>
+            <p class="card__description">${
+              abstract.length > 112 ? abstract.slice(0, 113) + '...' : abstract
+            }</p>
             <div class="wrap-info">
                 <p class="wrap-info__time">${newDateStr}</p>
                 <a href="${url}" class="wrap-info__link">Read more</a>
             </div>
-        </li>`
+        </li>`;
       }
       //
-      else return `
+      else
+        return `
          <li class="card  js-card-item" data-target-id="${id}">
       <div class="wrap-image">
           <img
@@ -110,8 +116,3 @@ function saveApiData(arrey) {
   });
   // console.log('savedApiData', savedApiData);
 }
-
-
-
-
-
