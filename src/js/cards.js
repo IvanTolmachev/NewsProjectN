@@ -34,8 +34,8 @@ export function createMarkup(arr) {
       let newDateStr = published_date.replace(/-/g, '/');
 
       return `
-       <li class="card js-card-item" data-target-id="${id}">
-        <div class="wrap-image">
+         <li class="card  js-card-item" data-target-id="${id}">
+      <div class="wrap-image">
           <img
             src="${imgUrl}"
             alt="photo"
@@ -54,10 +54,10 @@ export function createMarkup(arr) {
         }</p>
         <div class="wrap-info">
           <p class="wrap-info__time">${newDateStr}</p>
-          <a href="${url}" class="wrap-info__link">Read more</a>
+          <a href="${url}" class="wrap-info__link" target="_blank" rel="noreferrer noopener">Read more</a>
         </div>
       </li>
-        `;
+     `;
     })
     .join('');
   refs.gallery.insertAdjacentHTML('beforeend', markup);
