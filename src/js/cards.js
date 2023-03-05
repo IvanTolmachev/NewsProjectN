@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export async function getCards() {
-  const URL = `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=7p9CJylKpjl89QHHczOefIddo1AI47yw`;
+  const URL = `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=VPd8ESOXXGRNi6SUHc4QYJMXdqmRVK3K`;
   const requestData = await axios.get(URL);
   return requestData;
 }
