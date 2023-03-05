@@ -4,6 +4,9 @@ const weatherCond = document.querySelector('.weather__cond');
 const weatherLocation = document.querySelector('.weather__location');
 const weatherDate = document.querySelector('.weather__date');
 const weatherIcon = document.querySelector('.weather__icon');
+const weatherWeekList = document.querySelector('.weather__week--list');
+
+const apiKey = 'ac97801f712add3fe97dbc6a96855cd7';
 
 import wIcon from '../images/wether-icons/*.png';
 // Обновления элементов HTML
@@ -29,6 +32,7 @@ async function updateWeatherInfo(weatherData) {
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(getWeatherData);
+    navigator.geolocation.getCurrentPosition(getWeatherForWeek);
   } else {
     console.log('Geolocation is not supported by this browser.');
   }
@@ -36,7 +40,6 @@ function getLocation() {
 
 // Отправка запроса на получение данных о погоде
 function getWeatherData(position) {
-  const apiKey = 'ac97801f712add3fe97dbc6a96855cd7';
   const weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
   fetch(weatherApiUrl)
     .then(response => response.json())
@@ -46,5 +49,79 @@ function getWeatherData(position) {
     .catch(error => console.log(error));
 }
 
+// Получение погоды на неделю
+
+function getWeatherForWeek(position) {
+  const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
+
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+      const weatherData = data.list;
+
+      const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+      for (let i = 0; i < weatherData.length; i += 8) {
+        const weatherDay = weatherData[i];
+
+        const date = new Date(weatherDay.dt * 1000);
+        const dayOfWeek = daysOfWeek[date.getDay()];
+
+        const iconCode = weatherDay.weather[0].icon;
+        const iconUrl = `http://openweathermap.org/img/w/${iconCode}.png`;
+
+        const tempDay = Math.round(weatherDay.main.temp);
+        const tempNight = Math.round(weatherData[i + 4].main.temp);
+
+        const weatherThumb = document.createElement('li');
+        weatherThumb.classList.add('weather__week--thumb');
+
+        const weatherDate = document.createElement('p');
+        weatherDate.classList.add('weather__week-date');
+        weatherDate.textContent = dayOfWeek;
+
+        const weatherIcon = document.createElement('img');
+        weatherIcon.classList.add('weather__week-icon');
+        weatherIcon.setAttribute(
+          'src',
+          `http://openweathermap.org/img/w/${iconCode}.png`
+        );
+        weatherIcon.setAttribute('alt', 'Weather icon');
+
+        const weatherTempThumb = document.createElement('div');
+        weatherTempThumb.classList.add('weather__week-temp--thumb');
+
+        const weatherTempDay = document.createElement('p');
+        weatherTempDay.classList.add('weather__week-temp--day');
+        weatherTempDay.textContent = `${tempDay}C`;
+
+        const weatherTempNight = document.createElement('p');
+        weatherTempNight.classList.add('weather__week-temp--night');
+        weatherTempNight.textContent = `${tempNight}C`;
+
+        weatherTempThumb.appendChild(weatherTempDay);
+        weatherTempThumb.appendChild(weatherTempNight);
+
+        weatherThumb.appendChild(weatherDate);
+        weatherThumb.appendChild(weatherIcon);
+        weatherThumb.appendChild(weatherTempThumb);
+
+        weatherWeekList.appendChild(weatherThumb);
+      }
+    })
+    .catch(error => {
+      console.log('An error occurred:', error);
+    });
+}
+
+// Переключение погоды при нажатии кнопки
+const weekButton = document.querySelector('.weather__week');
+function toggleWeather(e) {
+  weatherIcon.classList.toggle('display-none');
+  weatherWeekList.classList.toggle('display-none');
+}
+weekButton.addEventListener('click', toggleWeather);
+
 // Вызов функции для получения данных о погоде
 getLocation();
+getWeatherForWeek();
