@@ -1,19 +1,19 @@
 
 import { createCards } from './cards';
 
- 
+//  const btnMoreRead = document.querySelector('.dropbtn'); 
 const dropIcon = document.querySelector('.icon-down-read-pg'); 
 const newsListRef = document.querySelector('.news-list'); 
 const dateListRef = document.querySelector('.date-list');
 // console.log("🚀 ~ newsListRef:", newsListRef);
 
-// dateListRef.addEventListener('click', function () {
-//   newsListRef.classList.toggle('show');
-//   dropIcon.classList.toggle('rotate');
-// });
+dateListRef.addEventListener('click', function () {
+  newsListRef.classList.toggle('show');
+  dropIcon.classList.toggle('rotate');
+});
 
  
-const STORAGE_KEY = 'objReadNews';
+const STORAGE_KEY = 'readNews';
 
 // ++++++++++++++++++++++++
 
@@ -25,7 +25,7 @@ export default function createMarkupRead() {
 
     let markup = "";
     
-    markup = storageData.readNews
+    markup = storageData
       .map(({ id, section, imgUrl, title, abstract, published_date, url }) => {
           // if (identifier !== Number(id)) {
               

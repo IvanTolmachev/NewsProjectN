@@ -45,26 +45,19 @@
 // import { createCards } from './cards';
 import { savedApiData } from './cards'; 
 
-
-  const STORAGE_KEY = 'objReadNews';
+  const STORAGE_KEY = 'readNews';
    
-  // const readNews = [];
-  let valuesStorage = {}; 
+  let readNews = [];
+  let readDate = ''; 
 
   const gallery = document.querySelector('.gallery'); 
-  
   
   gallery.addEventListener('click', getReadNewsId);
   
   export default function getReadNewsId(event) {
-
-  // valuesStorage = {
-  //   readNews: [],
-  //   dateRead: new Date().toLocaleDateString(), 
-  // } 
   
-    //  const readDate = new Date().toLocaleDateString(); 
-    //  console.log("🚀 ~ getReadNewsId ~ date:", readDate); 
+    readDate = new Date().toLocaleDateString().replaceAll('.', '/'); 
+     console.log("🚀 date:", readDate); 
   
     if(event.target.classList.contains("wrap-info__link")){ 
     
@@ -78,21 +71,16 @@ import { savedApiData } from './cards';
   
   export function saveReadNew(id) {
 
-    valuesStorage = [
-      readNews: [],
-      dateRead: new Date().toLocaleDateString().replaceAll('.', '/'), 
-    ]
-
     const readNew = savedApiData.find(item=>item.id===id)
   
-  //   if (valuesStorage.readNews.length<1){
-  //     valuesStorage.readNews.push(readNew); 
-  // } 
+    if (readNews.length<1){
+      readNews.push(readNew); 
+  } 
   
-  if(valuesStorage.readNews.every(el=>Number(el.id)!==Number(id))) {
-    valuesStorage.readNews.push(readNew); 
+  if(readNews.every(el=>Number(el.id)!==Number(id))) {
+    readNews.push(readNew); 
 
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(valuesStorage));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(readNews));
   }
   // console.log(valuesStorage.readNews); 
 
