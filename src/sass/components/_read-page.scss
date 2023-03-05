@@ -1,10 +1,10 @@
+
+Мій варіант
+
 .dropbtn {
   margin-top: 60px;
-  background-color: transparent;
   color: $primaryTextColor;
   font-size: 16px;
-  border: none;
-  cursor: pointer;
   display: block;
 }
   
@@ -12,6 +12,7 @@
     transform: rotate(-180deg);
   }
   .icon-down-read-pg {
+    cursor: pointer;
     transform: rotate(0deg);
     transition: transform $durationFunction $timingFunction;
   }

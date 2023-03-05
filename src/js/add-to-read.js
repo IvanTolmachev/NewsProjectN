@@ -1,28 +1,21 @@
 // import { savedApiData } from './read'; 
 
-
 // const STORAGE_KEY = 'readNews';
-// console.log("🚀 ~ STORAGE_KEY:", STORAGE_KEY); 
+ 
 // const readNews = [];
 // const gallery = document.querySelector('.gallery'); 
-// console.log("🚀 ~ gallery:", gallery); 
 
 
 // gallery.addEventListener('click', getReadNewsId);
 
 // export default function getReadNewsId(event) {
 
-//   // const date = new Date(); 
-//   // console.log("🚀 ~ getReadedNewsId ~ date:", date);
-//   const dateRead = Date.now(); 
-
-
-// console.log("🚀 ~ getReadNewsId ~ dateRead:", dateRead);
+//   //  const readDate = new Date().toLocaleDateString(); 
+//   //  console.log("🚀 ~ getReadNewsId ~ date:", readDate); 
 
 //   if(event.target.classList.contains("wrap-info__link")){ 
-
+//     spanBtnRef = new Date().toLocaleDateString(); 
 //     event.preventDefault();
-//     console.log('I"m button');
 
 //     const id=event.target.closest(".js-card-item").dataset.targetId
 
@@ -45,80 +38,56 @@
 // localStorage.setItem(STORAGE_KEY, JSON.stringify(readNews));
 // }
   // *******************************
-  import { savedApiData } from './read'; 
+  // import axios from 'axios';
 
+  // import { savedApiData } from './read'; 
+// import { getCards } from './cards';
+// import { createCards } from './cards';
+import { savedApiData } from './cards'; 
 
-const STORAGE_KEY = 'readNews';
-console.log("🚀 ~ STORAGE_KEY:", STORAGE_KEY); 
-const readNews = [];
-const gallery = document.querySelector('.gallery'); 
-console.log("🚀 ~ gallery:", gallery); 
+  const STORAGE_KEY = 'readNews';
+   
+  let readNews = [];
+ 
 
+  const gallery = document.querySelector('.gallery'); 
+  
+  gallery.addEventListener('click', getReadNewsId);
+  
+  export default function getReadNewsId(event) {
+   
+    readDate = new Date().toLocaleDateString().replaceAll('.', '/'); 
+    //  console.log("🚀 date:", readDate); 
+  
+    if(event.target.classList.contains("wrap-info__link")){ 
+    
+      event.currentTarget.children.style.opacity = '40%';
 
-gallery.addEventListener('click', getReadNewsId);
-
-export default function getReadNewsId(event) {
-
-  // const date = new Date(); 
-  // console.log("🚀 ~ getReadedNewsId ~ date:", date);
-  const dateRead = Date.now(); 
-
-
-console.log("🚀 ~ getReadNewsId ~ dateRead:", dateRead);
-
-  if(event.target.classList.contains("wrap-info__link")){ 
-
-    event.preventDefault();
-    console.log('I"m button');
-
-    const id=event.target.closest(".js-card-item").dataset.targetId
-
-    saveReadNew(id);
+      event.preventDefault();
+  
+      const id=event.target.closest(".js-card-item").dataset.targetId
+  
+      saveReadNew(id);
+    }
   }
-}
+  
+  export function saveReadNew(id) {
 
-function saveReadNew(id) {
-//  let valuesStorage = {
-//     readedNews: [],
-//     date: new Date(),
-//   }
+    const readNew = savedApiData.find(item=>item.id===id)
+ 
+    readNew.readDateNew = readDate; 
 
-  const readNew = savedApiData.find(item=>item.id===id)
-
-  if (readNews.length<1){
+    if (readNews.length<0){
+      readNews.push(readNew); 
+  } 
+  
+  if(readNews.every(el=>Number(el.id)!==Number(id))) {
     readNews.push(readNew); 
-} 
 
-if(readNews.every(el=>Number(el.id)!==Number(id))) {
-  readNews.push(readNew); 
-}
-console.log(readNews); 
-localStorage.setItem(STORAGE_KEY, JSON.stringify(readNews));
-}
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(readNews));
+  }
+  // console.log(valuesStorage.readNews); 
 
+  } 
+// // ***********************************
 
-
-
-// ***********************************
-// function addLeadingZero(value) {
-//   return String(value).padStart(2, '0'); 
-//     }
-
-// function convertMs(ms) {
-//   // Number of milliseconds per unit of time
-//   const second = 1000;
-//   const minute = second * 60;
-//   const hour = minute * 60;
-//   const day = hour * 24;
-
-//   // Remaining hours
-//   const hours = addLeadingZero(Math.floor((ms % day) / hour));
-//   // Remaining minutes
-//   const minutes = addLeadingZero(Math.floor(((ms % day) % hour) / minute));
-//   // Remaining seconds
-//   const seconds = addLeadingZero(Math.floor((((ms % day) % hour) % minute) / second));
-
-//   return { hours, minutes, seconds };
-// }
-
-// console.log(convertMs()); 

@@ -1,31 +1,34 @@
-const dropBtnRef = document.getElementById('dropBtn-js'); 
+
+import { createCards } from './cards';
+
+
+//  const btnMoreRead = document.querySelector('.dropbtn'); 
 const dropIcon = document.querySelector('.icon-down-read-pg'); 
 const newsListRef = document.querySelector('.news-list'); 
-
+const dateListRef = document.querySelector('.date-list');
 // console.log("🚀 ~ newsListRef:", newsListRef);
 
-dropBtnRef.addEventListener('click', function () {
+
+dateListRef.addEventListener('click', function () {
   newsListRef.classList.toggle('show');
   dropIcon.classList.toggle('rotate');
 });
 
-
 const STORAGE_KEY = 'readNews';
+
+// ++++++++++++++++++++++++
 
 export default function createMarkupRead() {
     const storageJson = localStorage.getItem(STORAGE_KEY);
     console.log("🚀 ~ createMarkupRead ~ storageJson:", storageJson)
     const storageData = JSON.parse(storageJson); 
-    console.log("🚀 ~ createMarkupRead ~ storageData:", storageData)
-  
+    console.log("🚀 ~ createMarkupRead ~ storageData:", storageData); 
+
     let markup = "";
     
     markup = storageData
       .map(({ id, section, imgUrl, title, abstract, published_date, url }) => {
-          // if (identifier !== Number(id)) {
-              
-          //     return
-          // }
+ 
         return `<li class="card js-card-item" data-target-id=${id}>
           <div class="wrap-image">
             <img
@@ -52,6 +55,22 @@ export default function createMarkupRead() {
       .join("");
       // console.log("🚀 ~ createMarkupFavorite ~ markup:", markup)
     newsListRef.insertAdjacentHTML("beforeend", markup);
+
   }
   
-  createMarkupRead(); 
+
+
+  // function readDateCard(items) {
+  //   console.log(items); 
+   
+//   dateMarkup = `<li class="dropbtn calendar-btn-span">
+//   <span class="btn-span">${date}</span>
+//     <svg class="icon-down-read-pg" width="15" height="9">
+//         <use href="/src/icon.svg#icon-arrow-down"></use>
+//       </svg>
+// </li>`
+// return dateMarkup; 
+// }
+// dateListRef.insertAdjacentHTML('beforeend', dateMarkup);
+
+
