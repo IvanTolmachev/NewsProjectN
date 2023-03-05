@@ -1,4 +1,4 @@
-import { getCards } from './api_cards';
+import { getCards } from './cards';
 
 //  const STORAGE_KEY = 'favoriteNews';
 export const savedApiData = [];
@@ -22,8 +22,7 @@ function saveApiData(array) {
     item['published_date'] = `${published_date}`;
     item['imgUrl'] = `${imgUrl}`;
     savedApiData.push(item);
-
   });
-//   console.log('savedApiData', savedApiData);
+  //   console.log('savedApiData', savedApiData);
 }
 getApiData();

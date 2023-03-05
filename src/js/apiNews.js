@@ -1,5 +1,10 @@
 import axios from 'axios';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
+//import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
+//! масив для якихось цілей. В ньому будуть лежати обєкти
+//! з останньго запиту як в картці
+
+export const arrLastData = [];
 
 //! запит до сервера модифікований
 //! можно використовувати стандартний
@@ -14,7 +19,6 @@ export async function getData(url, timeout = 5000) {
     signal: controller.signal,
   });
   clearTimeout(id);
-
   return response;
 }
 
@@ -22,7 +26,7 @@ export async function getData(url, timeout = 5000) {
 //! Заточено під сервер api.nytimes.com працює з
 //! усіма розділами сервера
 //! приймає валідний URL та повертає масив з даними
-// TODO зробити обробку різних 4хх відгуків замість сповіщення
+//!  обробка різних 4хх помилок і відображення відповідної сторінки
 //? як би ж я знав (-;
 
 export async function makeData(url) {
@@ -34,14 +38,19 @@ export async function makeData(url) {
     }
 
     if (typeof Data.data['response'] !== 'undefined') {
-      //  console.log(Data.data.response);
       return Data.data.response.docs;
     }
 
     return Data.data.results;
   } catch (error) {
-    const msg = error.name === 'CanceledError' ? 'Get timeout' : error;
-    Notify.failure(`Oops ${msg}`);
+    // const msg = error.name === 'CanceledError' ? 'Get timeout' : error;
+    // console.log(msg);
+    // Notify.failure(`Oops ${msg}`);
+    const sectionHome = document.querySelector('.section_home');
+    const errorRequest = document.querySelector('.errorRequest');
+
+    errorRequest.classList.remove('visually-hidden');
+    sectionHome.classList.add('visually-hidden');
   }
 }
 
@@ -125,6 +134,7 @@ export function createCard(item) {
             src="${imgUrl}"
             alt="photo"
            class="wrap-image__photo"
+           loading="lazy"
           />
           <p class="wrap-image__text">${section}</p>
           <button type="button" class="wrap-image__btn js-tartet-favorite">

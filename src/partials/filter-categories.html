@@ -7,8 +7,10 @@
         <use href="./images/icon.svg#icon-arrow-down"></use>
       </svg>
     </button>
-    <div class="filter visually-hidden">
-      <ul id="categories-hide"></ul>
+    <div class="filter-wrapper">
+      <div class="filter">
+        <ul id="categories-hide"></ul>
+      </div>
     </div>
   </div>
 
@@ -25,4 +27,38 @@
     </button>
     <include src="./partials/calendar.html"></include>
   </div>
+</div>
+
+<div class="errorRequest visually-hidden">
+  <p class="err__text">We haven’t found news from this category</p>
+
+  <picture>
+    <source
+      srcset="
+        ./images/not-found-news-de-min.png    1x,
+        ./images/not-found-news-de@2x-min.png 2x
+      "
+      media="(min-width: 1280px)"
+    />
+    <source
+      srcset="
+        ./images/not-found-news-tab-min.png    1x,
+        ./images/not-found-news-tab@2x-min.png 2x
+      "
+      media="(min-width: 768px)"
+    />
+    <source
+      srcset="
+        ./images/not-found-news-mob-min.png    1x,
+        ./images/not-found-news-mob@2x-min.png 2x
+      "
+      media="(max-width: 767px)"
+    />
+    <img
+      src="./images/not-found-news-de-min.png"
+      alt="photo"
+      class="err_img"
+      loading="lazy"
+    />
+  </picture>
 </div>
