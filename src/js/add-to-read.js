@@ -85,9 +85,11 @@ import { savedApiData } from './cards';
     readNews.push(readNew); 
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(readNews));
-  }
-  // console.log(valuesStorage.readNews); 
 
+    if(localStorage === '') {
+      errorRequest.classList.remove('visually-hidden');   
+    }
+  } 
   } 
 // // ***********************************
 
