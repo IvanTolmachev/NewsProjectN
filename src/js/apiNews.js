@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { makeURL } from './apiUrl';
 //import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 //! масив для якихось цілей. В ньому будуть лежати обєкти
@@ -29,8 +30,9 @@ export async function getData(url, timeout = 5000) {
 //!  обробка різних 4хх помилок і відображення відповідної сторінки
 
 export async function makeData(url) {
+  const URL = makeURL(url);
   try {
-    const Data = await getData(url);
+    const Data = await getData(URL);
 
     if (Data.data.status !== 'OK') {
       throw new Error(Data.data.status);
@@ -50,6 +52,7 @@ export async function makeData(url) {
     // const msg = error.name === 'CanceledError' ? 'Get timeout' : error;
     // console.log(msg);
     // Notify.failure(`Oops ${msg}`);
+    console.log(error);
     const sectionHome = document.querySelector('.section_home');
     const errorRequest = document.querySelector('.errorRequest');
 
