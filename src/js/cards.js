@@ -39,7 +39,7 @@ export function createMarkup(arr) {
       // checkIsNewFavorite(id)
       // console.log("🚀 ~ storageNews:", storageNews)
       if (
-        Boolean(storageNews) &
+        Boolean(storageNews) &&
         storageNews.some(el => Number(el.id) === Number(id))
       ) {
         // console.log(" Перевірка! Есть favorite новости")
