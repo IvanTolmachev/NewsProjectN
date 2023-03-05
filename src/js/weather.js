@@ -124,4 +124,4 @@ weekButton.addEventListener('click', toggleWeather);
 
 // Вызов функции для получения данных о погоде
 getLocation();
-getWeatherForWeek();
+// getWeatherForWeek();
