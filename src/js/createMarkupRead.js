@@ -1,19 +1,18 @@
-const dropBtnRef = document.getElementById('dropBtn-js'); 
+ 
 const dropIcon = document.querySelector('.icon-down-read-pg'); 
 const newsListRef = document.querySelector('.news-list'); 
+const dateListRef = document.querySelector('.date-list');
+// console.log("🚀 ~ newsListRef:", newsListRef);
 
-console.log("🚀 ~ newsListRef:", newsListRef);
-
-dropBtnRef.addEventListener('click', function () {
+dateListRef.addEventListener('click', function () {
   newsListRef.classList.toggle('show');
   dropIcon.classList.toggle('rotate');
 });
 
 
-const STORAGE_KEY = 'readNews';
+const STORAGE_KEY = 'objReadNews';
 
 // ++++++++++++++++++++++++
-
 
 export default function createMarkupRead() {
     const storageJson = localStorage.getItem(STORAGE_KEY);
