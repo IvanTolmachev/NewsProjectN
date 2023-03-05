@@ -5,7 +5,12 @@
   height: 276px;
   overflow: hidden;
   padding: 20px 16px;
+  pointer-events: none;
   }
+
+  .btn-is-active+.wrapper {
+      pointer-events: all;
+    }
 
 .calendar .wrapper {
   top: 33px;
@@ -15,6 +20,7 @@
     right: 33px;
   }
 }
+
 
 .modal {
   position: absolute;
@@ -142,8 +148,9 @@
   font-size: 12px;
   line-height: 1.5;
   text-align: center;
-  cursor: default;
+  user-select:none;
   color: rgba(60, 60, 67, 0.3);
+  pointer-events: none;
   
 }
 
