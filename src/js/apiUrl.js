@@ -1,5 +1,5 @@
-export const API_KEY = 'VPd8ESOXXGRNi6SUHc4QYJMXdqmRVK3K';
-// const API_KEY = '7p9CJylKpjl89QHHczOefIddo1AI47yw';
+// export const API_KEY = 'VPd8ESOXXGRNi6SUHc4QYJMXdqmRVK3K';
+export const API_KEY = '7p9CJylKpjl89QHHczOefIddo1AI47yw';
 
 export const sectionList = {
   baseUrl: `https://api.nytimes.com/svc/news/v3/content/`,
