@@ -1,5 +1,5 @@
 import debounce from 'lodash.debounce';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
+//import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import {
   makeData,
   createCard,
@@ -43,21 +43,17 @@ async function makeSectionNews(url) {
   const weather = document.querySelector('.weather__thumb');
   const sectionHome = document.querySelector('.section_home');
   const errorRequest = document.querySelector('.errorRequest');
-
+  arrLastData.length = 0;
   try {
     const news = await makeData(url);
-    // console.log(news.length);
-    arrLastData.length = 0;
+
     arrLastData.push(...news.map(dataSectionNormalize));
 
     gallery.innerHTML = arrLastData.map(createCard).join('');
     gallery.prepend(weather);
     errorRequest.classList.add('visually-hidden');
     sectionHome.classList.remove('visually-hidden');
-  } catch (error) {
-    // const msg = error.name === 'CanceledError' ? 'Get timeout' : error;
-    // Notify.failure(`Oops ${msg}`);
-  }
+  } catch (error) {}
 }
 
 //?===== function  render

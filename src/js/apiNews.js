@@ -27,7 +27,6 @@ export async function getData(url, timeout = 5000) {
 //! усіма розділами сервера
 //! приймає валідний URL та повертає масив з даними
 //!  обробка різних 4хх помилок і відображення відповідної сторінки
-//? як би ж я знав (-;
 
 export async function makeData(url) {
   try {
@@ -38,9 +37,14 @@ export async function makeData(url) {
     }
 
     if (typeof Data.data['response'] !== 'undefined') {
+      if (!Data.data.response.docs.length) {
+        throw new Error('Нічого не знайшлось');
+      }
       return Data.data.response.docs;
     }
-
+    if (!Data.data.results.length) {
+      throw new Error('Нічого не знайшлось');
+    }
     return Data.data.results;
   } catch (error) {
     // const msg = error.name === 'CanceledError' ? 'Get timeout' : error;
@@ -88,7 +92,9 @@ export function dataArticleSearchNormalize(item) {
   } = item;
 
   const imgUrl =
-    multimedia !== null ? `https://static01.nyt.com/${multimedia[2].url}` : '';
+    multimedia.length !== 0
+      ? `https://static01.nyt.com/${multimedia[2].url}`
+      : '';
   const newDateStr = pub_date
     .slice(0, pub_date.indexOf('T'))
     .trim()
