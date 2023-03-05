@@ -9,3 +9,4 @@ import './js/search_cards';
 import './js/form';
 import './js/add-to-read';
 import './js/pagination';
+import './js/articleSearch';
