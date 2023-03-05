@@ -34,7 +34,6 @@ async function makeSection(url) {
     listShow.innerHTML = Data.map(rendeSection).join('');
     restart();
   } catch (error) {
-    //console.log(error);
     // const msg = error.name === 'CanceledError' ? 'Get timeout' : error;
     // Notify.failure(`Oops ${msg}`);
   }
