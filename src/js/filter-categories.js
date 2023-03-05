@@ -1,8 +1,12 @@
 import debounce from 'lodash.debounce';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { makeData, createCard, dataSectionNormalize } from './apiNews';
+import {
+  makeData,
+  createCard,
+  dataSectionNormalize,
+  arrLastData,
+} from './apiNews';
 import { sectionList, sectionNews, makeURL } from './apiUrl';
-import { savedApiData } from './favorite';
 
 const gallery = document.querySelector('.gallery');
 const categories = document.querySelector('.categories');
@@ -37,21 +41,20 @@ async function makeSection(url) {
 }
 
 async function makeSectionNews(url) {
+  const weather = document.querySelector('.weather__thumb');
+  const sectionHome = document.querySelector('.section_home');
+  const errorRequest = document.querySelector('.errorRequest');
+
   try {
     const news = await makeData(url);
     // console.log(news.length);
-    const items = news.map(dataSectionNormalize);
+    arrLastData.length = 0;
+    arrLastData.push(...news.map(dataSectionNormalize));
 
-    // while (savedApiData.length) {
-    //   savedApiData.pop();
-    // }
-    savedApiData.length = 0;
-    savedApiData.push([...items]);
-    // console.log(savedApiData);
-
-    const weather = document.querySelector('.weather__thumb');
-    gallery.innerHTML = items.map(createCard).join('');
+    gallery.innerHTML = arrLastData.map(createCard).join('');
     gallery.prepend(weather);
+    errorRequest.classList.add('visually-hidden');
+    sectionHome.classList.remove('visually-hidden');
   } catch (error) {
     // const msg = error.name === 'CanceledError' ? 'Get timeout' : error;
     // Notify.failure(`Oops ${msg}`);
@@ -130,6 +133,7 @@ categories.addEventListener('click', e => {
 
     sectionNews.subUrl = e.target.dataset.section;
     sectionNews.params.limit = 8;
+
     const URL = makeURL(sectionNews);
     makeSectionNews(URL);
   }

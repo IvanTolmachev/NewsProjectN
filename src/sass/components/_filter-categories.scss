@@ -1,7 +1,7 @@
 //@import '~node_modules/modern-normalize/modern-normalize.css';
 $desctop: 1280px;
 $tablet: 768px;
-$mobile: 320px;
+$mobile: 480px;
 
 :root {
   // --bthBgColor: #f4f4f4;
@@ -61,15 +61,10 @@ $mobile: 320px;
   }
 }
 
-// #categories-toggler.mobile {
-
-//   padding: 7px 12px;
-
-// }
-
 #categories-toggler {
-  @media screen and (min-width: $desctop) {
-    padding: 7px 12px;
+  padding: 7px 12px;
+  @media screen and (min-width: $tablet) {
+    padding: 7px 22px;
   }
 }
 
@@ -283,5 +278,48 @@ $mobile: 320px;
   @media screen and (min-width: $tablet) {
     font-size: 14px;
     line-height: 1.5;
+  }
+}
+
+.errorRequest {
+  font-family: $primaryFontManrope;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.35;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+  padding: 0 20px;
+  padding-top: 40px;
+
+  max-width: $mobile;
+
+  @media screen and (min-width: $tablet) {
+    max-width: $tablet;
+    font-size: 40px;
+    line-height: 1.375;
+    padding: 0 104px;
+    padding-top: 88px;
+  }
+  @media screen and (min-width: $desctop) {
+    max-width: $desctop;
+    padding: 0 340px;
+    padding-top: 120px;
+  }
+}
+
+.errorRequest picture {
+  display: flex;
+  justify-content: center;
+}
+
+.errorRequest p {
+  width: 280px;
+  margin-bottom: 40px;
+  @media screen and (min-width: $tablet) {
+    width: 600px;
   }
 }
