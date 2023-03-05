@@ -1,5 +1,5 @@
 
-const favoriteList = document.querySelector(".favorite");
+const favoriteList = document.querySelector(".gallery");
 // console.log("🚀 ~ favorite:", favorite)
 
 // const container = document.querySelector(".container");
@@ -19,9 +19,8 @@ export default function createMarkupFavorite() {
   
   markup = storageData
     .map(({ id, section, imgUrl, title, abstract, newDateStr, url }) => {
-        // if (identifier !== Number(id)) {
-            
-        //     return
+        // if (Boolean(storageData)) {
+             
         // }
       return `<li class="card js-card-item" data-target-id=${id}>
         <div class="wrap-image">

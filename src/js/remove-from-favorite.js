@@ -4,7 +4,7 @@
 // import { createMarkupFavorite } from './createMarkupFavorite';
 
 const STORAGE_KEY = 'favoriteNews';
-const favoriteList = document.querySelector('.favorite');
+const favoriteList = document.querySelector('.gallery');
 const iconHeart = new URL('../images/icon.svg', import.meta.url);
 console.log('🚀 ~ favoriteList:', favoriteList);
 

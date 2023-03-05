@@ -1,12 +1,8 @@
-.favorite{
-    display: flex;
-    gap: 32px;
-}
+.container-height {
+    height: 100vh;
+  }
 
-.wrap-image__icon.fill-heard {
+.fill-heard {
     fill: $primarySwitchColor;
 }
 
-// li[data-target-id] span.js-tartet-favorite {
-
-// }
