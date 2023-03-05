@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { API_KEY } from './apiUrl';
+import { KEY } from './api-key';
 
 export async function getCards() {
-  const URL = `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=${API_KEY}`;
+  const URL = `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=${KEY}`;
   const requestData = await axios.get(URL);
   return requestData;
 }
