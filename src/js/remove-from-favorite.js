@@ -1,25 +1,23 @@
 // import { getFavoriteId } from './add-to-favorite';
-import { removeFromFavorite } from './add-to-favorite';
+// import { removeFromFavorite } from './add-to-favorite';
 // import { changeFavoriteBtnText } from './add-to-favorite';
 // import { createMarkupFavorite } from './createMarkupFavorite';
 
 const STORAGE_KEY = 'favoriteNews';
-const favoriteList=document.querySelector('.favorite') 
+const favoriteList = document.querySelector('.favorite');
 const iconHeart = new URL('../images/icon.svg', import.meta.url);
-console.log("🚀 ~ favoriteList:", favoriteList)
+console.log('🚀 ~ favoriteList:', favoriteList);
 
-
-favoriteList.addEventListener('click', getFavoriteId)
-
+favoriteList.addEventListener('click', getFavoriteId);
 
 function getFavoriteId(evt) {
-    if(evt.target.classList.contains("js-is-favorite")){
-      const id=evt.target.closest(".js-card-item").dataset.targetId
-      
-      removeFromFavorite(id)
-      location.reload();
+  if (evt.target.classList.contains('js-is-favorite')) {
+    const id = evt.target.closest('.js-card-item').dataset.targetId;
+
+    removeFromFavorite(id);
+    location.reload();
     //   createMarkupFavorite()
-    }
+  }
 }
 
 // function removeFromFavorite(id) {
@@ -45,7 +43,9 @@ function getFavoriteId(evt) {
 //     changeFavoriteBtnText(favoriteBtnText)
 //   }
 
-  function changeFavoriteBtnText(ref) {
-    ref.textContent =
-    ref.textContent === "Add to favorite" ? "Remove from favorite" : "Add to favorite";
-  }
+function changeFavoriteBtnText(ref) {
+  ref.textContent =
+    ref.textContent === 'Add to favorite'
+      ? 'Remove from favorite'
+      : 'Add to favorite';
+}
