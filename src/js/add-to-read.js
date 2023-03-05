@@ -1,25 +1,24 @@
 import { savedApiData } from './read'; 
 
+let spanBtnRef = document.querySelector('.btn-span'); 
+
 
 const STORAGE_KEY = 'readNews';
-console.log("🚀 ~ STORAGE_KEY:", STORAGE_KEY); 
+ 
 const readNews = [];
 const gallery = document.querySelector('.gallery'); 
-console.log("🚀 ~ gallery:", gallery); 
 
 
 gallery.addEventListener('click', getReadNewsId);
 
 export default function getReadNewsId(event) {
 
-  const date = new Date(); 
-  console.log("🚀 ~ getReadedNewsId ~ date:", date);
-  
+  //  const readDate = new Date().toLocaleDateString(); 
+  //  console.log("🚀 ~ getReadNewsId ~ date:", readDate); 
 
   if(event.target.classList.contains("wrap-info__link")){ 
-
+    spanBtnRef = new Date().toLocaleDateString(); 
     event.preventDefault();
-    console.log('I"m button');
 
     const id=event.target.closest(".js-card-item").dataset.targetId
 

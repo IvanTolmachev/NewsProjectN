@@ -15,7 +15,6 @@ const STORAGE_KEY = 'readNews';
 // ++++++++++++++++++++++++
 
 
-
 export default function createMarkupRead() {
     const storageJson = localStorage.getItem(STORAGE_KEY);
     console.log("🚀 ~ createMarkupRead ~ storageJson:", storageJson)
