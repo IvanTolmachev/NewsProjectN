@@ -80,6 +80,7 @@ export function createMarkup(arr) {
             alt="photo"
            class="wrap-image__photo"
           />
+          <p class="wrap-image__active" hidden>Already read</p>
           <p class="wrap-image__text">${section}</p>
           <button type="button" class="wrap-image__btn js-tartet-favorite">
           <span class="wrap-image__btn-text js-tartet-favorite">Add to favorite</span>
