@@ -123,6 +123,11 @@
     animation: none;
 }
 
+.footer__btn:focus .button__list ,
+.footer__btn:hover .button__list {
+   color: $whiteTextColor;
+}
+
 
 @keyframes btn-anim1 {
     0% {
