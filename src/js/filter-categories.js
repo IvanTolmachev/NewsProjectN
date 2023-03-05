@@ -6,7 +6,11 @@ import {
   dataSectionNormalize,
   arrLastData,
 } from './apiNews';
-import { sectionList, sectionNews, makeURL } from './apiUrl';
+import { sectionList, sectionNews } from './apiUrl';
+import { saveLS, loadLS } from './lStorage';
+//import { savedApiData } from './favorite';
+import { savedApiData } from './cards';
+const LS_KEY = 'lastSearch';
 
 const gallery = document.querySelector('.gallery');
 const categories = document.querySelector('.categories');
@@ -23,7 +27,6 @@ const calendarIcon = document.querySelector('#menu-calendar .categories__icon');
 
 function rendeSection(item) {
   const { display_name, section } = item;
-
   return `<li class="categories__item" data-section=${section}>${display_name}</li>
   `;
 }
@@ -44,11 +47,17 @@ async function makeSectionNews(url) {
   const sectionHome = document.querySelector('.section_home');
   const errorRequest = document.querySelector('.errorRequest');
   arrLastData.length = 0;
+  savedApiData.length = 0;
+
   try {
+    // url.params.limit = 50;
+    // const countNews = await makeData(url);
+    // //   console.log(countNews.length);
+    // url.params.limit = 8;
     const news = await makeData(url);
 
     arrLastData.push(...news.map(dataSectionNormalize));
-
+    savedApiData.push(...arrLastData);
     gallery.innerHTML = arrLastData.map(createCard).join('');
     gallery.prepend(weather);
     errorRequest.classList.add('visually-hidden');
@@ -127,16 +136,15 @@ categories.addEventListener('click', e => {
     filterItems.classList.remove('filter-show');
 
     sectionNews.subUrl = e.target.dataset.section;
-    sectionNews.params.limit = 8;
+    sectionNews.type = 'SECTION';
 
-    const URL = makeURL(sectionNews);
-    makeSectionNews(URL);
+    saveLS(LS_KEY, sectionNews);
+    makeSectionNews(sectionNews);
   }
 });
 
+window.addEventListener('load', () => {
+  makeSection(sectionList);
+});
+
 window.addEventListener('resize', debounce(restart, 250));
-
-//! ===== main
-
-const URL = makeURL(sectionList);
-makeSection(URL);

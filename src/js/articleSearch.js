@@ -4,9 +4,13 @@ import {
   dataArticleSearchNormalize,
   arrLastData,
 } from './apiNews';
-import { articleSearchNews, makeURL } from './apiUrl';
+import { articleSearchNews } from './apiUrl';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { saveLS, loadLS } from './lStorage';
+import { savedApiData } from './cards';
+//import { savedApiData } from './favorite';
 
+const LS_KEY = 'lastSearch';
 const gallery = document.querySelector('.gallery');
 const searhForm = document.querySelector('#search-form');
 
@@ -15,36 +19,44 @@ async function makeArticleSectionNews(url) {
   const sectionHome = document.querySelector('.section_home');
   const errorRequest = document.querySelector('.errorRequest');
   arrLastData.length = 0;
+  savedApiData.length = 0;
+  // console.log('nen');
   try {
     const news = await makeData(url);
-
     arrLastData.push(...news.map(dataArticleSearchNormalize));
+    savedApiData.push(...arrLastData);
 
     gallery.innerHTML = arrLastData.map(createCard).join('');
     gallery.prepend(weather);
     errorRequest.classList.add('visually-hidden');
     sectionHome.classList.remove('visually-hidden');
-  } catch (error) {}
+  } catch (error) {
+    // console.log(error);
+  }
 }
 
 searhForm.addEventListener('submit', e => {
   e.preventDefault();
   const searchNews = e.target.searchQuery.value.trim();
 
-  //e.currentTarget.reset();
-  //   if (!searchNews) {
-  //     Notify.failure(`❌ Нема чого шукати`);
-  //     return;
-  //   }
+  e.currentTarget.reset();
+  if (!searchNews) {
+    Notify.failure(`write search`);
+    return;
+  }
 
   let selectedDate = document.querySelector('.calendar-btn-span').textContent;
   selectedDate = selectedDate.trim().split('/').reverse().join('');
 
   articleSearchNews.params.q = searchNews;
-  articleSearchNews.params.page = 200;
-  if (/\d{8}/.test(selectedDate))
-    articleSearchNews.params['begin_date'] = selectedDate;
+  articleSearchNews.params.page = 0;
 
-  const URL = makeURL(articleSearchNews);
-  makeArticleSectionNews(URL);
+  if (/\d{8}/.test(selectedDate)) {
+    articleSearchNews.params.begin_date = selectedDate;
+    articleSearchNews.params.end_date = selectedDate;
+  }
+  articleSearchNews.type = 'SEARCHE';
+
+  saveLS(LS_KEY, articleSearchNews);
+  makeArticleSectionNews(articleSearchNews);
 });

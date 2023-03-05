@@ -32,9 +32,10 @@ export const articleSearchNews = {
   subUrl: 'articlesearch',
   params: {
     'api-key': API_KEY,
-    page: 1,
+    page: 0,
     q: '',
-    sort: 'newest',
+    begin_date: '',
+    end_date: '',
   },
 };
 
