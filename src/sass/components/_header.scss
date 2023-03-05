@@ -91,6 +91,15 @@
     // gap: 69px;
   }
 }
+.current::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: $hoverColor;
+}
 
 .search-form {
   position: relative;
