@@ -1,7 +1,9 @@
-import { savedApiData } from './favorite'
+// import { savedApiData } from './favorite'
+import { savedApiData } from './cards'
+// console.log("🚀 ~ savedApiData:", savedApiData)
 
 
-const STORAGE_KEY = 'favoriteNews';
+export const STORAGE_KEY = 'favoriteNews';
 // const favoriteNews=[]
 const gallery=document.querySelector('.gallery') 
 
@@ -20,8 +22,6 @@ export default function getFavoriteId(evt) {
       
       removeFromFavorite(id)
     }
-
-
 }
 
 function saveFavotiteNew(id) {
@@ -85,10 +85,16 @@ function saveFavotiteNew(id) {
     // favoriteNews.splice(removedNewIndex, 1)
     // localStorage.setItem(STORAGE_KEY, JSON.stringify(favoriteNews));
 
-    const storageNews=JSON.parse(localStorage.getItem(STORAGE_KEY))
+    let storageNews=JSON.parse(localStorage.getItem(STORAGE_KEY))
     const removedNewIndex=storageNews.findIndex(item => Number(item.id) === Number(id))
     storageNews.splice(removedNewIndex, 1)
     localStorage.setItem(STORAGE_KEY, JSON.stringify(storageNews));
+    storageNews=JSON.parse(localStorage.getItem(STORAGE_KEY))
+    console.log("🚀 ~ removeFromFavorite ~ storageNews дооооо:", storageNews)
+    if(storageNews.length===0){
+      localStorage.removeItem(STORAGE_KEY)
+      console.log("🚀 ~ removeFromFavorite ~ storageNews после:", storageNews)
+    }
 
     favoriteBtnText.classList.replace("js-is-favorite","js-tartet-favorite")
     favoriteBtn.classList.replace("js-is-favorite","js-tartet-favorite")
