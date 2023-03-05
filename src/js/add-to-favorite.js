@@ -1,7 +1,9 @@
-import { savedApiData } from './favorite'
+// import { savedApiData } from './favorite'
+import { savedApiData } from './cards'
+// console.log("🚀 ~ savedApiData:", savedApiData)
 
 
-const STORAGE_KEY = 'favoriteNews';
+export const STORAGE_KEY = 'favoriteNews';
 // const favoriteNews=[]
 const gallery=document.querySelector('.gallery') 
 
@@ -20,8 +22,6 @@ export default function getFavoriteId(evt) {
       
       removeFromFavorite(id)
     }
-
-
 }
 
 function saveFavotiteNew(id) {
@@ -32,7 +32,7 @@ function saveFavotiteNew(id) {
     const favoriteBtn=document.querySelector(`li[data-target-id='${id}'] button.js-tartet-favorite`)
     const favoriteSvg=document.querySelector(`li[data-target-id='${id}'] svg.js-tartet-favorite`)
     const favoriteUse=document.querySelector(`li[data-target-id='${id}'] use.js-tartet-favorite`)
-    const heardIcon=document.querySelector('svg.js-tartet-favorite.wrap-image__icon')
+    // const heardIcon=document.querySelector('svg.js-tartet-favorite.wrap-image__icon')
     const storageNews=JSON.parse(localStorage.getItem(STORAGE_KEY))
   
     // if(favoriteNews.length===0 || favoriteNews.every(el=>Number(el.id)!==Number(id))) {
@@ -52,17 +52,13 @@ function saveFavotiteNew(id) {
     // console.log("🚀 ~ favoriteNews:", favoriteNews)
     // localStorage.setItem(STORAGE_KEY, JSON.stringify(favoriteNews));
 
-    
-
-    
-    
     favoriteBtnText.classList.replace("js-tartet-favorite","js-is-favorite")
     favoriteBtn.classList.replace("js-tartet-favorite","js-is-favorite")
     favoriteSvg.classList.replace("js-tartet-favorite","js-is-favorite")
     favoriteUse.classList.replace("js-tartet-favorite","js-is-favorite")
   
     changeFavoriteBtnText(favoriteBtnText)
-    changeHeardColor(heardIcon)
+    changeHeardColor(favoriteSvg)
     
    }
 
@@ -85,10 +81,15 @@ function saveFavotiteNew(id) {
     // favoriteNews.splice(removedNewIndex, 1)
     // localStorage.setItem(STORAGE_KEY, JSON.stringify(favoriteNews));
 
-    const storageNews=JSON.parse(localStorage.getItem(STORAGE_KEY))
+    let storageNews=JSON.parse(localStorage.getItem(STORAGE_KEY))
     const removedNewIndex=storageNews.findIndex(item => Number(item.id) === Number(id))
     storageNews.splice(removedNewIndex, 1)
     localStorage.setItem(STORAGE_KEY, JSON.stringify(storageNews));
+    storageNews=JSON.parse(localStorage.getItem(STORAGE_KEY))
+    
+    if(storageNews.length===0){
+      localStorage.removeItem(STORAGE_KEY)
+    }
 
     favoriteBtnText.classList.replace("js-is-favorite","js-tartet-favorite")
     favoriteBtn.classList.replace("js-is-favorite","js-tartet-favorite")
@@ -96,6 +97,7 @@ function saveFavotiteNew(id) {
     favoriteUse.classList.replace("js-is-favorite","js-tartet-favorite")
 
     changeFavoriteBtnText(favoriteBtnText)
+    changeHeardColor(favoriteSvg)
   }
 
 

@@ -34,8 +34,8 @@
 }
 
 .weather__icon {
-  width: 128px;
-  height: 128px;
+  width: 230px;
+  height: 230px;
 
   margin-top: 25px;
   margin-bottom: 25px;
@@ -45,8 +45,8 @@
   // box-shadow: inset 0px 20px 65px #fa6c21;
 
   @include tablet {
-    width: 165px;
-    height: 165px;
+    width: 250px;
+    height: 250px;
   }
 }
 
