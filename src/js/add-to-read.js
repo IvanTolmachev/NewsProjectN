@@ -38,12 +38,19 @@
 // localStorage.setItem(STORAGE_KEY, JSON.stringify(readNews));
 // }
   // *******************************
-  import { savedApiData } from './read'; 
+  // import axios from 'axios';
+
+  // import { savedApiData } from './read'; 
+// import { getCards } from './cards';
+// import { createCards } from './cards';
+import { savedApiData } from './cards'; 
+
 
   const STORAGE_KEY = 'objReadNews';
    
   // const readNews = [];
   let valuesStorage = {}; 
+
   const gallery = document.querySelector('.gallery'); 
   
   
@@ -51,10 +58,10 @@
   
   export default function getReadNewsId(event) {
 
-  valuesStorage = {
-    readNews: [],
-    dateRead: new Date().toLocaleDateString(), 
-  } 
+  // valuesStorage = {
+  //   readNews: [],
+  //   dateRead: new Date().toLocaleDateString(), 
+  // } 
   
     //  const readDate = new Date().toLocaleDateString(); 
     //  console.log("🚀 ~ getReadNewsId ~ date:", readDate); 
@@ -69,19 +76,26 @@
     }
   }
   
-  function saveReadNew(id) {
-  
+  export function saveReadNew(id) {
+
+    valuesStorage = [
+      readNews: [],
+      dateRead: new Date().toLocaleDateString().replaceAll('.', '/'), 
+    ]
+
     const readNew = savedApiData.find(item=>item.id===id)
   
-    if (valuesStorage.readNews.length<1){
-      valuesStorage.readNews.push(readNew); 
-  } 
+  //   if (valuesStorage.readNews.length<1){
+  //     valuesStorage.readNews.push(readNew); 
+  // } 
   
   if(valuesStorage.readNews.every(el=>Number(el.id)!==Number(id))) {
     valuesStorage.readNews.push(readNew); 
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(valuesStorage));
   }
-  console.log(valuesStorage.readNews); 
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(valuesStorage));
+  // console.log(valuesStorage.readNews); 
+
   }
 
 

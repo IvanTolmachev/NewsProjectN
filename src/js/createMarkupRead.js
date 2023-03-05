@@ -1,15 +1,18 @@
+
+import { createCards } from './cards';
+
  
 const dropIcon = document.querySelector('.icon-down-read-pg'); 
 const newsListRef = document.querySelector('.news-list'); 
 const dateListRef = document.querySelector('.date-list');
 // console.log("🚀 ~ newsListRef:", newsListRef);
 
-dateListRef.addEventListener('click', function () {
-  newsListRef.classList.toggle('show');
-  dropIcon.classList.toggle('rotate');
-});
+// dateListRef.addEventListener('click', function () {
+//   newsListRef.classList.toggle('show');
+//   dropIcon.classList.toggle('rotate');
+// });
 
-
+ 
 const STORAGE_KEY = 'objReadNews';
 
 // ++++++++++++++++++++++++
@@ -18,12 +21,11 @@ export default function createMarkupRead() {
     const storageJson = localStorage.getItem(STORAGE_KEY);
     console.log("🚀 ~ createMarkupRead ~ storageJson:", storageJson)
     const storageData = JSON.parse(storageJson); 
-    console.log("🚀 ~ createMarkupRead ~ storageData:", storageData)
-  
+    console.log("🚀 ~ createMarkupRead ~ storageData:", storageData); 
 
     let markup = "";
     
-    markup = storageData
+    markup = storageData.readNews
       .map(({ id, section, imgUrl, title, abstract, published_date, url }) => {
           // if (identifier !== Number(id)) {
               
