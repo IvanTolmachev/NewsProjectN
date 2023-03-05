@@ -6,8 +6,9 @@
   padding: 32px;
   box-sizing: border-box;
 
-  width: 288px;
-  height: 469px;
+  max-width: 448px;
+  // width: 288px;
+  height: auto;
 
   font-family: $wetherFontRoboto;
   font-weight: 400;
@@ -35,6 +36,9 @@
 .weather__icon {
   width: 128px;
   height: 128px;
+
+  margin-top: 25px;
+  margin-bottom: 25px;
 
   // border-radius: 50%;
   // background: linear-gradient(180deg, #fa6c21 0%, rgba(255, 211, 88, 0.2) 100%);
@@ -135,4 +139,61 @@
   @include tablet {
     font-size: 20px;
   }
+}
+
+// Погода на неделю
+
+.weather__week--list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: calc(330px - 75px + 10px);
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.weather__week--thumb {
+  width: 80px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 15px;
+
+  font-size: 15px;
+  height: auto;
+  padding: 3px;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.weather__week-date {
+  margin-bottom: 5px;
+}
+
+.weather__week-icon {
+  width: 40px;
+  height: 40px;
+
+  // border-radius: 50%;
+  // background: linear-gradient(180deg, #fa6c21 0%, rgba(255, 211, 88, 0.2) 100%);
+  // box-shadow: inset 0px 20px 65px #fa6c21;
+}
+
+.weather__week-temp--thumb {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.weather__week-temp--day {
+  padding-right: 5px;
+  border-right: 1px solid #ffffff;
+}
+
+.weather__week-temp--night {
+  padding-left: 5px;
+}
+
+.display-none {
+  display: none;
 }
