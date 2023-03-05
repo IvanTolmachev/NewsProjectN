@@ -48,8 +48,8 @@ export function createMarkup(arr) {
           />
           <p class="wrap-image__text">${section}</p>
           <button type="button"  class="wrap-image__btn js-is-favorite">
-          <span class="wrap-image__btn-text js-is-favorite">Remove from favorite</span>
-            <svg class="wrap-image__icon js-is-favorite" width="16" height="16">
+          <span class="wrap-image__btn-text js-is-favorite ">Remove from favorite</span>
+            <svg class="wrap-image__icon js-is-favorite fill-heard" width="16" height="16">
                 <use class="js-is-favorite" href ='${iconHeart}#icon-heart'></use>
             </svg>
           </button>
