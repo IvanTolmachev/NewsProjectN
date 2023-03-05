@@ -37,7 +37,7 @@ searhForm.addEventListener('submit', e => {
   //     return;
   //   }
 
-  selectedDate = document.querySelector('.calendar-btn-span').textContent;
+  let selectedDate = document.querySelector('.calendar-btn-span').textContent;
   selectedDate = selectedDate.trim().split('/').reverse().join('');
 
   articleSearchNews.params.q = searchNews;
