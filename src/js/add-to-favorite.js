@@ -32,7 +32,6 @@ function saveFavotiteNew(id) {
     const favoriteBtn=document.querySelector(`li[data-target-id='${id}'] button.js-tartet-favorite`)
     const favoriteSvg=document.querySelector(`li[data-target-id='${id}'] svg.js-tartet-favorite`)
     const favoriteUse=document.querySelector(`li[data-target-id='${id}'] use.js-tartet-favorite`)
-    // const heardIcon=document.querySelector('svg.js-tartet-favorite.wrap-image__icon')
     const storageNews=JSON.parse(localStorage.getItem(STORAGE_KEY))
   
     // if(favoriteNews.length===0 || favoriteNews.every(el=>Number(el.id)!==Number(id))) {
@@ -58,8 +57,8 @@ function saveFavotiteNew(id) {
     favoriteUse.classList.replace("js-tartet-favorite","js-is-favorite")
   
     changeFavoriteBtnText(favoriteBtnText)
-    changeHeardColor(favoriteSvg)
-    
+    //favoriteSvg.classList.replace(oldClass, newClass)
+    favoriteSvg.classList.replace("wrap-image__icon","fill-heard")
    }
 
    function changeFavoriteBtnText(ref) {
@@ -97,7 +96,11 @@ function saveFavotiteNew(id) {
     favoriteUse.classList.replace("js-is-favorite","js-tartet-favorite")
 
     changeFavoriteBtnText(favoriteBtnText)
-    changeHeardColor(favoriteSvg)
+    // changeHeardColor(favoriteSvg)
+    //favoriteSvg.classList.replace(oldClass, newClass)
+    favoriteSvg.classList.replace("fill-heard", "wrap-image__icon")
+    // favoriteSvg.classList.remove("fill-heard")
+    // favoriteSvg.classList.add("wrap-image__icon")
   }
 
 
