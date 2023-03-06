@@ -23,6 +23,18 @@ btnEl.addEventListener('click', () => {
 btnEl.addEventListener('hover', () => btnEl.classList.add('btn-is-active'));
 btnEl.addEventListener('focus', () => btnEl.classList.add('btn-is-active'));
 
+
+window.addEventListener('click', hideModals);
+function hideModals(evt) {
+  if (evt.target.closest('.calendar')) {
+    return;
+  }
+  if (modalEl.classList.contains('is-shown')) {
+    modalEl.classList.remove('is-shown');
+  }
+}
+
+
 let selectedDate = '';
 let date = new Date();
 let currYear = date.getFullYear();
@@ -80,6 +92,7 @@ function renderCalendar() {
 
   localStorage.setItem('VALUE', JSON.stringify(date.getDate()));
 
+
   const dayBtns = document.querySelectorAll('.button');
   renderBtns(dayBtns);
 
@@ -92,7 +105,7 @@ function onDaysTagClick(e) {
   if (currentActiveDate) {
     currentActiveDate.classList.remove('active');
     calendarIcon.classList.remove('rotate');
-    currYear = date.getFullYear();
+    // currYear = date.getFullYear();
   }
   e.target.classList.add('active');
 }
@@ -120,6 +133,7 @@ function renderBtns(dayBtns) {
       btnEl.classList.remove('btn-is-active');
 
       selectedDate = `${currYear}/${addLeadingZero(currMonth + 1)}/${addLeadingZero(e.target.textContent)}`;
+      // console.log(selectedDate);
 
       if (Number(new Date(selectedDate).getTime()) > Number(Date.now())) {
         Notiflix.Notify.failure('Please select a date less than or equal to today!', {
@@ -202,3 +216,5 @@ function renderCurrentDays() {
     }
   });
 }
+
+localStorage.removeItem('VALUE')

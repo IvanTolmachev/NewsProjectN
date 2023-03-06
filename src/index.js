@@ -11,3 +11,4 @@ import './js/pagination';
 import './js/mob-input';
 import './js/articleSearch';
 import './js/weather';
+import './js/mob-menu';
