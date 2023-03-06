@@ -34,8 +34,6 @@ export const articleSearchNews = {
     'api-key': API_KEY,
     page: 0,
     q: '',
-    begin_date: '',
-    end_date: '',
   },
 };
 
