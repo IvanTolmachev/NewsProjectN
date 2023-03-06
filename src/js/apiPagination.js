@@ -3,7 +3,7 @@ import { makeSectionNews } from './filter-categories';
 import { makeArticleSectionNews } from './articleSearch';
 const LS_KEY = 'lastSearch';
 
-function paginationAll(n) {
+export function paginationAll(n) {
   const lastSeacrh = loadLS(LS_KEY);
 
   switch (lastSeacrh.type) {
@@ -22,9 +22,9 @@ function paginationAll(n) {
   }
 }
 
-const btnsContainer = document.querySelector('.pagination');
-btnsContainer.addEventListener('click', e => {
-  const activeBtn = btnsContainer.querySelector('.active');
-  const pageNum = +activeBtn.dataset.page;
-  paginationAll(pageNum - 1);
-});
+// const btnsContainer = document.querySelector('.pagination');
+// btnsContainer.addEventListener('click', e => {
+//   const activeBtn = btnsContainer.querySelector('.active');
+//   const pageNum = +activeBtn.dataset.page;
+//   paginationAll(pageNum - 1);
+// });

@@ -1,26 +1,39 @@
 const btnsContainer = document.getElementById('pagination');
 const btnForward = document.querySelector('.next-page');
 const btnBackPage = document.querySelector('.prev-page');
+const paginContainer = document.querySelector('.pagination');
+import { paginationAll } from './apiPagination.js';
+// import { createCards } from './cards.js';
+
 btnForward.disabled = true;
 
-const valuePage = {
+export const valuePage = {
   curPage: 1,
   numLinksTwoSide: 1,
-  totalPages: 10,
+  totalPages: 3,
+  set totalPage(newTotalPages) {
+    this.totalPages = newTotalPages;
+  },
+  get totalPage() {
+    return this.totalPages;
+  },
 };
+
 makePaginationsBtnMurkUp();
 
-btnsContainer.addEventListener('click', e => {
+paginContainer.addEventListener('click', e => {
   e.preventDefault();
-
+  handleButton(e.target);
+  paginationAll(valuePage.curPage);
+  // createCards(valuePage.curPage);
   if (!e.target.classList.contains('pg-link')) {
     return;
   }
-  valuePage.curPage = parseInt(e.target.dataset.page, 10);
+  valuePage.curPage = parseInt(e.target.dataset.page);
   makePaginationsBtnMurkUp(valuePage);
-  console.log('fucking');
-  handleButtonLeft();
-  handleButtonRight();
+  paginationAll(valuePage.curPage);
+
+  // createCards(valuePage.curPage);
 });
 
 function makePaginationsBtnMurkUp() {
@@ -66,6 +79,8 @@ function makePaginationsBtnMurkUp() {
   } else {
     btnsContainer.innerHTML = render;
   }
+  handleButtonLeft();
+  handleButtonRight();
 }
 function renderPage(index, active = '') {
   return ` <li class="pg-item " >
@@ -73,24 +88,17 @@ function renderPage(index, active = '') {
     </li>`;
 }
 
-document.querySelector('.pagination').addEventListener('click', function (e) {
-  handleButton(e.target);
-});
-
 function handleButton(element) {
   if (element.classList.contains('prev-page')) {
     valuePage.curPage--;
     handleButtonLeft();
-    console.log(valuePage);
-
     btnForward.disabled = false;
-    //  btnLastPg.disabled = false;
   } else if (element.classList.contains('next-page')) {
     valuePage.curPage++;
     handleButtonRight();
-    console.log(valuePage);
     btnBackPage.disabled = false;
   }
+
   makePaginationsBtnMurkUp();
 }
 function handleButtonLeft() {
@@ -102,7 +110,6 @@ function handleButtonLeft() {
 }
 function handleButtonRight() {
   if (valuePage.curPage === valuePage.totalPages) {
-    console.log(valuePage.curPage);
     btnForward.disabled = true;
   } else {
     btnForward.disabled = false;
