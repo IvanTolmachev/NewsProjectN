@@ -42,7 +42,7 @@ async function makeSection(url) {
   }
 }
 
-async function makeSectionNews(url) {
+export async function makeSectionNews(url) {
   const weather = document.querySelector('.weather__thumb');
   const sectionHome = document.querySelector('.section_home');
   const errorRequest = document.querySelector('.errorRequest');
@@ -55,7 +55,6 @@ async function makeSectionNews(url) {
     // //   console.log(countNews.length);
     // url.params.limit = 8;
     const news = await makeData(url);
-
     arrLastData.push(...news.map(dataSectionNormalize));
     savedApiData.push(...arrLastData);
     gallery.innerHTML = arrLastData.map(createCard).join('');
@@ -129,7 +128,6 @@ categories.addEventListener('click', e => {
     e.target.classList.contains('categories__item')
   ) {
     const listItem = categories.querySelectorAll('.categories__item');
-
     listItem.forEach(item => item.classList.remove('activ'));
     e.target.classList.add('activ');
     categoriesIcon.classList.remove('rotate');
