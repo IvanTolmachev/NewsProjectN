@@ -2,14 +2,21 @@
     // position: absolute;
     top: 49px;
     right: 0px;
-    display: flex;
+    display: none;
     gap: 8px;
     align-items: center;
+
+    @include tablet {
+        display: flex;
+    }
 
     @include desktop {
         gap: 12px;
     }
 }
+
+
+
 
 .switch {
     display: inline-block;
@@ -202,6 +209,7 @@
 
 body {
     background-color: var(--color-bg);
+    transition: background-color .25s cubic-bezier(.4, 0, .2, 1);
 }
 
 .header {
@@ -323,15 +331,8 @@ html.dark .toggle-label.light {
     fill: var(--search-btn-fill);
 }
 
-.calendar__btn {
-    border: 1px solid var(--calendar-border);
-    background-color: var(--calendar-bg-color);
-}
 
-.calendar-btn-span {
-    color: var(--calendar-text-color);
-    opacity: 0.4;
-}
+
 
 .card:hover,
 .card:focus {
@@ -354,10 +355,13 @@ html.light {
     --search-btn-fill: #111321;
     --calendar-border: #111321;
     --calendar-bg-color: #F4F4F4;
-    --calendar-text-color: #111321;
     --shadow-card-a: rgba(0, 0, 0, 0.12);
     --shadow-card-b: rgba(0, 0, 0, 0.06);
     --shadow-card-c: rgba(0, 0, 0, 0.16);
+
+    --calendar-text-color: #11132166;
+    --calendar-btn-color: #a2a2a2;
+    --header-bg: #F4F4F4;
 }
 
 
@@ -378,8 +382,10 @@ html.dark {
     --search-btn-fill: #F4F4F4;
     --calendar-border: #F4F4F4;
     --calendar-bg-color: #2E2E2E;
-    --calendar-text-color: #F4F4F4;
     --shadow-card-a: rgba(255, 255, 255, 0.12);
     --shadow-card-b: rgba(255, 255, 255, 0.06);
     --shadow-card-c: rgba(255, 255, 255, 0.16);
+    --calendar-text-color: #f4f4f466;
+    --calendar-btn-color: #f4f4f4;
+    --header-bg: #2E2E2E;
 }
