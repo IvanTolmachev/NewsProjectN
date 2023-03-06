@@ -33,6 +33,7 @@ transition: all 500ms $timingFunction;
 
   &--border {
     border: none;
+    background-color: transparent;
   }
 }
 .numbPageCount {
