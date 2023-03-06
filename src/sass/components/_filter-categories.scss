@@ -89,6 +89,7 @@ $mobile: 480px;
   transition: transform $durationFunction $timingFunction;
 
   &-wrapper {
+    pointer-events: none;
     border-radius: 20px;
     background: transparent;
     position: absolute;
@@ -98,6 +99,7 @@ $mobile: 480px;
   }
 
   &-show {
+    pointer-events: all;
     opacity: 1;
     top: 0;
     left: 0;
