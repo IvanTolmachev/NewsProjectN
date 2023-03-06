@@ -6,7 +6,13 @@ import { paginationAll } from './apiPagination.js';
 // import { createCards } from './cards.js';
 
 btnForward.disabled = true;
-
+function smoothScroll() {
+  window.scrollTo({
+    top: 0,
+    left: 50,
+    behavior: 'smooth',
+  });
+}
 export const valuePage = {
   curPage: 1,
   numLinksTwoSide: 1,
@@ -23,6 +29,7 @@ makePaginationsBtnMurkUp();
 
 paginContainer.addEventListener('click', e => {
   e.preventDefault();
+  smoothScroll();
   handleButton(e.target);
   paginationAll(valuePage.curPage);
   // createCards(valuePage.curPage);
@@ -50,7 +57,7 @@ export function makePaginationsBtnMurkUp() {
   for (let pos = 1; pos <= totalPages; pos++) {
     active = pos === curPage ? 'active' : '';
     if (totalPages >= 2 * range - 1) {
-      if (numberTruncateLeft > 3 && numberTruncateRight < totalPages - 3 + 1) {
+      if (numberTruncateLeft > 2 && numberTruncateRight < totalPages - 3 + 1) {
         if (pos >= numberTruncateLeft && pos <= numberTruncateRight) {
           renderTwoSide += renderPage(pos, active);
         }
@@ -88,6 +95,7 @@ function renderPage(index, active = '') {
 }
 
 function handleButton(element) {
+  smoothScroll();
   if (element.classList.contains('prev-page')) {
     valuePage.curPage--;
     handleButtonLeft();
