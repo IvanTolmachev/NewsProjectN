@@ -6,7 +6,7 @@
   <div class="container header-container">
     <!-- ----------mobile menu ---------- -->
 
-    <div class="burger-wraper container">
+    <!-- <div class="burger-wraper container">
       <div class="menu-wraper">
         <a class="logo" href="./index.html">News</a>
 
@@ -49,22 +49,20 @@
           </li>
         </ul>
       </div>
-    </div>
+    </div> -->
 
     <!-- ----------mobile menu ---------- -->
 
     <!-- <nav class="header-nav"> -->
     <nav class="container-nav">
-      <!-- <a class="logo" href="./index.html">News</a> -->
+      <a class="logo" href="./index.html">News</a>
       <!-- </nav> -->
       <ul class="header-navigation">
         <li class="menu-item">
           <a class="menu-link" id="home-link" href="./index.html">Home</a>
         </li>
         <li class="menu-item">
-          <a class="menu-link" id="favorite-link" href="./favorite.html"
-            >Favorite</a
-          >
+          <a class="menu-link" id="favorite-link" href="./favorite.html">Favorite</a>
         </li>
         <li class="menu-item">
           <a class="menu-link" id="read-link" href="./read.html">Read</a>
@@ -73,20 +71,20 @@
     </nav>
     <div class="search">
       <form class="search-form" id="search-form">
-        <input
-          class="input-text"
-          type="text"
-          name="searchQuery"
-          autocomplete="off"
-          placeholder="Search "
-        />
-        <button type="submit" class="btn-search">
+        <input class="input-text" type="text" name="searchQuery" autocomplete="off" placeholder="Search " />
+        <div type="submit" class="btn-search">
           <svg class="menu-icon-btn" width="20px" height="20px">
             <use href="/src/images/icon.svg#icon-bx_search"></use>
           </svg>
-        </button>
+        </div>
       </form>
+      <div class="menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
+
     <include src="./partials/toggle-mode.html"></include>
   </div>
 </header>
