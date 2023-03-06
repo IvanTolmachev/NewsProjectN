@@ -1,27 +1,24 @@
 
 const favoriteList = document.querySelector(".gallery");
-// console.log("🚀 ~ favorite:", favorite)
-
-// const container = document.querySelector(".container");
+const errorRequest = document.querySelector(".errorRequest");
 const iconHeart = new URL('../images/icon.svg', import.meta.url);
-
-// localStorage.setItem("test", JSON.stringify(localStorageDataTest));
-
 const STORAGE_KEY = 'favoriteNews';
 
 export default function createMarkupFavorite() {
-    const storageDataJson=localStorage.getItem(STORAGE_KEY)
-    const storageData=JSON.parse(storageDataJson)
-    console.log("🚀 ~ storageData:", storageData)
+    
+    const storageNews=JSON.parse(localStorage.getItem(STORAGE_KEY))
+    console.log("🚀 ~ storageNews:", storageNews)
 
+        if (!Boolean(storageNews)) {
+          errorRequest.classList.remove('visually-hidden')
+          return
+        }
 
   let markup = "";
   
-  markup = storageData
+  markup = storageNews
     .map(({ id, section, imgUrl, title, abstract, newDateStr, url }) => {
-        // if (Boolean(storageData)) {
-             
-        // }
+      
       return `<li class="card js-card-item" data-target-id=${id}>
         <div class="wrap-image">
           <img
@@ -32,7 +29,7 @@ export default function createMarkupFavorite() {
           <p class="wrap-image__text">${section}</p>
           <button type="button"  class="wrap-image__btn js-is-favorite">
             <span class="wrap-image__btn-text js-is-favorite">Remove from favorite</span>
-              <svg class="wrap-image__icon js-is-favorite fill-heard" width="16" height="16">
+              <svg class="js-is-favorite fill-heard" width="16" height="16">
                 <use class="js-is-favorite" href ='${iconHeart}#icon-heart'></use>
               </svg>
           </button>
@@ -47,8 +44,11 @@ export default function createMarkupFavorite() {
       </li>`;
     })
     .join("");
-    // console.log("🚀 ~ createMarkupFavorite ~ markup:", markup)
     favoriteList.insertAdjacentHTML("beforeend", markup);
+}
+
+function is(params) {
+  
 }
 
 createMarkupFavorite();
