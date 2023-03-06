@@ -10,7 +10,7 @@ serachForm.addEventListener('submit', onSearch)
 function onSearch(evt) {
     evt.preventDefault();
     const query = evt.currentTarget.elements.searchQuery.value.trim();
-    console.log("🚀 ~ onSearch ~ query:", query)
+    
     let markup = "";
     
   markup = storageNews
