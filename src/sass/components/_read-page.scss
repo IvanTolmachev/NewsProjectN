@@ -1,7 +1,3 @@
-.container-height {
-  height: 100vh;
-}
-
 .dropbtn {
   margin-top: 60px;
   color: $primaryTextColor;
@@ -18,7 +14,7 @@
     transition: transform $durationFunction $timingFunction;
   }
   
-  .news-list.show {
+  .item-list.show {
   display: flex;  
   gap: 32px;
   flex-wrap: wrap;
