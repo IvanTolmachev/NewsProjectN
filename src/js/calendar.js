@@ -129,6 +129,15 @@ function renderBtns(dayBtns) {
           cssAnimationDuration: 2000,
           cssAnimationStyle: 'from-top',
         });
+
+        spanEl.textContent = `${addLeadingZero(date.getDate())}/${addLeadingZero(
+          date.getMonth() + 1
+        )}/${date.getFullYear()}`;
+        currentDate.innerHTML = `${months[date.getMonth()]} ${date.getFullYear()}`;
+        date = new Date();
+        currYear = date.getFullYear();
+        currMonth = date.getMonth();
+        renderCalendar()
       }
 
       // onTodayBtnClick();
