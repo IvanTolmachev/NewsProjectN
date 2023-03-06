@@ -1,18 +1,4 @@
-// import CalendarDates from "calendar-dates";
-// const calendarDates = new CalendarDates();
-
-// const main = async () => {
-//   const arr = [];
-//   for (const meta of await calendarDates.getDates(new Date())) {
-//     arr.push(meta)
-//   }
-//   return arr;
-// };
-
-// main().then((data) => {
-//   console.log(data)
-// })
-//   .catch((error) => console.log(error));
+import Notiflix from 'notiflix';
 
 const daysTag = document.querySelector('.days');
 const currentDate = document.querySelector('.current-date');
@@ -68,6 +54,7 @@ function renderCalendar() {
     liTag += `<li><button type="button" class="button inactive" id="inactive" disabled>${lastDateofLastMonth - i + 1
       }</button></li>`;
   }
+
   for (let i = 1; i <= lastDateofMonth; i++) {
     // creating li of all days of current month
     // adding active class to li if the current day, month, and year matched
@@ -78,8 +65,10 @@ function renderCalendar() {
         ? 'current-month-day'
         : '';
     let isCurrentDay = i === date.getDate() ? 'active' : '';
+
     liTag += `<li><button type="button" class="button ${isToday} ${isCurrentDay}">${i}</button></li>`;
   }
+
   for (let i = lastDayofMonth; i < 7; i++) {
     // creating li of next month first days
     liTag += `<li><button type="button" class="button inactive" id="inactive" disabled>${i - lastDayofMonth + 1
@@ -129,7 +118,20 @@ function renderBtns(dayBtns) {
       )}/${addLeadingZero(currMonth + 1)}/${currYear}`;
       modalEl.classList.toggle('is-shown');
       btnEl.classList.remove('btn-is-active');
-      onTodayBtnClick();
+
+      selectedDate = `${currYear}/${addLeadingZero(currMonth + 1)}/${addLeadingZero(e.target.textContent)}`;
+
+      if (Number(new Date(selectedDate).getTime()) > Number(Date.now())) {
+        Notiflix.Notify.failure('Please select a date less than or equal to today!', {
+          opacity: 1,
+          position: 'center-top',
+          timeout: 350,
+          cssAnimationDuration: 2000,
+          cssAnimationStyle: 'from-top',
+        });
+      }
+
+      // onTodayBtnClick();
     })
   );
 }
