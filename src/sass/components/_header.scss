@@ -1,29 +1,27 @@
 .header {
   margin-top: 24px;
   height: 81px;
-  // position: fixed;
-  // z-index: 999;
+ 
   border-bottom: 1px solid $borderHeaderColor;
   width: 100%;
 }
 
 .header-container {
   display: flex;
-  // justify-content: space-between;
+  
   align-items: center;
 }
 
 .container-nav {
   display: flex;
+ 
+
 }
 
 .logo {
   margin-right: auto;
-  text-transform: uppercase;
-  // padding: 24px 0;
-
   color: $primaryTextColor;
-
+  
   font-weight: 700;
   font-size: 24px;
   line-height: 1.38;
@@ -35,17 +33,6 @@
   @include desktop {
     font-size: 42px;
     margin-right: 102px;
-  }
-  @media screen and (min-width: 768px) {
-    // width: 768px;
-    // font-size: 32px;
-    // padding: 32px 0;
-  }
-  @media screen and (min-width: 1280px) {
-    // width: 1280px;
-    // font-size: 42px;
-    // line-height: 1.36;
-    // padding: 28px 0;
   }
   transition: text-shadow $durationFunction $timingFunction;
   &:hover,
@@ -62,8 +49,6 @@
     align-items: center;
   }
   @include desktop {
-    // display: flex;
-    // align-items: center;
     gap: 69px;
   }
 }
@@ -116,14 +101,10 @@
   @include desktop {
     margin-left: 147px;
     margin-right: 137px;
-  }
-  // position: relative;
-  // width: 30px;
-}
-// .menu-icon-btn {
-//   display: block;
-//   cursor: pointer;
-// }
+  }}
+  
+  
+
 .btn-search {
   width: 20px;
   height: 20px;
@@ -134,9 +115,8 @@
   padding: 0;
   margin: 0;
   appearance: none;
-  // position: relative;
-  // width: 15px;
 }
+
 .input-text {
   display: none;
   width: 173px;
@@ -176,58 +156,21 @@
     left: 12px;
   }
 }
-
-// form{
-//     @media screen and (min-width: 480px) {
-//         width: 480px;
-
-//       }
-
-// }
-// input, button {
-//     @media screen and (min-width: 480px) {
-//         width: 480px;
-//         outline: none;
-//         background: transparent;
-
-//       }
-
-// }
-// input {
-//     @media screen and (min-width: 480px) {
-//         width: 480px;
-//         width: 100%;
-//         height: 42px;
-//         padding-left: 15px;
-//         border: 3px solid #F9F0DA;
-
-//       }
-
-//   }
-//   button {
-//     @media screen and (min-width: 480px) {
-//         width: 480px;
-//         border: none;
-//         height: 42px;
-//         width: 42px;
-//         position: absolute;
-//         top: 0;
-//         right: 0;
-//         cursor: pointer;
-
-//       }
-
-//   }
-//   button:before {
-//     @media screen and (min-width: 480px) {
-//         width: 480px;
-//         content: "\f002";
-//         font-family: FontAwesome;
-//         font-size: 16px;
-//         color: #F9F0DA;
-//       }
-
-//   }
-//   input:focus {
-//     border-color: #311c24;
-//   }
+.mob-input {
+  display: inline-block;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  line-height: 1.71;
+  width: 170px;
+  min-height: 30px;
+  margin-right: 25px;
+  border-radius: 20px;
+  outline: none;
+  border: 1px solid #111321;
+  padding-left: 50px;
+ transition: box-shadow $durationFunction $timingFunction;
+  &:hover,
+  &:focus {
+    box-shadow: $boxShadow;
+  };
+}
