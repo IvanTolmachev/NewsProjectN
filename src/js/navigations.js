@@ -1,4 +1,4 @@
-const currentPage = window.location.pathname;
+const currentPage = window.location.href;
 const home = document.getElementById('home-link');
 const favorite = document.getElementById('favorite-link');
 const read = document.getElementById('read-link');
