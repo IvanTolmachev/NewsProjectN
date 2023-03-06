@@ -1,9 +1,9 @@
 import axios from 'axios';
-// const API_KEY = 'VPd8ESOXXGRNi6SUHc4QYJMXdqmRVK3K';
-import { KEY } from './api-key';
+// import { KEY } from './api-key';
+const API_KEY = 'VPd8ESOXXGRNi6SUHc4QYJMXdqmRVK3K';
 
 export async function getCards() {
-  const URL = `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=${KEY}`;
+  const URL = `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=${API_KEY}`;
   const requestData = await axios.get(URL);
   return requestData;
 }
@@ -80,7 +80,6 @@ export function createMarkup(arr) {
             alt="photo"
            class="wrap-image__photo"
           />
-          <p class="wrap-image__active" hidden>Already read</p>
           <p class="wrap-image__text">${section}</p>
           <button type="button" class="wrap-image__btn js-tartet-favorite">
           <span class="wrap-image__btn-text js-tartet-favorite">Add to favorite</span>
@@ -102,6 +101,7 @@ export function createMarkup(arr) {
     .join('');
   refs.gallery.insertAdjacentHTML('beforeend', markup);
 }
+
 function saveApiData(arrey) {
   arrey.map(({ id, url, title, section, abstract, published_date, media }) => {
     const item = {};
@@ -112,8 +112,8 @@ function saveApiData(arrey) {
     item['title'] = `${title}`;
     item['section'] = `${section}`;
     item['abstract'] = `${abstract}`;
-    item['newDateStr'] = newDateStr;
-    item['imgUrl'] = imgUrl;
+    item['newDateStr'] = `${newDateStr}`;
+    item['imgUrl'] = `${imgUrl}`;
     savedApiData.push(item);
   });
   // console.log('savedApiData', savedApiData);

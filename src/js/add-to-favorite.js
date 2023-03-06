@@ -1,10 +1,6 @@
-// import { savedApiData } from './favorite'
 import { savedApiData } from './cards'
-// console.log("🚀 ~ savedApiData:", savedApiData)
-
 
 export const STORAGE_KEY = 'favoriteNews';
-// const favoriteNews=[]
 const gallery=document.querySelector('.gallery') 
 
 gallery.addEventListener("click", getFavoriteId);
@@ -13,13 +9,12 @@ export default function getFavoriteId(evt) {
     
     if(evt.target.classList.contains("js-tartet-favorite")){
       const id=evt.target.closest(".js-card-item").dataset.targetId
-  
+
       saveFavotiteNew(id)
       return
     }
     if(evt.target.classList.contains("js-is-favorite")){
       const id=evt.target.closest(".js-card-item").dataset.targetId
-      
       removeFromFavorite(id)
     }
 }
@@ -33,10 +28,6 @@ function saveFavotiteNew(id) {
     const favoriteSvg=document.querySelector(`li[data-target-id='${id}'] svg.js-tartet-favorite`)
     const favoriteUse=document.querySelector(`li[data-target-id='${id}'] use.js-tartet-favorite`)
     const storageNews=JSON.parse(localStorage.getItem(STORAGE_KEY))
-  
-    // if(favoriteNews.length===0 || favoriteNews.every(el=>Number(el.id)!==Number(id))) {
-     
-    // }
 
     if(!storageNews){
       const firstNew=[]
@@ -47,9 +38,6 @@ function saveFavotiteNew(id) {
       storageNews.push(favoriteNew)
       localStorage.setItem(STORAGE_KEY, JSON.stringify(storageNews));
     }
-    // favoriteNews.push(favoriteNew)
-    // console.log("🚀 ~ favoriteNews:", favoriteNews)
-    // localStorage.setItem(STORAGE_KEY, JSON.stringify(favoriteNews));
 
     favoriteBtnText.classList.replace("js-tartet-favorite","js-is-favorite")
     favoriteBtn.classList.replace("js-tartet-favorite","js-is-favorite")
@@ -60,25 +48,12 @@ function saveFavotiteNew(id) {
     //favoriteSvg.classList.replace(oldClass, newClass)
     favoriteSvg.classList.replace("wrap-image__icon","fill-heard")
    }
-
-   function changeFavoriteBtnText(ref) {
-    ref.textContent =
-    ref.textContent === "Add to favorite" ? "Remove from favorite" : "Add to favorite";
-  }
-
-  function changeHeardColor(icon) {
-    icon.classList.toggle('.fill-heard')
-  }
-
+  
   function removeFromFavorite(id) {
     const favoriteBtnText=document.querySelector(`li[data-target-id='${id}'] span.js-is-favorite`)
     const favoriteBtn=document.querySelector(`li[data-target-id='${id}'] button.js-is-favorite`)
     const favoriteSvg=document.querySelector(`li[data-target-id='${id}'] svg.js-is-favorite`)
     const favoriteUse=document.querySelector(`li[data-target-id='${id}'] use.js-is-favorite`)
-
-    // const removedNewIndex=favoriteNews.findIndex(item => Number(item.id) === Number(id))
-    // favoriteNews.splice(removedNewIndex, 1)
-    // localStorage.setItem(STORAGE_KEY, JSON.stringify(favoriteNews));
 
     let storageNews=JSON.parse(localStorage.getItem(STORAGE_KEY))
     const removedNewIndex=storageNews.findIndex(item => Number(item.id) === Number(id))
@@ -96,11 +71,15 @@ function saveFavotiteNew(id) {
     favoriteUse.classList.replace("js-is-favorite","js-tartet-favorite")
 
     changeFavoriteBtnText(favoriteBtnText)
-    // changeHeardColor(favoriteSvg)
+    
     //favoriteSvg.classList.replace(oldClass, newClass)
     favoriteSvg.classList.replace("fill-heard", "wrap-image__icon")
-    // favoriteSvg.classList.remove("fill-heard")
-    // favoriteSvg.classList.add("wrap-image__icon")
   }
+
+  function changeFavoriteBtnText(ref) {
+    ref.textContent =
+    ref.textContent === "Add to favorite" ? "Remove from favorite" : "Add to favorite";
+  }
+
 
 
