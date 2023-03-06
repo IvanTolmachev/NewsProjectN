@@ -9,7 +9,7 @@ export async function getCards() {
 }
 const STORAGE_KEY = 'favoriteNews';
 const storageNews = JSON.parse(localStorage.getItem(STORAGE_KEY));
-const iconHeart = new URL('../images/icon.svg', import.meta.url);
+const iconHeart = new URL('../images/icon.svg', import.meta.url); 
 
 const refs = {
   gallery: document.querySelector('.gallery'),
@@ -34,7 +34,7 @@ export function createMarkup(arr) {
   const markup = arr
     .map(({ id, url, title, section, abstract, published_date, media }) => {
       let imgUrl = media.map(media => media['media-metadata'][2].url);
-      let newDateStr = published_date.replace(/-/g, '/');
+      let newDateStr = published_date.toLocaleDateString().replaceAll('.', '/');
       //Проверка есть ли эта новость в Favorite
       // checkIsNewFavorite(id)
       // console.log("🚀 ~ storageNews:", storageNews)
@@ -50,7 +50,6 @@ export function createMarkup(arr) {
             alt="photo"
             class="wrap-image__photo"
           />
-          <p class="wrap-image__active" hidden>Already read</p>
           <p class="wrap-image__text">${section}</p>
           <button type="button"  class="wrap-image__btn js-is-favorite">
           <span class="wrap-image__btn-text js-is-favorite ">Remove from favorite</span>
@@ -64,10 +63,9 @@ export function createMarkup(arr) {
             <p class="card__description">${
               abstract.length > 112 ? abstract.slice(0, 113) + '...' : abstract
             }</p>
-            <div class="wrap-info">
                 <p class="wrap-info__time">${newDateStr}</p>
                 <a href="${url}" class="wrap-info__link">Read more</a>
-            </div>
+                <p class="wrap-image__active visually-hidden">Already read</p>
         </li>`;
       }
       //
@@ -80,7 +78,6 @@ export function createMarkup(arr) {
             alt="photo"
            class="wrap-image__photo"
           />
-          <p class="wrap-image__active" hidden>Already read</p>
           <p class="wrap-image__text">${section}</p>
           <button type="button" class="wrap-image__btn js-tartet-favorite">
           <span class="wrap-image__btn-text js-tartet-favorite">Add to favorite</span>
@@ -92,10 +89,9 @@ export function createMarkup(arr) {
         <p class="card__description">${
           abstract.length > 112 ? abstract.slice(0, 113) + '...' : abstract
         }</p>
-        <div class="wrap-info">
           <p class="wrap-info__time">${newDateStr}</p>
           <a href="${url}" class="wrap-info__link" target="_blank" rel="noreferrer noopener">Read more</a>
-        </div>
+          <p class="wrap-image__active visually-hidden">Already read</p>
       </li>
      `;
     })
