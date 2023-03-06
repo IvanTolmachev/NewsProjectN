@@ -96,22 +96,22 @@ export default function createMarkupRead() {
       errorRequest.classList.remove('visually-hidden');
       sectionHome.classList.add('visually-hidden'); 
     }
-  // readDateCard(storageData.readDateNew); 
+  readDateCard(storageData.readDateNew); 
   }
   
 
 
-//   function readDateCard(items) {
-//     console.log(items); 
-//     const markup = items.map(({ readDateNew }) => {
-//       return `<li class="dropbtn calendar-btn-span">
-//       <span class="btn-span">${readDateNew}</span>
-//         <svg class="icon-down-read-pg" width="15" height="9">
-//             <use href="/src/icon.svg#icon-arrow-down"></use>
-//           </svg>
-//   </li>`
-//   }).sort((a, b) => b - a).join(""); 
-//   dateListRef.insertAdjacentHTML('beforeend', markup); 
-// }
+  function readDateCard(items) {
+    console.log(items); 
+    const markup = items.map(({ readDateNew }) => {
+      return `<li class="dropbtn calendar-btn-span">
+      <span class="btn-span">${readDateNew}</span>
+        <svg class="icon-down-read-pg" width="15" height="9">
+            <use href="/src/icon.svg#icon-arrow-down"></use>
+          </svg>
+  </li>`
+  }).sort((a, b) => b - a).join(""); 
+  dateListRef.insertAdjacentHTML('beforeend', markup); 
+}
 
 
