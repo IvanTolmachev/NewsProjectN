@@ -9,7 +9,7 @@ export async function getCards() {
 }
 const STORAGE_KEY = 'favoriteNews';
 const storageNews = JSON.parse(localStorage.getItem(STORAGE_KEY));
-const iconHeart = new URL('../images/icon.svg', import.meta.url); 
+const iconHeart = new URL('../images/icon.svg', import.meta.url);
 
 const refs = {
   gallery: document.querySelector('.gallery'),
@@ -34,7 +34,7 @@ export function createMarkup(arr) {
   const markup = arr
     .map(({ id, url, title, section, abstract, published_date, media }) => {
       let imgUrl = media.map(media => media['media-metadata'][2].url);
-      let newDateStr = published_date.toLocaleDateString().replaceAll('.', '/');
+      let newDateStr = published_date;
       //Проверка есть ли эта новость в Favorite
       // checkIsNewFavorite(id)
       // console.log("🚀 ~ storageNews:", storageNews)
