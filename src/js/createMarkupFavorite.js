@@ -1,13 +1,14 @@
 
 const favoriteList = document.querySelector(".gallery");
 const errorRequest = document.querySelector(".errorRequest");
-const iconHeart = new URL('../images/icon.svg', import.meta.url);
+export const iconHeart = new URL('../images/icon.svg', import.meta.url);
 const STORAGE_KEY = 'favoriteNews';
+const storageNews=JSON.parse(localStorage.getItem(STORAGE_KEY))
 
 export default function createMarkupFavorite() {
     
-    const storageNews=JSON.parse(localStorage.getItem(STORAGE_KEY))
-    console.log("🚀 ~ storageNews:", storageNews)
+    
+    // console.log("🚀 ~ storageNews:", storageNews)
 
         if (!Boolean(storageNews)) {
           errorRequest.classList.remove('visually-hidden')
@@ -45,10 +46,6 @@ export default function createMarkupFavorite() {
     })
     .join("");
     favoriteList.insertAdjacentHTML("beforeend", markup);
-}
-
-function is(params) {
-  
 }
 
 createMarkupFavorite();
