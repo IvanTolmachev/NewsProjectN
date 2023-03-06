@@ -1,10 +1,12 @@
 import { savedApiData } from './cards';
 
+
 const STORAGE_KEY = 'readNews';
 
 let readNews = [];
 
 const gallery = document.querySelector('.gallery');
+
 
 gallery.addEventListener('click', getReadNewsId);
 
@@ -13,7 +15,8 @@ export default function getReadNewsId(event) {
 
   if (event.target.classList.contains('wrap-info__link')) {
     event.preventDefault();
-
+    event.target.parentNode.style.opacity = '40%';
+    event.target.nextElementSibling.classList.remove('visually-hidden'); 
     const id = event.target.closest('.js-card-item').dataset.targetId;
     saveReadNew(id);
   }
