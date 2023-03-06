@@ -216,3 +216,5 @@ function renderCurrentDays() {
     }
   });
 }
+
+localStorage.removeItem('VALUE')
