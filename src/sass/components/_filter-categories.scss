@@ -5,6 +5,7 @@ $mobile: 480px;
 
 :root {
   // --bthBgColor: #f4f4f4;
+  //--calendar-btn-color: #a2a2a2;
 
   --mainBgcolor: #f4f4f4;
   --countCard: 1;
@@ -232,12 +233,12 @@ $mobile: 480px;
   align-items: center;
 
   //color: $primaryTextColor;
-  color: #a2a2a2;
-  background-color: var(--bthBgColor);
+  color: var(--calendar-btn-color);
+  background-color: var(--calendar-bg-color);
   text-align: center;
   padding: 5px 12px;
   border: 1 solid;
-  border-color: $primaryTextColor;
+  border-color: var(--calendar-border);
   border-radius: 20px;
   cursor: pointer;
 
@@ -271,7 +272,7 @@ $mobile: 480px;
 
 .calendar-btn-span {
   padding: 0 12px;
-
+  color: var(--calendar-text-color);
   font-family: $primaryFontManrope;
   font-weight: 400;
   font-size: 12px;
