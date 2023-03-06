@@ -172,7 +172,7 @@
   width: 26px;
   height: 26px;
   border: none;
-  // padding: 0px;
+   border-radius:50%;
   background-color: transparent;
   cursor: pointer;
 
@@ -183,6 +183,8 @@
     font-size: 14px;
     line-height: 1.785;
     letter-spacing: 0.38px;
+
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .button.inactive,
@@ -195,6 +197,21 @@
 .days li .button.active {
   color: $whiteTextColor;
 }
+
+.days li .button:hover,
+.days li .button:focus
+ {
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: $primarySwitchColor;
+  color:$whiteTextColor;
+  
+}
+
+.days li .button.inactive:hover,
+.days li .button.inactive:focus {
+  background-color: $calendarBgColor;
+}
+
 
 .button::before {
   position: absolute;
