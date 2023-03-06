@@ -8,5 +8,6 @@ import './js/add-to-favorite';
 import './js/search_cards';
 import './js/add-to-read';
 import './js/pagination';
+import './js/mob-input';
 import './js/articleSearch';
 import './js/weather';
