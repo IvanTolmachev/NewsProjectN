@@ -31,7 +31,6 @@ paginContainer.addEventListener('click', e => {
   }
   valuePage.curPage = parseInt(e.target.dataset.page);
   makePaginationsBtnMurkUp(valuePage);
-  paginationAll(valuePage.curPage);
 
   // createCards(valuePage.curPage);
 });
