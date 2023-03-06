@@ -4,7 +4,7 @@ import {
   dataArticleSearchNormalize,
   arrLastData,
 } from './apiNews';
-import { articleSearchNews } from './apiUrl';
+import { articleSearchNews, perPage } from './apiUrl';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { saveLS, loadLS } from './lStorage';
 import { savedApiData } from './cards';
@@ -27,7 +27,7 @@ export async function makeArticleSectionNews(url) {
     const news = await makeData(url);
 
     arrLastData.push(...news.map(dataArticleSearchNormalize));
-    arrLastData.splice(8);
+    arrLastData.splice(perPage);
     savedApiData.push(...arrLastData);
 
     gallery.innerHTML = arrLastData.map(createCard).join('');

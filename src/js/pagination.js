@@ -35,7 +35,7 @@ paginContainer.addEventListener('click', e => {
   // createCards(valuePage.curPage);
 });
 
-function makePaginationsBtnMurkUp() {
+export function makePaginationsBtnMurkUp() {
   const { totalPages, curPage, numLinksTwoSide: delta } = valuePage;
 
   const range = delta + 4;
