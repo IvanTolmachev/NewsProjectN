@@ -6,8 +6,9 @@ import {
   dataSectionNormalize,
   arrLastData,
 } from './apiNews';
-import { sectionList, sectionNews } from './apiUrl';
+import { sectionList, sectionNews, perPage, maxHits } from './apiUrl';
 import { saveLS, loadLS } from './lStorage';
+import { valuePage, makePaginationsBtnMurkUp } from './pagination';
 //import { savedApiData } from './favorite';
 import { savedApiData } from './cards';
 const LS_KEY = 'lastSearch';
@@ -50,10 +51,7 @@ export async function makeSectionNews(url) {
   savedApiData.length = 0;
 
   try {
-    // url.params.limit = 50;
-    // const countNews = await makeData(url);
-    // //   console.log(countNews.length);
-    // url.params.limit = 8;
+    sectionNews.params.limit = perPage;
     const news = await makeData(url);
     arrLastData.push(...news.map(dataSectionNormalize));
     savedApiData.push(...arrLastData);
@@ -137,7 +135,20 @@ categories.addEventListener('click', e => {
     sectionNews.type = 'SECTION';
 
     saveLS(LS_KEY, sectionNews);
-    makeSectionNews(sectionNews);
+
+    (async () => {
+      try {
+        makeSectionNews(sectionNews);
+
+        sectionNews.params.limit = maxHits;
+        const news = await makeData(sectionNews);
+        valuePage.totalPage = Math.floor(news.length / perPage);
+        sectionNews.params.limit = perPage;
+        makePaginationsBtnMurkUp();
+      } catch (error) {
+        console.log(error);
+      }
+    })();
   }
 });
 
