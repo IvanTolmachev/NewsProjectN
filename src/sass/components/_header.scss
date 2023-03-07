@@ -14,8 +14,6 @@
 
 .container-nav {
   display: flex;
-
-
 }
 
 .logo {
@@ -117,8 +115,6 @@
   }
 }
 
-
-
 .btn-search {
   width: 20px;
   height: 20px;
@@ -173,12 +169,12 @@
   }
 }
 
-
 .mob-input {
   display: inline-block;
   font-family: 'Poppins', sans-serif;
   font-size: 14px;
   line-height: 1.71;
+  height: 31px;
   width: 170px;
   min-height: 30px;
   border-radius: 20px;
