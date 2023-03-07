@@ -6,11 +6,11 @@ const itemListRef = document.querySelector('.item-list');
 itemListRef.addEventListener('click', getFavoriteId);
 
 function getFavoriteId(evt) {
-    if(evt.target.classList.contains("js-tartet-favorite")){
-      const id=evt.target.closest(".js-card-item").dataset.targetId
-      saveFavotiteNew(id)
-      return
-    }
+    // if(evt.target.classList.contains("js-tartet-favorite")){
+    //   const id=evt.target.closest(".js-card-item").dataset.targetId
+    //   saveFavotiteNew(id)
+    //   return
+    // }
 
     if (evt.target.classList.contains('js-is-favorite')) {
       const id = evt.target.closest('.js-card-item').dataset.targetId;
@@ -71,7 +71,7 @@ function getFavoriteId(evt) {
     const ReadNews=JSON.parse(localStorage.getItem(STORAGE_KEY_READ))
     
 
-    const favoriteNew =ReadNews.find(item=>item.id===id)
+    const favoriteNew =favoriteNews.find(item=>item.id===id)
     console.log("🚀 ~ saveFavotiteNew ~ favoriteNew:", favoriteNew)
 
     
