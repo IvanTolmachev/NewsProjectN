@@ -44,7 +44,8 @@ export function createMarkupFavorite() {
       </li>`;
     })
     .join("");
-    favoriteList.insertAdjacentHTML("beforeend", markup);
+    // favoriteList.insertAdjacentHTML("beforeend", markup);
+    favoriteList.innerHTML= markup
 }
 
 createMarkupFavorite();
