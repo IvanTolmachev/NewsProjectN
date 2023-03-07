@@ -31,6 +31,7 @@ function hideModals(evt) {
   }
   if (modalEl.classList.contains('is-shown')) {
     modalEl.classList.remove('is-shown');
+    btnEl.classList.remove('btn-is-active');
   }
 }
 
