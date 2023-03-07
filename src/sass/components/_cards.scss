@@ -1,6 +1,7 @@
 .card {
   position: relative;
   width: 100%;
+  // padding-bottom: 20px;
   // height: 630px;
   border-radius: 4px;
   transition: box-shadow $durationFunction $timingFunction,
@@ -131,7 +132,7 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 19px;
-  margin-bottom: 20px;
+  margin-bottom: 42px;
   display: block;
   min-height: 57px;
   padding: 0 4px 0 4px;

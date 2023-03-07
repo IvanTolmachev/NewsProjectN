@@ -57,10 +57,9 @@ function createMarkup(arr) {
               ? lead_paragraph.slice(0, 113) + '...'
               : lead_paragraph
           }</p>
-          <div class="wrap-info">
             <p class="wrap-info__time">${pub_date}</p>
             <a href="${web_url}" target="_blank" rel="noreferrer noopener" class="wrap-info__link">Read more</a>
-          </div>
+            <p class="wrap-image__active visually-hidden">Already read</p>
         </li>
           `;
       }
