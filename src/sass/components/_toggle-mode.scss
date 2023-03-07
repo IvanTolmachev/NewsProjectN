@@ -331,6 +331,13 @@ html.dark .toggle-label.light {
     fill: var(--search-btn-fill);
 }
 
+.err__text {
+    color: var(--error-text);
+}
+
+.pg-link--border {
+    color: var(--pagination-dot-color);
+}
 
 
 
@@ -362,6 +369,9 @@ html.light {
     --calendar-text-color: #11132166;
     --calendar-btn-color: #a2a2a2;
     --header-bg: #F4F4F4;
+    --error-text: #111321;
+    --pagination-dot-color: #111321;
+
 }
 
 
@@ -388,4 +398,6 @@ html.dark {
     --calendar-text-color: #f4f4f466;
     --calendar-btn-color: #f4f4f4;
     --header-bg: #2E2E2E;
+    --error-text: #F4F4F4;
+    --pagination-dot-color: #F4F4F4;
 }
