@@ -77,7 +77,6 @@ function errorWeekWeatherCallback() {
         const weatherDay = weatherData[i];
 
         const date = new Date(weatherDay.dt * 1000);
-        const dayOfMonth = date.getDate();
         const dayOfWeek = daysOfWeek[date.getDay()];
 
         const iconCode = weatherDay.weather[0].icon;
@@ -91,7 +90,7 @@ function errorWeekWeatherCallback() {
 
         const weatherDate = document.createElement('p');
         weatherDate.classList.add('weather__week-date');
-        weatherDate.textContent = `${dayOfMonth} ${dayOfWeek}`;
+        weatherDate.textContent = dayOfWeek;
 
         const weatherIcon = document.createElement('img');
         weatherIcon.classList.add('weather__week-icon');
@@ -141,7 +140,6 @@ function getWeatherForWeek(position) {
         const weatherDay = weatherData[i];
 
         const date = new Date(weatherDay.dt * 1000);
-        const dayOfMonth = date.getDate();
         const dayOfWeek = daysOfWeek[date.getDay()];
 
         const iconCode = weatherDay.weather[0].icon;
@@ -155,7 +153,7 @@ function getWeatherForWeek(position) {
 
         const weatherDate = document.createElement('p');
         weatherDate.classList.add('weather__week-date');
-        weatherDate.textContent = `${dayOfMonth} ${dayOfWeek}`;
+        weatherDate.textContent = dayOfWeek;
 
         const weatherIcon = document.createElement('img');
         weatherIcon.classList.add('weather__week-icon');
