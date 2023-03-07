@@ -9,17 +9,18 @@ const itemListRef = document.querySelector('.item-list');
 
 
 const STORAGE_KEY = 'readNews';
-
+const STORAGE_KEY_FAVORITE = 'favoriteNews';
 // ++++++++++++++++++++++++
 
 const storageJson = localStorage.getItem(STORAGE_KEY);
     console.log("🚀 ~ createMarkupRead ~ storageJson:", storageJson)
     const storageData = JSON.parse(storageJson); 
     console.log("🚀 ~ createMarkupRead ~ storageData:", storageData); 
-
+const favoriteNews = JSON.parse(localStorage.getItem(STORAGE_KEY_FAVORITE));
+   console.log("🚀 ~ Boolean(favoriteNews)", Boolean(favoriteNews))
    
 
-    function createMarkupRead(arr) {
+export function createMarkupRead(arr) {
       if (!Boolean(storageData)) {
         errorRequest.classList.remove('visually-hidden'); 
         return; 
@@ -33,8 +34,8 @@ const storageJson = localStorage.getItem(STORAGE_KEY);
         // checkIsNewFavorite(id)
         // console.log("🚀 ~ storageNews:", storageNews)
         if (
-          Boolean(storageData) &&
-          storageData.some(el => Number(el.id) === Number(id))
+          Boolean(favoriteNews) &&
+          favoriteNews.some(el => Number(el.id) === Number(id))
         ) {
           // console.log(" Перевірка! Есть favorite новости")
           return `<li class="card js-card-item" data-target-id=${id}>
