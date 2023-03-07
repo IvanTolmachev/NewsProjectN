@@ -7,8 +7,8 @@ export async function getCards() {
   const requestData = await axios.get(URL);
   return requestData;
 }
-const STORAGE_KEY = 'favoriteNews';
-const storageNews = JSON.parse(localStorage.getItem(STORAGE_KEY));
+const STORAGE_KEY_FAVORITE = 'favoriteNews';
+const favoriteNews = JSON.parse(localStorage.getItem(STORAGE_KEY_FAVORITE));
 const iconHeart = new URL('../images/icon.svg', import.meta.url);
 
 const refs = {
@@ -21,8 +21,9 @@ export async function createCards() {
     const response = await getCards();
     const data = response.data.results;
     // console.log(data);
-    createMarkup(data);
     saveApiData(data);
+    const markup=createMarkup(savedApiData);
+    refs.gallery.insertAdjacentHTML('beforeend', markup);
   } catch (error) {
     console.error('Error from backend:', error);
   }
@@ -32,15 +33,15 @@ createCards();
 
 export function createMarkup(arr) {
   const markup = arr
-    .map(({ id, url, title, section, abstract, published_date, media }) => {
-      let imgUrl = media.map(media => media['media-metadata'][2].url);
-      let newDateStr = published_date;
+    .map(({ id, url, title, section, abstract, newDateStr, imgUrl }) => {
+      // let imgUrl = media.map(media => media['media-metadata'][2].url);
+      // let newDateStr = published_date;
       //Проверка есть ли эта новость в Favorite
       // checkIsNewFavorite(id)
-      // console.log("🚀 ~ storageNews:", storageNews)
+      // console.log("🚀 ~ favoriteNews:", favoriteNews)
       if (
-        Boolean(storageNews) &&
-        storageNews.some(el => Number(el.id) === Number(id))
+        Boolean(favoriteNews) &&
+        favoriteNews.some(el => Number(el.id) === Number(id))
       ) {
         // console.log(" Перевірка! Есть favorite новости")
         return `<li class="card js-card-item" data-target-id=${id}>
@@ -64,7 +65,7 @@ export function createMarkup(arr) {
               abstract.length > 112 ? abstract.slice(0, 113) + '...' : abstract
             }</p>
                 <p class="wrap-info__time">${newDateStr}</p>
-                <a href="${url}" class="wrap-info__link">Read more</a>
+                <a href="${url}" class="wrap-info__link" target="_blank" rel="noreferrer noopener>Read more</a>
                 <p class="wrap-image__active visually-hidden">Already read</p>
         </li>`;
       }
@@ -96,13 +97,16 @@ export function createMarkup(arr) {
      `;
     })
     .join('');
-  refs.gallery.insertAdjacentHTML('beforeend', markup);
+
+    return markup
+  // refs.gallery.insertAdjacentHTML('beforeend', markup);
 }
 function saveApiData(arrey) {
   arrey.map(({ id, url, title, section, abstract, published_date, media }) => {
     const item = {};
     let imgUrl = media.map(media => media['media-metadata'][2].url);
-    let newDateStr = published_date.replace(/-/g, '/');
+    let newDateStr = published_date
+    //.replace(/-/g, '/');
     item['id'] = `${id}`;
     item['url'] = `${url}`;
     item['title'] = `${title}`;

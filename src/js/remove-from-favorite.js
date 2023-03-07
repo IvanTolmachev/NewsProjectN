@@ -1,4 +1,4 @@
-const STORAGE_KEY = 'favoriteNews';
+const STORAGE_KEY_FAVORITE = 'favoriteNews';
 const favoriteList = document.querySelector('.gallery');
 const errorRequest = document.querySelector(".errorRequest");
 
@@ -28,16 +28,16 @@ function removeFromFavorite(id) {
     `li[data-target-id='${id}']`
   );
 
-  let storageNews = JSON.parse(localStorage.getItem(STORAGE_KEY));
+  let storageNews = JSON.parse(localStorage.getItem(STORAGE_KEY_FAVORITE));
   const removedNewIndex = storageNews.findIndex(
     item => Number(item.id) === Number(id)
   );
   storageNews.splice(removedNewIndex, 1);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(storageNews));
+  localStorage.setItem(STORAGE_KEY_FAVORITE, JSON.stringify(storageNews));
 //Якщо не має улюблених новин, очищаємо localStorage
-  storageNews=JSON.parse(localStorage.getItem(STORAGE_KEY))
+  storageNews=JSON.parse(localStorage.getItem(STORAGE_KEY_FAVORITE))
     if(storageNews.length===0){
-      localStorage.removeItem(STORAGE_KEY)
+      localStorage.removeItem(STORAGE_KEY_FAVORITE)
       errorRequest.classList.remove('visually-hidden')
     }
 

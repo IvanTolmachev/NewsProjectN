@@ -1,10 +1,11 @@
-import { iconHeart } from "./createMarkupFavorite";
-import {createMarkupFavorite} from './createMarkupFavorite'
-const STORAGE_KEY = 'favoriteNews';
+iconHeart = new URL('../images/icon.svg', import.meta.url);
+import { createMarkupRead  } from "./createMarkupRead";
+const STORAGE_KEY = 'readNews';
 const storageNews = JSON.parse(localStorage.getItem(STORAGE_KEY));
-const favoriteList = document.querySelector(".gallery");
+const itemListRef = document.querySelector('.item-list');
 const errorRequest = document.querySelector(".errorRequest");
 const serachForm = document.querySelector('.search-form');
+const dataList = document.querySelector('.dropbtn');
 
 serachForm.addEventListener('submit', onSearch)
 
@@ -13,15 +14,16 @@ function onSearch(evt) {
     const query = evt.currentTarget.elements.searchQuery.value.trim();
     
     if (!Boolean(query)){
-      createMarkupFavorite()
-      errorRequest.classList.add('visually-hidden')
-      return
-    }
+        createMarkupRead(storageNews)
+        errorRequest.classList.add('visually-hidden')
+        dataList.classList.remove('visually-hidden')
+        return
+      }
     let markup = "";
     
   markup = storageNews
     .map(({ id, section, imgUrl, title, abstract, newDateStr, url }) =>{
-      
+        
         if(title.toLowerCase().includes(query.toLowerCase())) {
             return `<li class="card js-card-item" data-target-id=${id}>
             <div class="wrap-image">
@@ -50,10 +52,11 @@ function onSearch(evt) {
         }
         
     }).join('')
+    console.log("🚀 ~ onSearch ~ !Boolean(query):", !Boolean(query))
+    console.log("🚀 ~ onSearch ~ !Boolean(markup):", !Boolean(markup))
     if (!Boolean(markup)) {
         errorRequest.classList.remove('visually-hidden')
-        
+        dataList.classList.add('visually-hidden')
       }
-    favoriteList.innerHTML= markup;
+    itemListRef.innerHTML= markup;
 }
-

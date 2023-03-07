@@ -1,11 +1,11 @@
 import { savedApiData } from './cards'
 
-export const STORAGE_KEY = 'favoriteNews';
+const STORAGE_KEY = 'favoriteNews';
 const gallery=document.querySelector('.gallery') 
 
 gallery.addEventListener("click", getFavoriteId);
 
-export default function getFavoriteId(evt) {
+export function getFavoriteId(evt) {
     
     if(evt.target.classList.contains("js-tartet-favorite")){
       const id=evt.target.closest(".js-card-item").dataset.targetId
@@ -76,7 +76,7 @@ function saveFavotiteNew(id) {
     favoriteSvg.classList.replace("fill-heard", "wrap-image__icon")
   }
 
-  function changeFavoriteBtnText(ref) {
+  export function changeFavoriteBtnText(ref) {
     ref.textContent =
     ref.textContent === "Add to favorite" ? "Remove from favorite" : "Add to favorite";
   }
