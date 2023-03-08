@@ -7,7 +7,7 @@ export const iconHeart = new URL('../images/icon.svg', import.meta.url);
 const STORAGE_KEY_FAVORITE = 'favoriteNews';
 const storageNews = JSON.parse(localStorage.getItem(STORAGE_KEY_FAVORITE));
 
-export function createMarkupFavorite() {
+function createMarkupFavorite() {
   // console.log("🚀 ~ storageNews:", storageNews)
 
   if (!Boolean(storageNews)) {
@@ -17,7 +17,7 @@ export function createMarkupFavorite() {
 
   let markup = '';
 
-  markup = arr
+  markup = storageNews
     .map(({ id, section, imgUrl, title, abstract, newDateStr, url }) => {
       return `<li class="card js-card-item" data-target-id=${id}>
         <div class="wrap-image">
@@ -49,5 +49,10 @@ export function createMarkupFavorite() {
   favoriteList.innerHTML = markup;
   checkRead(READ_NEWS);
 }
-
 createMarkupFavorite();
+favoriteList.addEventListener('click', e => {
+  arrLastData.length = 0;
+  arrLastData.push(...storageNews);
+
+  addRead(e);
+});
