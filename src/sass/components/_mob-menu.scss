@@ -77,7 +77,7 @@
   width: 100vw;
   height: 100vh;
   transform: translateY(0);
-  z-index: 1;
+  z-index: 2;
   // opacity: 1;
   // transition: opacity .4s linear,transform .5s ease-in-out;
 }
@@ -99,13 +99,24 @@
   background-color: $hoverColor;
 }
 
+.mobile__menu-item.active .mobile__menu-icon {
+  stroke: #f4f4f4;
+  // stroke-width: 1.5px;
+}
+
+.mobile__menu-item.active .mobile__menu-icon__arrow{
+  stroke: #f4f4f4;
+}
+
 .mobile__menu-icon {
   margin-left: 16px;
+  stroke: none;
 }
 
 .mobile__menu-icon__arrow {
   margin-left: auto;
   margin-right: 10px;
+  fill: none;
 }
 
 .mobile__menu-link {
@@ -131,15 +142,3 @@
   top: 50%;
   transform: translate(-50%, 0%) rotate(-45deg);
 }
-
-
-
-// .logo {
-//   z-index: 2;
-//   font-family: $primaryFontManrope;
-//   font-style: normal;
-//   font-weight: 700;
-//   font-size: 24px;
-//   line-height: 33px;
-//   color: $primaryTextColor;
-// }

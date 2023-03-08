@@ -1,5 +1,6 @@
 
 
+// ---------------------------------------------------------
 const menuBtn = document.querySelector('.mobile__menu-btn');
 const menu = document.querySelector('.mobile__menu');
 const bodyScroll = document.querySelector('body');
