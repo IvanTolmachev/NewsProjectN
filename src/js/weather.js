@@ -81,7 +81,7 @@ function errorWeekWeatherCallback() {
         const dayOfWeek = daysOfWeek[date.getDay()];
 
         const iconCode = weatherDay.weather[0].icon;
-        const iconUrl = `http://openweathermap.org/img/w/${iconCode}.png`;
+        const iconUrl = wIcon[`${iconCode}`];
 
         const tempDay = Math.round(weatherDay.main.temp);
         const tempNight = Math.round(weatherData[i + 4].main.temp);
@@ -95,10 +95,7 @@ function errorWeekWeatherCallback() {
 
         const weatherIcon = document.createElement('img');
         weatherIcon.classList.add('weather__week-icon');
-        weatherIcon.setAttribute(
-          'src',
-          `http://openweathermap.org/img/w/${iconCode}.png`
-        );
+        weatherIcon.setAttribute('src', iconUrl);
         weatherIcon.setAttribute('alt', 'Weather icon');
 
         const weatherTempThumb = document.createElement('div');
@@ -145,7 +142,7 @@ function getWeatherForWeek(position) {
         const dayOfWeek = daysOfWeek[date.getDay()];
 
         const iconCode = weatherDay.weather[0].icon;
-        const iconUrl = `http://openweathermap.org/img/w/${iconCode}.png`;
+        const iconUrl = wIcon[`${iconCode}`];
 
         const tempDay = Math.round(weatherDay.main.temp);
         const tempNight = Math.round(weatherData[i + 4].main.temp);
@@ -159,10 +156,7 @@ function getWeatherForWeek(position) {
 
         const weatherIcon = document.createElement('img');
         weatherIcon.classList.add('weather__week-icon');
-        weatherIcon.setAttribute(
-          'src',
-          `http://openweathermap.org/img/w/${iconCode}.png`
-        );
+        weatherIcon.setAttribute('src', iconUrl);
         weatherIcon.setAttribute('alt', 'Weather icon');
 
         const weatherTempThumb = document.createElement('div');
