@@ -61,7 +61,7 @@
   visibility: hidden;
   transform: translateY(-100%);
   transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out,
-  transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .mobile__menu-list {
@@ -98,6 +98,12 @@
 }
 
 .mobile__menu-link {
+  font-family: $primaryFontManrope;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  color: var(--header-text-color);
   display: block;
   width: 100%;
 }
@@ -107,16 +113,16 @@
 }
 
 .mobile__menu-item.active .mobile__menu-link {
-  color: #f4f4f4;
+  color: $TextColor;
 }
 
 .mobile__menu-item.active .mobile__menu-icon {
-  stroke: #f4f4f4;
+  stroke: $TextColor;
   // stroke-width: 1.5px;
 }
 
 .mobile__menu-item.active .mobile__menu-icon__arrow {
-  stroke: #f4f4f4;
+  stroke: $TextColor;
 }
 
 .mobile__menu-icon {
@@ -130,14 +136,9 @@
   fill: none;
 }
 
-.mobile__menu-link {
-  font-family: $primaryFontManrope;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 22px;
-  color: $primaryTextColor;
-}
+// .mobile__menu-link {
+
+// }
 
 /* Меняем гамбургер иконку, когда меню открыто */
 .mobile__menu-btn.isMenuOpen span:nth-of-type(1) {
