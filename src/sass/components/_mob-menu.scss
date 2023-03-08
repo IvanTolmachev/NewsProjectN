@@ -38,7 +38,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: $primaryTextColor;
+  background-color: var(--header-text-color);
   transition: all 0.5s;
 }
 
@@ -79,7 +79,7 @@
 }
 
 .isMenuOpen {
-  background-color: $primaryBgColor;
+  background-color: var(--color-bg);
 }
 
 .mobile__menu-item {

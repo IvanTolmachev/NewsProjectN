@@ -313,6 +313,10 @@ html.dark .toggle-label.light {
   color: var(--pagination-dot-color);
 }
 
+.header {
+  background-color: var(--color-bg);
+}
+
 .card:hover,
 .card:focus {
   box-shadow: 2px 6px 6px var(--shadow-card-a), 2px 8px 8px var(--shadow-card-b),
