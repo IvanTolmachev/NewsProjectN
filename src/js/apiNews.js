@@ -24,11 +24,10 @@ export const arrLastData = [];
 // }
 
 let preLoader = document.querySelector('.preloader');
-
 preLoader.classList.add('loaded');
+
 export async function getData(url, timeout = 5000) {
   preLoader.classList.remove('loaded');
-
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), timeout);
   const response = await axios.get(url, {
@@ -68,9 +67,6 @@ export async function makeData(url) {
     }
     return Data.data.results;
   } catch (error) {
-    // const msg = error.name === 'CanceledError' ? 'Get timeout' : error;
-    // console.log(msg);
-    // Notify.failure(`Oops ${msg}`);
     console.log(error);
     const sectionHome = document.querySelector('.section_home');
     const errorRequest = document.querySelector('.errorRequest');
@@ -155,33 +151,6 @@ const iconHeart = new URL('../images/icon.svg', import.meta.url);
 export function createCard(item) {
   const { id, url, title, section, abstract, imgUrl, newDateStr } = item;
 
-  // return `
-  //      <li class="card js-card-item" data-target-id="${id}">
-  //       <div class="wrap-image">
-  //         <img
-  //           src="${imgUrl}"
-  //           alt="photo"
-  //          class="wrap-image__photo"
-  //          loading="lazy"
-  //         />
-  //         <p class="wrap-image__text">${section}</p>
-  //         <button type="button" class="wrap-image__btn js-tartet-favorite">
-  //         <span class="wrap-image__btn-text js-tartet-favorite">Add to favorite</span>
-  //          <svg class="wrap-image__icon js-tartet-favorite" width="16" height="16">
-  //               <use href ='${iconHeart}#icon-heart' class="js-tartet-favorite"></use>
-  //             </svg></button>
-  //       </div>
-  //       <h2 class="card__title">${title}</h2>
-  //       <p class="card__description">${
-  //         abstract.length > 112 ? abstract.slice(0, 113) + '...' : abstract
-  //       }</p>
-  //       <div class="wrap-info">
-  //         <p class="wrap-info__time">${newDateStr}</p>
-  //         <a href="${url}" class="wrap-info__link">Read more</a>
-  //       </div>
-  //     </li>
-  //       `
-  //=============================
   return `
          <li class="card  js-card-item" data-target-id="${id}">
       <div class="wrap-image">

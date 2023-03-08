@@ -1,6 +1,5 @@
-// export const API_KEY = 'VPd8ESOXXGRNi6SUHc4QYJMXdqmRVK3K';
 import { KEY } from './api-key';
-//export const API_KEY = '7p9CJylKpjl89QHHczOefIddo1AI47yw';
+
 const API_KEY = KEY;
 export let perPage = 8; //не більше 10
 export const maxHits = 500;
