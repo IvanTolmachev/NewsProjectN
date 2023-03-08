@@ -1,18 +1,22 @@
+.burger-wraper {
+  // display: none;
+}
+
 .mobile__menu-wraper {
-  display: flex;
+  display: none;
   align-items: center;
   width: 100%;
 }
 
-.logo {
-  z-index: 2;
-  font-family: $primaryFontManrope;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 33px;
-  color: $primaryTextColor;
-}
+// .logo {
+//   z-index: 2;
+//   font-family: $primaryFontManrope;
+//   font-style: normal;
+//   font-weight: 700;
+//   font-size: 24px;
+//   line-height: 33px;
+//   color: $primaryTextColor;
+// }
 
 .mobile__menu-btn {
   display: block;
