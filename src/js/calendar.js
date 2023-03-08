@@ -153,7 +153,6 @@ function renderBtns(dayBtns) {
         currYear = date.getFullYear();
         currMonth = date.getMonth();
         renderCalendar()
-        renderCurrentDays()
       }
 
       // onTodayBtnClick();
@@ -213,7 +212,7 @@ function renderCurrentDays() {
   let rendCurrentDays = daysTag.childNodes;
 
   rendCurrentDays.forEach(el => {
-    if (Number(el.textContent) === Number(saveDate)) {
+    if (el.textContent === saveDate) {
       el.classList.add('active');
     }
   });
