@@ -61,6 +61,7 @@ export async function makeSectionNews(url) {
     sectionHome.classList.remove('visually-hidden');
     checkRead(READ_NEWS);
     checkFavorites(FAIVORIT_NEWS);
+    valuePage.curPage = 1;
   } catch (error) {
     console.log(error);
   }
@@ -147,7 +148,6 @@ categories.addEventListener('click', e => {
         sectionNews.params.limit = maxHits;
         const news = await makeData(sectionNews);
         valuePage.totalPage = Math.floor(news.length / perPage);
-        valuePage.curPage = 1;
         sectionNews.params.limit = perPage;
 
         makePaginationsBtnMurkUp();

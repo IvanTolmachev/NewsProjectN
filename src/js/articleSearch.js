@@ -30,6 +30,7 @@ export async function makeArticleSectionNews(url) {
     gallery.prepend(weather);
     errorRequest.classList.add('visually-hidden');
     sectionHome.classList.remove('visually-hidden');
+    valuePage.curPage = 1;
   } catch (error) {}
 }
 
@@ -58,7 +59,6 @@ searhForm.addEventListener('submit', e => {
   }
 
   articleSearchNews.type = 'SEARCHE';
-  valuePage.curPage = 1;
   saveLS(LS_KEY, articleSearchNews);
   makeArticleSectionNews(articleSearchNews);
 });
