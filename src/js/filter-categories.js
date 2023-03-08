@@ -1,5 +1,4 @@
 import debounce from 'lodash.debounce';
-//import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import {
   makeData,
   createCard,
@@ -9,12 +8,12 @@ import {
 import { sectionList, sectionNews, perPage, maxHits } from './apiUrl';
 import { saveLS, loadLS } from './lStorage';
 import { valuePage, makePaginationsBtnMurkUp } from './pagination';
-//import { savedApiData } from './favorite';
 import { savedApiData } from './cards';
-import { addRead, checkFavorites } from './apiCard';
+import { addRead, checkFavorites, checkRead } from './apiCard';
 
 const LS_KEY = 'lastSearch';
 const FAIVORIT_NEWS = 'favoriteNews';
+const READ_NEWS = 'readNews';
 
 const gallery = document.querySelector('.gallery');
 const categories = document.querySelector('.categories');
@@ -40,10 +39,7 @@ async function makeSection(url) {
     const Data = await makeData(url);
     listShow.innerHTML = Data.map(rendeSection).join('');
     restart();
-  } catch (error) {
-    // const msg = error.name === 'CanceledError' ? 'Get timeout' : error;
-    // Notify.failure(`Oops ${msg}`);
-  }
+  } catch (error) {}
 }
 
 export async function makeSectionNews(url) {
@@ -60,11 +56,14 @@ export async function makeSectionNews(url) {
     savedApiData.push(...arrLastData);
     gallery.innerHTML = arrLastData.map(createCard).join('');
     gallery.prepend(weather);
+
     errorRequest.classList.add('visually-hidden');
     sectionHome.classList.remove('visually-hidden');
-    checkFavorites(FAIVORIT_NEWS);
     checkRead(READ_NEWS);
-  } catch (error) {}
+    checkFavorites(FAIVORIT_NEWS);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 //?===== function  render
@@ -114,22 +113,11 @@ function sortSections(count) {
   listHide.append(...elementHide);
 }
 
-function hideNonAcctiv(e) {
-  // if (filterItems.classList.contains('filter-show')) {
-  categoriesIcon.classList.remove('rotate');
-  filterItems.classList.remove('filter-show');
-  // }
-}
-
 //!=== listener
 
 showHideCategoriesBtn.addEventListener('click', () => {
   filterItems.classList.toggle('filter-show');
   categoriesIcon.classList.toggle('rotate');
-
-  // window.addEventListener('click', hideNonAcctiv, {
-  //   once: false,
-  // });
 });
 
 calendarBtn.addEventListener('click', () => {
@@ -159,7 +147,9 @@ categories.addEventListener('click', e => {
         sectionNews.params.limit = maxHits;
         const news = await makeData(sectionNews);
         valuePage.totalPage = Math.floor(news.length / perPage);
+        valuePage.curPage = 1;
         sectionNews.params.limit = perPage;
+
         makePaginationsBtnMurkUp();
       } catch (error) {
         console.log(error);
