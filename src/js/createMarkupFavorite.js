@@ -7,7 +7,7 @@ export const iconHeart = new URL('../images/icon.svg', import.meta.url);
 const STORAGE_KEY_FAVORITE = 'favoriteNews';
 const storageNews = JSON.parse(localStorage.getItem(STORAGE_KEY_FAVORITE));
 
-function createMarkupFavorite() {
+export function createMarkupFavorite() {
   // console.log("🚀 ~ storageNews:", storageNews)
 
   if (!Boolean(storageNews)) {
