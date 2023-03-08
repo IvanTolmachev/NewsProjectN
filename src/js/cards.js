@@ -1,6 +1,8 @@
 import axios from 'axios';
 // const API_KEY = 'VPd8ESOXXGRNi6SUHc4QYJMXdqmRVK3K';
 import { KEY } from './api-key';
+import {checkFavorites} from './is-new-favorite'
+
 
 export async function getCards() {
   const URL = `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=${KEY}`;
@@ -24,6 +26,7 @@ export async function createCards() {
     saveApiData(data);
     const markup = createMarkup(savedApiData);
     refs.gallery.insertAdjacentHTML('beforeend', markup);
+    checkFavorites(STORAGE_KEY_FAVORITE)
   } catch (error) {
     console.error('Error from backend:', error);
   }
@@ -34,40 +37,6 @@ createCards();
 export function createMarkup(arr) {
   const markup = arr
     .map(({ id, url, title, section, abstract, newDateStr, imgUrl }) => {
-      // let imgUrl = media.map(media => media['media-metadata'][2].url);
-      // let newDateStr = published_date;
-      //Проверка есть ли эта новость в Favorite
-      // checkIsNewFavorite(id)
-      // console.log("🚀 ~ favoriteNews:", favoriteNews)
-      if (Boolean(favoriteNews) && favoriteNews.find(el => el.id === id)) {
-        // console.log(" Перевірка! Есть favorite новости")
-        return `<li class="card js-card-item" data-target-id=${id}>
-        <div class="wrap-image">
-          <img
-            src="${imgUrl}"
-            alt="photo"
-            class="wrap-image__photo"
-          />
-          <p class="wrap-image__text">${section}</p>
-          <button type="button"  class="wrap-image__btn js-is-favorite">
-          <span class="wrap-image__btn-text js-is-favorite ">Remove from favorite</span>
-            <svg class="js-is-favorite fill-heard" width="16" height="16">
-                <use class="js-is-favorite" href ='${iconHeart}#icon-heart'></use>
-            </svg>
-          </button>
-        
-        </div>
-            <h2 class="card__title">${title}</h2>
-            <p class="card__description">${
-              abstract.length > 112 ? abstract.slice(0, 113) + '...' : abstract
-            }</p>
-                <p class="wrap-info__time">${newDateStr}</p>
-                <a href="${url}" class="wrap-info__link" target="_blank" rel="noreferrer noopener>Read more</a>
-                <p class="wrap-image__active visually-hidden">Already read</p>
-        </li>`;
-      }
-      //
-      else
         return `
          <li class="card  js-card-item" data-target-id="${id}">
       <div class="wrap-image">
@@ -78,7 +47,7 @@ export function createMarkup(arr) {
           />
           <p class="wrap-image__text">${section}</p>
           <button type="button" class="wrap-image__btn js-tartet-favorite">
-          <span class="wrap-image__btn-text js-tartet-favorite">Add to favorite</span>
+          <span class="wrap-image__btn-text js-tartet-favorite"'>Add to favorite</span>
            <svg class="wrap-image__icon js-tartet-favorite" width="16" height="16">
                 <use href ='${iconHeart}#icon-heart' class="js-tartet-favorite"></use>
               </svg></button>
@@ -115,3 +84,5 @@ function saveApiData(arrey) {
   });
   // console.log('savedApiData', savedApiData);
 }
+
+
