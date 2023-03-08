@@ -103,14 +103,14 @@ export function createMarkupRead(arr) {
   itemListRef.insertAdjacentHTML('beforeend', markup);
 }
 
-createMarkupRead(storageData);
+//createMarkupRead(storageData);
 
 btnMoreRead.addEventListener('click', function () {
   itemListRef.classList.toggle('show');
   dropIcon.classList.toggle('rotate');
 });
 
-readDateCard(storageData);
+//readDateCard(storageData);
 
 function readDateCard(items) {
   console.log(items);

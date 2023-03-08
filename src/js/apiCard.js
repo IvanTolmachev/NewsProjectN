@@ -1,5 +1,6 @@
 import { saveLS, loadLS, removeLS } from './lStorage';
 import { arrLastData } from './apiNews';
+//import { savedApiData } from './cards';
 
 const FAIVORIT_NEWS = 'favoriteNews';
 const READ_NEWS = 'readNews';
@@ -39,9 +40,9 @@ export function togleFaforite(e) {
     const newsId = itemNews.dataset.targetId;
 
     let favoritNews = loadLS(FAIVORIT_NEWS);
-    console.log(arrLastData);
+    // console.log(arrLastData);
     let targetNews = arrLastData.find(i => i.id === newsId);
-    console.log(targetNews);
+    // console.log(targetNews);
     if (!favoritNews) {
       favoritNews = [];
       favoritNews.push(targetNews);
@@ -66,11 +67,15 @@ export function togleFaforite(e) {
       itemNews.classList.remove('inFavorite');
       favoriteText.textContent = 'Add to favorite';
     }
+    // checkFavorites(FAIVORIT_NEWS);
   }
 }
 
 export function addRead(e) {
   e.preventDefault();
+  // const cardNews = Array.from(document.querySelectorAll('.card'));
+  //const arrLastData = [...cardNews];
+  //console.log(arrLastData);
   if (e.target.classList.contains('wrap-info__link')) {
     const itemNews = e.target.closest('.js-card-item');
     //  const favoriteText = itemNews.querySelector('#favorit-txt');
@@ -78,11 +83,21 @@ export function addRead(e) {
     itemNews.classList.add('inRead');
     let readNews = loadLS(READ_NEWS);
     const targetNews = arrLastData.find(i => i.id === newsId);
+    // console.log(targetNews);
+    // console.log(readNews);
+    // console.log(newsId);
+    //'03/03/2023';
+
     const readDate = new Date().toLocaleDateString('en-US', {
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
     });
+
+    // console.log(readDate);
+    // console.log(targetNews.readDate);
     targetNews.readDate = readDate;
 
     if (!readNews) {
@@ -102,5 +117,20 @@ export function addRead(e) {
       saveLS(READ_NEWS, readNews);
       if (!readNews.length) removeLS(READ_NEWS);
     }
+  }
+}
+
+export function checkRead(key) {
+  let readNews = loadLS(key);
+  const cardNews = Array.from(document.querySelectorAll('.card'));
+  // console.log(cardNews);
+  if (readNews) {
+    const allId = readNews.map(i => i.id);
+    cardNews.forEach(i => {
+      if (allId.includes(i.dataset.targetId)) {
+        i.classList.add('inRead');
+        // const favoriteText = i.querySelector('#favorit-txt');
+      }
+    });
   }
 }

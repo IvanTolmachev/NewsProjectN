@@ -29,7 +29,7 @@ export function getFavoriteId(evt) {
     // console.log(targetF);
     // console.log(targetR);
     if (targetF || targetR) {
-      console.log('remove');
+      //console.log('remove');
       removeFromFavorite(id);
       return;
     }

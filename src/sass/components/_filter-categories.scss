@@ -329,8 +329,12 @@ $mobile: 480px;
   }
 }
 
-// .inFavorite .wrap-image__icon {
-//   display: block;
-//   fill: $hoverColor;
-//   stroke: $hoverColor;
-// }
+.inFavorite .wrap-image__icon {
+  display: block;
+  fill: $hoverColor;
+  stroke: $hoverColor;
+}
+
+.inRead {
+  opacity: 0.4;
+}
