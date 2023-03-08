@@ -1,8 +1,30 @@
-<div class="container favorite">
-  <include src="./partials/pre-loader.html"></include>
+<div class="container">
+  <!--       
+      <button class="dropbtn calendar-btn-span">
+          <span class="btn-span">12/12/12</span>
+            <svg class="icon-down-read-pg" width="15" height="9">
+                <use href="/src/icon.svg#icon-arrow-down"></use>
+              </svg>
+      </button>
+  
+  <ul class="item-list" hidden></ul>       
+         <hr> -->
+
+  <!-- Пробний -->
+
+  <ul class="dropbtn calendar-btn-span">
+    <li>
+      <span class="btn-span">12/12/12</span>
+      <svg class="icon-down-read-pg" width="15" height="9">
+        <use href="/src/icon.svg#icon-arrow-down"></use>
+      </svg>
+    </li>
+  </ul>
+
+  <ul class="item-list" hidden></ul>
+  <hr />
   <div class="errorRequest visually-hidden">
     <p class="err__text">We haven’t found news from this category</p>
-
     <picture>
       <source
         srcset="
@@ -33,5 +55,4 @@
       />
     </picture>
   </div>
-  <ul class="gallery"></ul>
 </div>

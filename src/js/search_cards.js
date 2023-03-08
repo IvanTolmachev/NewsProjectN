@@ -20,7 +20,7 @@ async function createSearchCards() {
   }
 }
 
-createSearchCards();
+//createSearchCards();
 
 function createMarkup(arr) {
   const markup = arr

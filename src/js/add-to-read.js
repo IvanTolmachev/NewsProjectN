@@ -6,7 +6,7 @@ let readNews = [];
 
 const gallery = document.querySelector('.gallery');
 
-gallery.addEventListener('click', getReadNewsId);
+//gallery.addEventListener('click', getReadNewsId);
 
 export default function getReadNewsId(event) {
   //  console.log("🚀 date:", readDate);

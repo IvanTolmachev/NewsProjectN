@@ -1,12 +1,14 @@
 import axios from 'axios';
 // const API_KEY = 'VPd8ESOXXGRNi6SUHc4QYJMXdqmRVK3K';
 import { KEY } from './api-key';
-
+import { arrLastData } from './apiNews';
+import { checkRead } from './apiCard';
 export async function getCards() {
   const URL = `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=${KEY}`;
   const requestData = await axios.get(URL);
   return requestData;
 }
+const READ_NEWS = 'readNews';
 const STORAGE_KEY_FAVORITE = 'favoriteNews';
 const favoriteNews = JSON.parse(localStorage.getItem(STORAGE_KEY_FAVORITE));
 const iconHeart = new URL('../images/icon.svg', import.meta.url);
@@ -22,8 +24,11 @@ export async function createCards() {
     const data = response.data.results;
     // console.log(data);
     saveApiData(data);
+    arrLastData.length = 0;
+    arrLastData.push(...savedApiData);
     const markup = createMarkup(savedApiData);
     refs.gallery.insertAdjacentHTML('beforeend', markup);
+    checkRead(READ_NEWS);
   } catch (error) {
     console.error('Error from backend:', error);
   }
@@ -63,7 +68,7 @@ export function createMarkup(arr) {
               abstract.length > 112 ? abstract.slice(0, 113) + '...' : abstract
             }</p>
                 <p class="wrap-info__time">${newDateStr}</p>
-                <a href="${url}" class="wrap-info__link" target="_blank" rel="noreferrer noopener>Read more</a>
+                <a href="${url}" class="wrap-info__link" target="_blank" rel="noreferrer noopener">Read more</a>
                 <p class="wrap-image__active visually-hidden">Already read</p>
         </li>`;
       }

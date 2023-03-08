@@ -11,7 +11,7 @@ import { saveLS, loadLS } from './lStorage';
 import { valuePage, makePaginationsBtnMurkUp } from './pagination';
 //import { savedApiData } from './favorite';
 import { savedApiData } from './cards';
-import { checkFavorites } from './apiCard';
+import { addRead, checkFavorites } from './apiCard';
 
 const LS_KEY = 'lastSearch';
 const FAIVORIT_NEWS = 'favoriteNews';
@@ -63,6 +63,7 @@ export async function makeSectionNews(url) {
     errorRequest.classList.add('visually-hidden');
     sectionHome.classList.remove('visually-hidden');
     checkFavorites(FAIVORIT_NEWS);
+    checkRead(READ_NEWS);
   } catch (error) {}
 }
 
@@ -183,3 +184,5 @@ window.addEventListener('click', e => {
     }
   }
 });
+
+gallery.addEventListener('click', addRead);

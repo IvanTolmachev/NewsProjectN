@@ -1,14 +1,16 @@
+import { checkRead, addRead } from './apiCard';
+import { arrLastData } from './apiNews';
+const READ_NEWS = 'readNews';
 const favoriteList = document.querySelector('.gallery');
 const errorRequest = document.querySelector('.errorRequest');
 export const iconHeart = new URL('../images/icon.svg', import.meta.url);
 const STORAGE_KEY_FAVORITE = 'favoriteNews';
-const favoriteNews = JSON.parse(localStorage.getItem(STORAGE_KEY_FAVORITE));
+const storageNews = JSON.parse(localStorage.getItem(STORAGE_KEY_FAVORITE));
 
-createMarkupFavorite(favoriteNews);
+export function createMarkupFavorite() {
+  // console.log("🚀 ~ storageNews:", storageNews)
 
-export function createMarkupFavorite(arr) {
-  
-  if (!Boolean(favoriteNews)) {
+  if (!Boolean(storageNews)) {
     errorRequest.classList.remove('visually-hidden');
     return;
   }
@@ -45,6 +47,7 @@ export function createMarkupFavorite(arr) {
     .join('');
   // favoriteList.insertAdjacentHTML("beforeend", markup);
   favoriteList.innerHTML = markup;
+  checkRead(READ_NEWS);
 }
 
-
+createMarkupFavorite();
