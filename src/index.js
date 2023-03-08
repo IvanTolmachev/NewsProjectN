@@ -12,3 +12,4 @@ import './js/mob-input';
 import './js/articleSearch';
 import './js/weather';
 import './js/mob-menu';
+import './js/pre-loader';
