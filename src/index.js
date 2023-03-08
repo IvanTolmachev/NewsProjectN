@@ -2,7 +2,6 @@ import './js/navigations';
 import './js/cards';
 import './js/calendar';
 import './js/filter-categories';
-import './js/home-page';
 import './js/toggle-mode';
 import './js/add-to-favorite';
 import './js/search_cards';
