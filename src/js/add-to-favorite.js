@@ -5,16 +5,36 @@ const gallery = document.querySelector('.gallery');
 
 gallery.addEventListener('click', getFavoriteId);
 
+// export function getFavoriteId(evt) {
+//   if (evt.target.classList.contains('js-tartet-favorite')) {
+//     const id = evt.target.closest('.js-card-item').dataset.targetId;
+
+//     saveFavotiteNew(id);
+//     return;
+//   }
+//   if (evt.target.classList.contains('js-is-favorite')) {
+//     const id = evt.target.closest('.js-card-item').dataset.targetId;
+//     removeFromFavorite(id);
+//   }
+// }
+
 export function getFavoriteId(evt) {
-  if (evt.target.classList.contains('js-tartet-favorite')) {
-    const id = evt.target.closest('.js-card-item').dataset.targetId;
+  //console.log('====');
+  if (evt.target.classList.contains('favorit-bth')) {
+    // const targetS = evt.target.classList.contains('js-tartet-favorite');
+    const targetR = evt.target.classList.contains('js-is-favorite');
+    const itemNews = evt.target.closest('.js-card-item');
+    const id = itemNews.dataset.targetId;
+    const targetF = itemNews.classList.contains('inFavorite');
+    // console.log(targetF);
+    // console.log(targetR);
+    if (targetF || targetR) {
+      console.log('remove');
+      removeFromFavorite(id);
+      return;
+    }
 
     saveFavotiteNew(id);
-    return;
-  }
-  if (evt.target.classList.contains('js-is-favorite')) {
-    const id = evt.target.closest('.js-card-item').dataset.targetId;
-    removeFromFavorite(id);
   }
 }
 
@@ -35,6 +55,8 @@ function saveFavotiteNew(id) {
   );
   const storageNews = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
+  const targetF = document.querySelector(`li[data-target-id='${id}']`);
+
   if (!storageNews) {
     const firstNew = [];
     firstNew.push(favoriteNew);
@@ -44,7 +66,7 @@ function saveFavotiteNew(id) {
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(storageNews));
   }
-
+  targetF.classList.add('inFavorite');
   favoriteBtnText.classList.replace('js-tartet-favorite', 'js-is-favorite');
   favoriteBtn.classList.replace('js-tartet-favorite', 'js-is-favorite');
   favoriteSvg.classList.replace('js-tartet-favorite', 'js-is-favorite');
@@ -68,7 +90,7 @@ function removeFromFavorite(id) {
   const favoriteUse = document.querySelector(
     `li[data-target-id='${id}'] use.js-is-favorite`
   );
-
+  const targetF = document.querySelector(`li[data-target-id='${id}']`);
   let storageNews = JSON.parse(localStorage.getItem(STORAGE_KEY));
   const removedNewIndex = storageNews.findIndex(item => item.id === id);
   storageNews.splice(removedNewIndex, 1);
@@ -79,6 +101,7 @@ function removeFromFavorite(id) {
     localStorage.removeItem(STORAGE_KEY);
   }
 
+  targetF.classList.remove('inFavorite');
   favoriteBtnText.classList.replace('js-is-favorite', 'js-tartet-favorite');
   favoriteBtn.classList.replace('js-is-favorite', 'js-tartet-favorite');
   favoriteSvg.classList.replace('js-is-favorite', 'js-tartet-favorite');
