@@ -93,6 +93,7 @@
 }
 
 .wrap-image__btn-text {
+  pointer-events: none;
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
@@ -146,11 +147,14 @@
 }
 
 .wrap-image__icon {
+  pointer-events: none;
   display: block;
   fill: transparent;
   stroke: $hoverColor;
 }
-
+.fill-heard {
+  pointer-events: none;
+}
 .wrap-info__time {
   position: absolute;
   bottom: 4px;

@@ -191,8 +191,8 @@ export function createCard(item) {
            class="wrap-image__photo"
           />
           <p class="wrap-image__text">${section}</p>
-          <button type="button" class="wrap-image__btn js-tartet-favorite">
-          <span class="wrap-image__btn-text js-tartet-favorite">Add to favorite</span>
+          <button type="button" class="wrap-image__btn js-tartet-favorite favorit-bth">
+          <span id="favorit-txt" class="wrap-image__btn-text js-tartet-favorite">Add to favorite</span>
            <svg class="wrap-image__icon js-tartet-favorite" width="16" height="16">
                 <use href ='${iconHeart}#icon-heart' class="js-tartet-favorite"></use>
               </svg></button>
