@@ -53,13 +53,15 @@
 /* Меню, которое будет появляться */
 .mobile__menu {
   position: fixed;
-  top: 0;
+  top: -100%;
   left: 0;
   width: 100%;
   height: 100%;
+  // opacity: 0;
+  // transition: opacity .4s linear,transform .7s ease-in-out;
   //  overflow: auto;
-  transform: translateX(-100%);
-  transition: transform 0.5s;
+  transform: translateY(-100%);
+  transition: transform 0.7s;
 }
 
 .mobile__menu-list {
@@ -74,8 +76,10 @@
   top: 0;
   width: 100vw;
   height: 100vh;
-  transform: translateX(0);
-  z-index: 1;
+  transform: translateY(0);
+  z-index: 2;
+  // opacity: 1;
+  // transition: opacity .4s linear,transform .5s ease-in-out;
 }
 
 .isMenuOpen {
@@ -95,13 +99,24 @@
   background-color: $hoverColor;
 }
 
+.mobile__menu-item.active .mobile__menu-icon {
+  stroke: #f4f4f4;
+  // stroke-width: 1.5px;
+}
+
+.mobile__menu-item.active .mobile__menu-icon__arrow{
+  stroke: #f4f4f4;
+}
+
 .mobile__menu-icon {
   margin-left: 16px;
+  stroke: none;
 }
 
 .mobile__menu-icon__arrow {
   margin-left: auto;
   margin-right: 10px;
+  fill: none;
 }
 
 .mobile__menu-link {
