@@ -13,13 +13,32 @@ export const arrLastData = [];
 //! для перевірки навантаження з можливістю
 //! примусового збросу запиту
 
+// export async function getData(url, timeout = 5000) {
+//   const controller = new AbortController();
+//   const id = setTimeout(() => controller.abort(), timeout);
+//   const response = await axios.get(url, {
+//     signal: controller.signal,
+//   });
+//   clearTimeout(id);
+//   return response;
+// }
+
+let preLoader = document.querySelector('.preloader');
+
+preLoader.classList.add('loaded');
 export async function getData(url, timeout = 5000) {
+  preLoader.classList.remove('loaded');
+
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), timeout);
   const response = await axios.get(url, {
     signal: controller.signal,
   });
   clearTimeout(id);
+  setTimeout(() => {
+    preLoader.classList.add('loaded');
+  }, 400);
+
   return response;
 }
 
