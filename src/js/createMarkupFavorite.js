@@ -2,19 +2,20 @@ const favoriteList = document.querySelector('.gallery');
 const errorRequest = document.querySelector('.errorRequest');
 export const iconHeart = new URL('../images/icon.svg', import.meta.url);
 const STORAGE_KEY_FAVORITE = 'favoriteNews';
-const storageNews = JSON.parse(localStorage.getItem(STORAGE_KEY_FAVORITE));
+const favoriteNews = JSON.parse(localStorage.getItem(STORAGE_KEY_FAVORITE));
 
-export function createMarkupFavorite() {
-  // console.log("🚀 ~ storageNews:", storageNews)
+createMarkupFavorite(favoriteNews);
 
-  if (!Boolean(storageNews)) {
+export function createMarkupFavorite(arr) {
+  
+  if (!Boolean(favoriteNews)) {
     errorRequest.classList.remove('visually-hidden');
     return;
   }
 
   let markup = '';
 
-  markup = storageNews
+  markup = arr
     .map(({ id, section, imgUrl, title, abstract, newDateStr, url }) => {
       return `<li class="card js-card-item" data-target-id=${id}>
         <div class="wrap-image">
@@ -46,4 +47,4 @@ export function createMarkupFavorite() {
   favoriteList.innerHTML = markup;
 }
 
-createMarkupFavorite();
+
