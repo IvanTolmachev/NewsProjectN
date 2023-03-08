@@ -83,7 +83,7 @@ $mobile: 480px;
   position: absolute;
   top: 35px;
   left: 0;
-  overflow-y: scroll;
+  //overflow-y: scroll;
   z-index: 3;
 
   transform: translateY(-201%);
@@ -94,7 +94,7 @@ $mobile: 480px;
     border-radius: 20px;
     background: transparent;
     position: absolute;
-    width: 165px;
+    width: 150px;
     height: 300px;
     overflow: hidden;
   }
@@ -233,7 +233,7 @@ $mobile: 480px;
   align-items: center;
 
   //color: $primaryTextColor;
-  color: var(--calendar-btn-color);
+  color: #a2a2a2; // var(--calendar-btn-color);
   background-color: var(--calendar-bg-color);
   text-align: center;
   padding: 5px 12px;
@@ -269,7 +269,9 @@ $mobile: 480px;
 .calendar__icon {
   fill: currentColor;
 }
-
+.calendar__btn:hover .calendar-btn-span {
+  color: $witeTextColor;
+}
 .calendar-btn-span {
   padding: 0 12px;
   color: var(--calendar-text-color);

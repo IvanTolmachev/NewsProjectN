@@ -136,14 +136,40 @@ const iconHeart = new URL('../images/icon.svg', import.meta.url);
 export function createCard(item) {
   const { id, url, title, section, abstract, imgUrl, newDateStr } = item;
 
+  // return `
+  //      <li class="card js-card-item" data-target-id="${id}">
+  //       <div class="wrap-image">
+  //         <img
+  //           src="${imgUrl}"
+  //           alt="photo"
+  //          class="wrap-image__photo"
+  //          loading="lazy"
+  //         />
+  //         <p class="wrap-image__text">${section}</p>
+  //         <button type="button" class="wrap-image__btn js-tartet-favorite">
+  //         <span class="wrap-image__btn-text js-tartet-favorite">Add to favorite</span>
+  //          <svg class="wrap-image__icon js-tartet-favorite" width="16" height="16">
+  //               <use href ='${iconHeart}#icon-heart' class="js-tartet-favorite"></use>
+  //             </svg></button>
+  //       </div>
+  //       <h2 class="card__title">${title}</h2>
+  //       <p class="card__description">${
+  //         abstract.length > 112 ? abstract.slice(0, 113) + '...' : abstract
+  //       }</p>
+  //       <div class="wrap-info">
+  //         <p class="wrap-info__time">${newDateStr}</p>
+  //         <a href="${url}" class="wrap-info__link">Read more</a>
+  //       </div>
+  //     </li>
+  //       `
+  //=============================
   return `
-       <li class="card js-card-item" data-target-id="${id}">
-        <div class="wrap-image">
+         <li class="card  js-card-item" data-target-id="${id}">
+      <div class="wrap-image">
           <img
             src="${imgUrl}"
             alt="photo"
            class="wrap-image__photo"
-           loading="lazy"
           />
           <p class="wrap-image__text">${section}</p>
           <button type="button" class="wrap-image__btn js-tartet-favorite">
@@ -156,10 +182,9 @@ export function createCard(item) {
         <p class="card__description">${
           abstract.length > 112 ? abstract.slice(0, 113) + '...' : abstract
         }</p>
-        <div class="wrap-info">
           <p class="wrap-info__time">${newDateStr}</p>
-          <a href="${url}" class="wrap-info__link">Read more</a>
-        </div>
+          <a href="${url}" class="wrap-info__link" target="_blank" rel="noreferrer noopener">Read more</a>
+          <p class="wrap-image__active visually-hidden">Already read</p>
       </li>
-        `;
+     `;
 }

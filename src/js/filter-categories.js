@@ -11,7 +11,10 @@ import { saveLS, loadLS } from './lStorage';
 import { valuePage, makePaginationsBtnMurkUp } from './pagination';
 //import { savedApiData } from './favorite';
 import { savedApiData } from './cards';
+import { checkFavorites } from './apiCard';
+
 const LS_KEY = 'lastSearch';
+const FAIVORIT_NEWS = 'favoriteNews';
 
 const gallery = document.querySelector('.gallery');
 const categories = document.querySelector('.categories');
@@ -59,6 +62,7 @@ export async function makeSectionNews(url) {
     gallery.prepend(weather);
     errorRequest.classList.add('visually-hidden');
     sectionHome.classList.remove('visually-hidden');
+    checkFavorites(FAIVORIT_NEWS);
   } catch (error) {}
 }
 
@@ -109,11 +113,22 @@ function sortSections(count) {
   listHide.append(...elementHide);
 }
 
+function hideNonAcctiv(e) {
+  // if (filterItems.classList.contains('filter-show')) {
+  categoriesIcon.classList.remove('rotate');
+  filterItems.classList.remove('filter-show');
+  // }
+}
+
 //!=== listener
 
 showHideCategoriesBtn.addEventListener('click', () => {
   filterItems.classList.toggle('filter-show');
   categoriesIcon.classList.toggle('rotate');
+
+  // window.addEventListener('click', hideNonAcctiv, {
+  //   once: false,
+  // });
 });
 
 calendarBtn.addEventListener('click', () => {
@@ -157,3 +172,14 @@ window.addEventListener('load', () => {
 });
 
 window.addEventListener('resize', debounce(restart, 250));
+window.addEventListener('click', e => {
+  if (
+    !e.target.closest('.filter-wrapper') &&
+    !e.target.closest('.filter__btn')
+  ) {
+    if (filterItems.classList.contains('filter-show')) {
+      categoriesIcon.classList.remove('rotate');
+      filterItems.classList.remove('filter-show');
+    }
+  }
+});

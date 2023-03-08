@@ -38,9 +38,7 @@ function removeFromFavorite(id) {
   // );
 
   let storageNews = JSON.parse(localStorage.getItem(STORAGE_KEY_FAVORITE));
-  const removedNewIndex = storageNews.findIndex(
-    item => Number(item.id) === Number(id)
-  );
+  const removedNewIndex = storageNews.findIndex(item => item.id === id);
   storageNews.splice(removedNewIndex, 1);
   localStorage.setItem(STORAGE_KEY_FAVORITE, JSON.stringify(storageNews));
   //Якщо не має улюблених новин, очищаємо localStorage
@@ -84,7 +82,7 @@ function saveFavotiteNew(id) {
     const firstNew = [];
     firstNew.push(favoriteNew);
     localStorage.setItem(STORAGE_KEY_FAVORITE, JSON.stringify(firstNew));
-  } else if (favoriteNews.every(el => Number(el.id) !== Number(id))) {
+  } else if (!favoriteNews.find(el => el.id === id)) {
     favoriteNews.push(favoriteNew);
     localStorage.setItem(STORAGE_KEY_FAVORITE, JSON.stringify(favoriteNews));
   }
