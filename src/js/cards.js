@@ -22,7 +22,7 @@ export async function createCards() {
     const data = response.data.results;
     // console.log(data);
     saveApiData(data);
-    const markup=createMarkup(savedApiData);
+    const markup = createMarkup(savedApiData);
     refs.gallery.insertAdjacentHTML('beforeend', markup);
   } catch (error) {
     console.error('Error from backend:', error);
@@ -39,10 +39,7 @@ export function createMarkup(arr) {
       //Проверка есть ли эта новость в Favorite
       // checkIsNewFavorite(id)
       // console.log("🚀 ~ favoriteNews:", favoriteNews)
-      if (
-        Boolean(favoriteNews) &&
-        favoriteNews.some(el => Number(el.id) === Number(id))
-      ) {
+      if (Boolean(favoriteNews) && favoriteNews.find(el => el.id === id)) {
         // console.log(" Перевірка! Есть favorite новости")
         return `<li class="card js-card-item" data-target-id=${id}>
         <div class="wrap-image">
@@ -98,14 +95,14 @@ export function createMarkup(arr) {
     })
     .join('');
 
-    return markup
+  return markup;
   // refs.gallery.insertAdjacentHTML('beforeend', markup);
 }
 function saveApiData(arrey) {
   arrey.map(({ id, url, title, section, abstract, published_date, media }) => {
     const item = {};
     let imgUrl = media.map(media => media['media-metadata'][2].url);
-    let newDateStr = published_date
+    let newDateStr = published_date;
     //.replace(/-/g, '/');
     item['id'] = `${id}`;
     item['url'] = `${url}`;

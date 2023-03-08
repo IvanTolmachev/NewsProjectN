@@ -1,6 +1,6 @@
 const STORAGE_KEY_FAVORITE = 'favoriteNews';
 const favoriteList = document.querySelector('.gallery');
-const errorRequest = document.querySelector(".errorRequest");
+const errorRequest = document.querySelector('.errorRequest');
 
 favoriteList.addEventListener('click', getFavoriteId);
 
@@ -24,28 +24,23 @@ function removeFromFavorite(id) {
   const favoriteUse = document.querySelector(
     `li[data-target-id='${id}'] use.js-is-favorite`
   );
-  const galleryItem = document.querySelector(
-    `li[data-target-id='${id}']`
-  );
+  const galleryItem = document.querySelector(`li[data-target-id='${id}']`);
 
   let storageNews = JSON.parse(localStorage.getItem(STORAGE_KEY_FAVORITE));
-  const removedNewIndex = storageNews.findIndex(
-    item => Number(item.id) === Number(id)
-  );
+  const removedNewIndex = storageNews.findIndex(item => item.id === id);
   storageNews.splice(removedNewIndex, 1);
   localStorage.setItem(STORAGE_KEY_FAVORITE, JSON.stringify(storageNews));
-//Якщо не має улюблених новин, очищаємо localStorage
-  storageNews=JSON.parse(localStorage.getItem(STORAGE_KEY_FAVORITE))
-    if(storageNews.length===0){
-      localStorage.removeItem(STORAGE_KEY_FAVORITE)
-      errorRequest.classList.remove('visually-hidden')
-    }
+  //Якщо не має улюблених новин, очищаємо localStorage
+  storageNews = JSON.parse(localStorage.getItem(STORAGE_KEY_FAVORITE));
+  if (storageNews.length === 0) {
+    localStorage.removeItem(STORAGE_KEY_FAVORITE);
+    errorRequest.classList.remove('visually-hidden');
+  }
 
   favoriteBtnText.classList.replace('js-is-favorite', 'js-tartet-favorite');
   favoriteBtn.classList.replace('js-is-favorite', 'js-tartet-favorite');
   favoriteSvg.classList.replace('js-is-favorite', 'js-tartet-favorite');
   favoriteUse.classList.replace('js-is-favorite', 'js-tartet-favorite');
 
-  galleryItem.remove()
+  galleryItem.remove();
 }
-
