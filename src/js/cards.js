@@ -39,9 +39,10 @@ export function createMarkup(arr) {
       //Проверка есть ли эта новость в Favorite
       // checkIsNewFavorite(id)
       // console.log("🚀 ~ favoriteNews:", favoriteNews)
+      //  console.log(url);
       if (Boolean(favoriteNews) && favoriteNews.find(el => el.id === id)) {
         // console.log(" Перевірка! Есть favorite новости")
-        return `<li class="card js-card-item" data-target-id=${id}>
+        return `<li class="card js-card-item " data-target-id=${id}>
         <div class="wrap-image">
           <img
             src="${imgUrl}"
@@ -49,7 +50,7 @@ export function createMarkup(arr) {
             class="wrap-image__photo"
           />
           <p class="wrap-image__text">${section}</p>
-          <button type="button"  class="wrap-image__btn js-is-favorite">
+          <button type="button" id="favorit-bth"  class="wrap-image__btn js-is-favorite favorit-bth">
           <span class="wrap-image__btn-text js-is-favorite ">Remove from favorite</span>
             <svg class="js-is-favorite fill-heard" width="16" height="16">
                 <use class="js-is-favorite" href ='${iconHeart}#icon-heart'></use>
@@ -77,7 +78,7 @@ export function createMarkup(arr) {
            class="wrap-image__photo"
           />
           <p class="wrap-image__text">${section}</p>
-          <button type="button" class="wrap-image__btn js-tartet-favorite">
+          <button type="button" id="favorit-bth" class="wrap-image__btn js-tartet-favorite favorit-bth">
           <span class="wrap-image__btn-text js-tartet-favorite">Add to favorite</span>
            <svg class="wrap-image__icon js-tartet-favorite" width="16" height="16">
                 <use href ='${iconHeart}#icon-heart' class="js-tartet-favorite"></use>

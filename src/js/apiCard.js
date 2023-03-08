@@ -6,9 +6,7 @@ const READ_NEWS = 'readNews';
 
 export function checkFavorites(key) {
   let favoritNews = loadLS(key);
-  // console.log(favoritNews);
   const cardNews = Array.from(document.querySelectorAll('.card'));
-  // console.log(cardNews);
   if (favoritNews) {
     const allId = favoritNews.map(i => i.id);
     cardNews.forEach(i => {
@@ -16,13 +14,26 @@ export function checkFavorites(key) {
         i.classList.add('inFavorite');
         const favoriteText = i.querySelector('#favorit-txt');
         favoriteText.textContent = 'Remove from favorite';
+
+        const favoriteBtnText = i.querySelector(`span.js-tartet-favorite`);
+        const favoriteBtn = i.querySelector(`button.js-tartet-favorite`);
+        const favoriteSvg = i.querySelector(`svg.js-tartet-favorite`);
+        const favoriteUse = i.querySelector(`use.js-tartet-favorite`);
+        favoriteBtnText.classList.replace(
+          'js-tartet-favorite',
+          'js-is-favorite'
+        );
+        favoriteBtn.classList.replace('js-tartet-favorite', 'js-is-favorite');
+        favoriteSvg.classList.replace('js-tartet-favorite', 'js-is-favorite');
+        favoriteUse.classList.replace('js-tartet-favorite', 'js-is-favorite');
+        favoriteSvg.classList.replace('wrap-image__icon', 'fill-heard');
       }
     });
   }
 }
 
 export function togleFaforite(e) {
-  if (e.target.classList.contains('js-tartet-favorite')) {
+  if (e.target.classList.contains('favorit-bth')) {
     const itemNews = e.target.closest('.js-card-item');
     const favoriteText = itemNews.querySelector('#favorit-txt');
     const newsId = itemNews.dataset.targetId;
