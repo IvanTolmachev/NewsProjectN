@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { makeURL } from './apiUrl';
+const DEFAULT_PLUG = new URL('../images/blank.webp', import.meta.url);
 //import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 //! масив для якихось цілей. В ньому будуть лежати обєкти
@@ -87,7 +88,7 @@ export function dataSectionNormalize(item) {
   const { uri, url, title, section, abstract, published_date, multimedia } =
     item;
   //const id = uri;
-  const imgUrl = multimedia !== null ? multimedia[2].url : '';
+  const imgUrl = multimedia !== null ? multimedia[2].url : DEFAULT_PLUG;
   const newDateStr = published_date
     .slice(0, published_date.indexOf('T'))
     .trim()
@@ -112,7 +113,7 @@ export function dataArticleSearchNormalize(item) {
   const imgUrl =
     multimedia.length !== 0
       ? `https://static01.nyt.com/${multimedia[2].url}`
-      : '';
+      : DEFAULT_PLUG;
   const newDateStr = pub_date
     .slice(0, pub_date.indexOf('T'))
     .trim()
@@ -135,7 +136,8 @@ export function dataArticleSearchNormalize(item) {
 export function dataMostPopularNormalize(item) {
   const { uri, url, title, section, abstract, published_date, media } = item;
   //const id = uri;
-  const imgUrl = media.length !== 0 ? media[0]['media-metadata'][2].url : '';
+  const imgUrl =
+    media.length !== 0 ? media[0]['media-metadata'][2].url : DEFAULT_PLUG;
   const newDateStr = published_date
     .slice(0, published_date.indexOf('T'))
     .trim()
@@ -148,6 +150,7 @@ export function dataMostPopularNormalize(item) {
 //! рендер картки (сам поцупив)
 //! на вхід треба передати нормалізований обїект
 const iconHeart = new URL('../images/icon.svg', import.meta.url);
+
 export function createCard(item) {
   const { id, url, title, section, abstract, imgUrl, newDateStr } = item;
 
