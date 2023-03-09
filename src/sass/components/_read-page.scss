@@ -1,23 +1,27 @@
-.dropbtn {
-  margin-top: 60px;
-  color: $primaryTextColor;
-  font-size: 16px;
-  display: block;
-  background-color: transparent;
-  border: none;
+.date-title .icon-down-read-pg {
+  cursor: pointer;
+  transform: rotate(0deg);
+  transition: transform $durationFunction $timingFunction;
+  pointer-events: none;
+  z-index: -1;
 }
-  
-  .icon-down-read-pg.rotate {
+
+.date-title.rotate .icon-down-read-pg{
     transform: rotate(-180deg);
   }
-  .icon-down-read-pg {
-    cursor: pointer;
-    transform: rotate(0deg);
-    transition: transform $durationFunction $timingFunction;
-  }
   
-  .item-list.show {
-  display: flex;  
-  gap: 32px;
-  flex-wrap: wrap;
+  .section-read {
+    padding: 60px;
   }
+
+  .date-title {
+    border-bottom: 1px solid #929292;
+    padding-bottom: 12px;
+    margin-bottom: 18px;
+  }       
+
+  .data-block .btn-span {
+    pointer-events: none;
+    z-index: -1;
+  }  
+
