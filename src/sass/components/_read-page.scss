@@ -6,8 +6,8 @@
 }
 
 .date-title.rotate .icon-down-read-pg{
+  transition: transform $durationFunction $timingFunction;
     transform: rotate(-180deg);
-    transition: transform $durationFunction $timingFunction;
   }
   
   .section-read {
