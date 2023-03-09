@@ -31,6 +31,7 @@ function hideModals(evt) {
   if (modalEl.classList.contains('is-shown')) {
     modalEl.classList.remove('is-shown');
     btnEl.classList.remove('btn-is-active');
+    calendarIcon.classList.remove('rotate');
   }
 }
 
@@ -111,18 +112,18 @@ function onDaysTagClick(e) {
   e.target.classList.add('active');
 }
 
-function onTodayBtnClick() {
-  todayBtn.addEventListener('click', () => {
-    spanEl.textContent = `${addLeadingZero(date.getDate())}/${addLeadingZero(
-      date.getMonth() + 1
-    )}/${date.getFullYear()}`;
-    currentDate.innerHTML = `${months[date.getMonth()]} ${date.getFullYear()}`;
-    date = new Date();
-    currYear = date.getFullYear();
-    currMonth = date.getMonth();
-    renderCalendar();
-  });
-}
+// function onTodayBtnClick() {
+//   todayBtn.addEventListener('click', () => {
+//     spanEl.textContent = `${addLeadingZero(date.getDate())}/${addLeadingZero(
+//       date.getMonth() + 1
+//     )}/${date.getFullYear()}`;
+//     currentDate.innerHTML = `${months[date.getMonth()]} ${date.getFullYear()}`;
+//     date = new Date();
+//     currYear = date.getFullYear();
+//     currMonth = date.getMonth();
+//     renderCalendar();
+//   });
+// }
 
 function renderBtns(dayBtns) {
   dayBtns.forEach(dayBtn =>
