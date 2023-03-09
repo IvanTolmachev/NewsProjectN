@@ -71,7 +71,7 @@ export async function makeSectionNews(url) {
 
 //?===== function  render
 
-function restart() {
+export function restart() {
   const element = document.querySelector('.gallery');
   // const maxWidth = element.getBoundingClientRect().width;
   const style = window.getComputedStyle(element, null);

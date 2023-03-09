@@ -8,6 +8,7 @@ import { checkFavorites } from './apiCard';
 import { valuePage } from './pagination';
 import { makePaginationsBtnMurkUp } from './pagination';
 import { countSearch } from './apiUrl';
+import { restart } from './filter-categories';
 
 let LS_KEY = 'lastSearch';
 
@@ -34,7 +35,7 @@ export let savedApiData = [];
 export async function createCards(page) {
   try {
     const response = await getCards();
-
+    restart();
     let currentPage = page || 1;
     let cardsPerPage = countSearch.perPage;
 
