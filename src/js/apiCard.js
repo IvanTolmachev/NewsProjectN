@@ -77,7 +77,7 @@ export function addRead(e) {
     const newsId = itemNews.dataset.targetId;
     itemNews.classList.add('inRead');
     readText.classList.remove('visually-hidden');
-    const readNews = loadLS(READ_NEWS);
+    let readNews = loadLS(READ_NEWS);
     const targetNews = arrLastData.find(i => i.id === newsId);
 
     const readDate = new Date().toLocaleDateString('en-US', {
