@@ -155,7 +155,7 @@
   font-size: 12px;
   line-height: 1.5;
   text-align: center;
-  user-select: none;
+  // user-select: none;
   color: rgba(60, 60, 67, 0.3);
   pointer-events: none;
 }
@@ -196,7 +196,7 @@
 #inactive {
   color: rgba(60, 60, 67, 0.1);
   cursor: default;
-  user-select: none;
+  // user-select: none;
 }
 
 .days li {

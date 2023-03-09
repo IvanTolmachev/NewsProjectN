@@ -62,30 +62,30 @@ function renderCalendar() {
 
   for (let i = firstDayofMonth; i > 0; i--) {
     // creating li of previous month last days
-    liTag += `<li><button type="button" class="button inactive" id="inactive" disabled>${
-      lastDateofLastMonth - i + 1
-    }</button></li>`;
+    liTag += `<li><button type="button" class="button inactive" id="inactive" disabled>${lastDateofLastMonth - i + 1
+      }</button></li>`;
   }
 
   for (let i = 1; i <= lastDateofMonth; i++) {
     // creating li of all days of current month
     // adding active class to li if the current day, month, and year matched
-    let isToday =
-      i === date.getDate() &&
-      currMonth === date.getMonth() &&
-      currYear === date.getFullYear()
-        ? 'current-month-day'
-        : '';
-    let isCurrentDay = i === date.getDate() ? 'active' : '';
 
-    liTag += `<li><button type="button" class="button ${isToday} ${isCurrentDay}">${i}</button></li>`;
+    // let isToday =
+    //   i === date.getDate() &&
+    //     currMonth === date.getMonth() &&
+    //     currYear === date.getFullYear()
+    //     ? 'current-month-day'
+    //     : '';
+    // let isCurrentDay = i === date.getDate() ? 'active' : '';
+    // liTag += `<li><button type="button" class="button ${isToday} ${isCurrentDay}">${i}</button></li>`;
+
+    liTag += `<li><button type="button" class="button">${i}</button></li>`;
   }
 
   for (let i = lastDayofMonth; i < 7; i++) {
     // creating li of next month first days
-    liTag += `<li><button type="button" class="button inactive" id="inactive" disabled>${
-      i - lastDayofMonth + 1
-    }</button></li>`;
+    liTag += `<li><button type="button" class="button inactive" id="inactive" disabled>${i - lastDayofMonth + 1
+      }</button></li>`;
   }
 
   currentDate.innerHTML = `${months[currMonth]} ${currYear}`; // passing current mon and yr as currentDate text
@@ -96,6 +96,8 @@ function renderCalendar() {
   const dayBtns = document.querySelectorAll('.button');
   renderBtns(dayBtns);
 
+  renderCurrentDays()
+
   daysTag.addEventListener('click', onDaysTagClick);
 }
 
@@ -105,7 +107,6 @@ function onDaysTagClick(e) {
   if (currentActiveDate) {
     currentActiveDate.classList.remove('active');
     calendarIcon.classList.remove('rotate');
-    // currYear = date.getFullYear();
   }
   e.target.classList.add('active');
 }
@@ -135,7 +136,6 @@ function renderBtns(dayBtns) {
       selectedDate = `${currYear}/${addLeadingZero(
         currMonth + 1
       )}/${addLeadingZero(e.target.textContent)}`;
-      // console.log(selectedDate);
 
       if (Number(new Date(selectedDate).getTime()) > Number(Date.now())) {
         Notiflix.Notify.failure(
@@ -149,17 +149,14 @@ function renderBtns(dayBtns) {
           }
         );
 
-        spanEl.textContent = `${addLeadingZero(
-          date.getDate()
-        )}/${addLeadingZero(date.getMonth() + 1)}/${date.getFullYear()}`;
-        currentDate.innerHTML = `${
-          months[date.getMonth()]
-        } ${date.getFullYear()}`;
-        date = new Date();
-        currYear = date.getFullYear();
-        currMonth = date.getMonth();
-        renderCalendar();
-        renderCurrentDays();
+        // spanEl.textContent = `${addLeadingZero(
+        //   date.getDate()
+        // )}/${addLeadingZero(date.getMonth() + 1)}/${date.getFullYear()}`;
+        // currentDate.innerHTML = `${months[date.getMonth()]
+        //   } ${date.getFullYear()}`;
+        // date = new Date();
+        // currYear = date.getFullYear();
+        // currMonth = date.getMonth();
       }
 
       // onTodayBtnClick();
@@ -217,8 +214,12 @@ function renderCurrentDays() {
   let rendCurrentDays = daysTag.childNodes;
 
   rendCurrentDays.forEach(el => {
+    el.firstChild.classList.remove('active');
+  });
+
+  rendCurrentDays.forEach(el => {
     if (Number(el.textContent) === Number(saveDate)) {
-      el.classList.add('active');
+      el.firstChild.classList.add('active');
     }
   });
 }
