@@ -134,6 +134,7 @@ function onDaysTagClick(e) {
     currYear = date.getFullYear();
     currMonth = date.getMonth();
     currentDate.innerHTML = `${months[currMonth]} ${currYear}`;
+
     renderCalendar()
   }
 
@@ -142,6 +143,7 @@ function onDaysTagClick(e) {
     e.target.classList.add('active');
   }
 
+  calendarIcon.classList.remove('rotate');
 
 }
 
@@ -215,23 +217,23 @@ function onYearBtnNextClick() {
 }
 onYearBtnNextClick();
 
-function renderCurrentDays() {
-  let saveDate = JSON.parse(localStorage.getItem('VALUE'));
-  let rendCurrentDays = daysTag.childNodes;
+// function renderCurrentDays() {
+//   let saveDate = JSON.parse(localStorage.getItem('VALUE'));
+//   let rendCurrentDays = daysTag.childNodes;
 
-  rendCurrentDays.forEach(el => {
-    el.firstChild.classList.remove('active');
-    el.firstChild.classList.remove('current-month-day');
-  });
+//   rendCurrentDays.forEach(el => {
+//     el.firstChild.classList.remove('active');
+//     el.firstChild.classList.remove('current-month-day');
+//   });
 
-  rendCurrentDays.forEach(el => {
-    if (Number(el.textContent) === Number(saveDate)
-      && currMonth === date.getMonth()
-      && currYear === date.getFullYear()
-    ) {
-      el.firstChild.classList.add('current-month-day');
-    }
-  });
-}
+//   rendCurrentDays.forEach(el => {
+//     if (Number(el.textContent) === Number(saveDate)
+//       && currMonth === date.getMonth()
+//       && currYear === date.getFullYear()
+//     ) {
+//       el.firstChild.classList.add('current-month-day');
+//     }
+//   });
+// }
 
 localStorage.removeItem('VALUE');
