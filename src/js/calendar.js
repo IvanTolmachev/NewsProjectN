@@ -99,130 +99,129 @@ function renderCalendar() {
 
   renderCurrentDays()
 
-  daysTag.addEventListener('click', onDaysTagClick);
-}
+  //   daysTag.addEventListener('click', onDaysTagClick);
+  // }
 
-function onDaysTagClick(e) {
-  const currentActiveDate = document.querySelector('.active');
+  // function onDaysTagClick(e) {
+  //   const currentActiveDate = document.querySelector('.active');
+  //   if (currentActiveDate) {
+  //     currentActiveDate.classList.remove('active');
+  //     calendarIcon.classList.remove('rotate');
+  //   }
+  //   e.target.classList.add('active');
+  // }
 
-  if (currentActiveDate) {
-    currentActiveDate.classList.remove('active');
-    calendarIcon.classList.remove('rotate');
+  // function onTodayBtnClick() {
+  //   todayBtn.addEventListener('click', () => {
+  //     spanEl.textContent = `${addLeadingZero(date.getDate())}/${addLeadingZero(
+  //       date.getMonth() + 1
+  //     )}/${date.getFullYear()}`;
+  //     currentDate.innerHTML = `${months[date.getMonth()]} ${date.getFullYear()}`;
+  //     date = new Date();
+  //     currYear = date.getFullYear();
+  //     currMonth = date.getMonth();
+  //     renderCalendar();
+  //   });
+  // }
+
+  function renderBtns(dayBtns) {
+    dayBtns.forEach(dayBtn =>
+      dayBtn.addEventListener('click', e => {
+        spanEl.textContent = `${addLeadingZero(
+          e.target.textContent
+        )}/${addLeadingZero(currMonth + 1)}/${currYear}`;
+        modalEl.classList.toggle('is-shown');
+        btnEl.classList.remove('btn-is-active');
+
+        selectedDate = `${currYear}/${addLeadingZero(
+          currMonth + 1
+        )}/${addLeadingZero(e.target.textContent)}`;
+
+        if (Number(new Date(selectedDate).getTime()) > Number(Date.now())) {
+          Notiflix.Notify.failure(
+            'Please select a date less than or equal to today!',
+            {
+              opacity: 1,
+              position: 'center-top',
+              timeout: 350,
+              cssAnimationDuration: 2000,
+              cssAnimationStyle: 'from-top',
+            }
+          );
+
+          // spanEl.textContent = `${addLeadingZero(
+          //   date.getDate()
+          // )}/${addLeadingZero(date.getMonth() + 1)}/${date.getFullYear()}`;
+          // currentDate.innerHTML = `${months[date.getMonth()]
+          //   } ${date.getFullYear()}`;
+          // date = new Date();
+          // currYear = date.getFullYear();
+          // currMonth = date.getMonth();
+        }
+
+        // onTodayBtnClick();
+      })
+    );
   }
-  e.target.classList.add('active');
-}
+  renderCalendar();
 
-// function onTodayBtnClick() {
-//   todayBtn.addEventListener('click', () => {
-//     spanEl.textContent = `${addLeadingZero(date.getDate())}/${addLeadingZero(
-//       date.getMonth() + 1
-//     )}/${date.getFullYear()}`;
-//     currentDate.innerHTML = `${months[date.getMonth()]} ${date.getFullYear()}`;
-//     date = new Date();
-//     currYear = date.getFullYear();
-//     currMonth = date.getMonth();
-//     renderCalendar();
-//   });
-// }
+  function addLeadingZero(value) {
+    return String(value).padStart(2, '0');
+  }
 
-function renderBtns(dayBtns) {
-  dayBtns.forEach(dayBtn =>
-    dayBtn.addEventListener('click', e => {
-      spanEl.textContent = `${addLeadingZero(
-        e.target.textContent
-      )}/${addLeadingZero(currMonth + 1)}/${currYear}`;
-      modalEl.classList.toggle('is-shown');
-      btnEl.classList.remove('btn-is-active');
-
-      selectedDate = `${currYear}/${addLeadingZero(
-        currMonth + 1
-      )}/${addLeadingZero(e.target.textContent)}`;
-
-      if (Number(new Date(selectedDate).getTime()) > Number(Date.now())) {
-        Notiflix.Notify.failure(
-          'Please select a date less than or equal to today!',
-          {
-            opacity: 1,
-            position: 'center-top',
-            timeout: 350,
-            cssAnimationDuration: 2000,
-            cssAnimationStyle: 'from-top',
-          }
-        );
-
-        // spanEl.textContent = `${addLeadingZero(
-        //   date.getDate()
-        // )}/${addLeadingZero(date.getMonth() + 1)}/${date.getFullYear()}`;
-        // currentDate.innerHTML = `${months[date.getMonth()]
-        //   } ${date.getFullYear()}`;
-        // date = new Date();
-        // currYear = date.getFullYear();
-        // currMonth = date.getMonth();
-      }
-
-      // onTodayBtnClick();
-    })
-  );
-}
-renderCalendar();
-
-function addLeadingZero(value) {
-  return String(value).padStart(2, '0');
-}
-
-function onPrevNextIconClick() {
-  prevNextIcon.forEach(icon => {
-    // getting prev and next icons
-    icon.addEventListener('click', () => {
-      // adding click event on both icons
-      // if clicked icon is previous icon then decrement current month by 1 else increment it by 1
-      currMonth = icon.id === 'prev' ? currMonth - 1 : currMonth + 1;
-      if (currMonth < 0 || currMonth > 11) {
-        // if current month is less than 0 or greater than 11
-        // creating a new date of current year & month and pass it as date value
-        date = new Date(currYear, currMonth, new Date().getDate());
-        currYear = date.getFullYear(); // updating current year with new date year
-        currMonth = date.getMonth(); // updating current month with new date month
-      } else {
-        date = new Date(); // pass the current date as date value
-      }
-      renderCalendar(); // calling renderCalendar function
+  function onPrevNextIconClick() {
+    prevNextIcon.forEach(icon => {
+      // getting prev and next icons
+      icon.addEventListener('click', () => {
+        // adding click event on both icons
+        // if clicked icon is previous icon then decrement current month by 1 else increment it by 1
+        currMonth = icon.id === 'prev' ? currMonth - 1 : currMonth + 1;
+        if (currMonth < 0 || currMonth > 11) {
+          // if current month is less than 0 or greater than 11
+          // creating a new date of current year & month and pass it as date value
+          date = new Date(currYear, currMonth, new Date().getDate());
+          currYear = date.getFullYear(); // updating current year with new date year
+          currMonth = date.getMonth(); // updating current month with new date month
+        } else {
+          date = new Date(); // pass the current date as date value
+        }
+        renderCalendar(); // calling renderCalendar function
+      });
     });
-  });
-}
-onPrevNextIconClick();
+  }
+  onPrevNextIconClick();
 
-function onYearBtnPrevClick() {
-  yearBtnPrev.addEventListener('click', () => {
-    currYear -= 1;
-    renderCalendar();
-    renderCurrentDays();
-  });
-}
-onYearBtnPrevClick();
+  function onYearBtnPrevClick() {
+    yearBtnPrev.addEventListener('click', () => {
+      currYear -= 1;
+      renderCalendar();
+      renderCurrentDays();
+    });
+  }
+  onYearBtnPrevClick();
 
-function onYearBtnNextClick() {
-  yearBtnNext.addEventListener('click', () => {
-    currYear += 1;
-    renderCalendar();
-    renderCurrentDays();
-  });
-}
-onYearBtnNextClick();
+  function onYearBtnNextClick() {
+    yearBtnNext.addEventListener('click', () => {
+      currYear += 1;
+      renderCalendar();
+      renderCurrentDays();
+    });
+  }
+  onYearBtnNextClick();
 
-function renderCurrentDays() {
-  let saveDate = JSON.parse(localStorage.getItem('VALUE'));
-  let rendCurrentDays = daysTag.childNodes;
+  function renderCurrentDays() {
+    let saveDate = JSON.parse(localStorage.getItem('VALUE'));
+    let rendCurrentDays = daysTag.childNodes;
 
-  rendCurrentDays.forEach(el => {
-    el.firstChild.classList.remove('active');
-  });
+    rendCurrentDays.forEach(el => {
+      el.firstChild.classList.remove('active');
+    });
 
-  rendCurrentDays.forEach(el => {
-    if (Number(el.textContent) === Number(saveDate)) {
-      el.firstChild.classList.add('active');
-    }
-  });
-}
+    rendCurrentDays.forEach(el => {
+      if (Number(el.textContent) === Number(saveDate)) {
+        el.firstChild.classList.add('active');
+      }
+    });
+  }
 
-localStorage.removeItem('VALUE');
+  localStorage.removeItem('VALUE');
