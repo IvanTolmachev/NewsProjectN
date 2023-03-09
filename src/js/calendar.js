@@ -77,10 +77,10 @@ function renderCalendar() {
     //     currYear === date.getFullYear()
     //     ? 'current-month-day'
     //     : '';
-    // let isCurrentDay = i === date.getDate() ? 'active' : '';
+    let isCurrentDay = i === date.getDate() ? 'active' : '';
     // liTag += `<li><button type="button" class="button ${isToday} ${isCurrentDay}">${i}</button></li>`;
 
-    liTag += `<li><button type="button" class="button">${i}</button></li>`;
+    liTag += `<li><button type="button" class="button ${isCurrentDay}">${i}</button></li>`;
   }
 
   for (let i = lastDayofMonth; i < 7; i++) {
@@ -97,20 +97,20 @@ function renderCalendar() {
   const dayBtns = document.querySelectorAll('.button');
   renderBtns(dayBtns);
 
-  renderCurrentDays()
+  // renderCurrentDays()
 
-  // daysTag.addEventListener('click', onDaysTagClick);
+  daysTag.addEventListener('click', onDaysTagClick);
 }
 
-// function onDaysTagClick(e) {
-//   const currentActiveDate = document.querySelector('.active');
+function onDaysTagClick(e) {
+  const currentActiveDate = document.querySelector('.active');
 
-//   if (currentActiveDate) {
-//     currentActiveDate.classList.remove('active');
-//     calendarIcon.classList.remove('rotate');
-//   }
-//   e.target.classList.add('active');
-// }
+  if (currentActiveDate) {
+    currentActiveDate.classList.remove('active');
+    calendarIcon.classList.remove('rotate');
+  }
+  e.target.classList.add('active');
+}
 
 // function onTodayBtnClick() {
 //   todayBtn.addEventListener('click', () => {
@@ -187,6 +187,7 @@ function onPrevNextIconClick() {
         date = new Date(); // pass the current date as date value
       }
       renderCalendar(); // calling renderCalendar function
+      renderCurrentDays()
     });
   });
 }
