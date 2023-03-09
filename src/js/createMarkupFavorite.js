@@ -53,7 +53,7 @@ export function createMarkupFavorite(arr) {
 
 favoriteList.addEventListener('click', e => {
   arrLastData.length = 0;
-  arrLastData.push(...storageNews);
+  arrLastData.push(...favoriteNews);
 
   addRead(e);
 });
