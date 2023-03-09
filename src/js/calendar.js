@@ -77,7 +77,7 @@ function renderCalendar() {
     //     currYear === date.getFullYear()
     //     ? 'current-month-day'
     //     : '';
-    let isCurrentDay = i === date.getDate() ? 'active' : '';
+    let isCurrentDay = i === date.getDate() ? 'current-month-day' : '';
     // liTag += `<li><button type="button" class="button ${isToday} ${isCurrentDay}">${i}</button></li>`;
 
     liTag += `<li><button type="button" class="button ${isCurrentDay}">${i}</button></li>`;
@@ -217,11 +217,12 @@ function renderCurrentDays() {
 
   rendCurrentDays.forEach(el => {
     el.firstChild.classList.remove('active');
+    el.firstChild.classList.remove('current-month-day');
   });
 
   rendCurrentDays.forEach(el => {
     if (Number(el.textContent) === Number(saveDate)) {
-      el.firstChild.classList.add('active');
+      el.firstChild.classList.add('current-month-day');
     }
   });
 }
