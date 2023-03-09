@@ -4,9 +4,10 @@ import {
   dataArticleSearchNormalize,
   arrLastData,
 } from './apiNews';
-import { articleSearchNews, perPage } from './apiUrl';
+import { articleSearchNews, countSearch } from './apiUrl';
 import { saveLS } from './lStorage';
 import { savedApiData } from './cards';
+import { valuePage, makePaginationsBtnMurkUp } from './pagination';
 
 const LS_KEY = 'lastSearch';
 const gallery = document.querySelector('.gallery');
@@ -23,14 +24,13 @@ export async function makeArticleSectionNews(url) {
     const news = await makeData(url);
 
     arrLastData.push(...news.map(dataArticleSearchNormalize));
-    arrLastData.splice(perPage);
+    arrLastData.splice(countSearch.perPage);
     savedApiData.push(...arrLastData);
-
+    console.log(arrLastData.length);
     gallery.innerHTML = arrLastData.map(createCard).join('');
     gallery.prepend(weather);
     errorRequest.classList.add('visually-hidden');
     sectionHome.classList.remove('visually-hidden');
-    valuePage.curPage = 1;
   } catch (error) {}
 }
 
@@ -59,6 +59,7 @@ searhForm.addEventListener('submit', e => {
   }
 
   articleSearchNews.type = 'SEARCHE';
+  valuePage.curPage = 1;
   saveLS(LS_KEY, articleSearchNews);
   makeArticleSectionNews(articleSearchNews);
 });
