@@ -1,5 +1,3 @@
-
-
 // ---------------------------------------------------------
 const menuBtn = document.querySelector('.mobile__menu-btn');
 const menu = document.querySelector('.mobile__menu');
@@ -17,10 +15,10 @@ menuBtn.addEventListener('click', function () {
 
 // -------------------------------------------------------
 
-//  получаем текущий путь страницы с помощью 
-//  window.location.pathname и затем проверяем 
+//  получаем текущий путь страницы с помощью
+//  window.location.pathname и затем проверяем
 //  каждую ссылку на соответствие этому пути.
-//  Если ссылка соответствует текущей странице, 
+//  Если ссылка соответствует текущей странице,
 //  мы добавляем класс.active к родительскому элементу.
 
 const links = document.querySelectorAll('.mobile__menu-link');
@@ -31,8 +29,6 @@ links.forEach(link => {
     link.parentElement.classList.add('active');
   }
 });
-console.log(currentPath);
-
 
 // ------------------------------------------------------
 // const currentPage = window.location.pathname;
@@ -50,4 +46,3 @@ console.log(currentPath);
 // console.log(currentPage);
 
 // -----------------------------------------------------------
-
