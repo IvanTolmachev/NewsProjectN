@@ -3,8 +3,8 @@ import axios from 'axios';
 import { KEY } from './api-key';
 import { arrLastData } from './apiNews';
 import { checkRead } from './apiCard';
-import {  loadLS } from './lStorage';
-import {checkFavorites} from './apiCard'
+import { loadLS } from './lStorage';
+import { checkFavorites } from './apiCard';
 
 export async function getCards() {
   const URL = `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=${KEY}`;
@@ -32,7 +32,7 @@ export async function createCards() {
     const markup = createMarkup(savedApiData);
     refs.gallery.insertAdjacentHTML('beforeend', markup);
     checkRead(READ_NEWS);
-    checkFavorites(STORAGE_KEY_FAVORITE)
+    checkFavorites(STORAGE_KEY_FAVORITE);
   } catch (error) {
     console.error('Error from backend:', error);
   }
@@ -43,11 +43,11 @@ createCards();
 export function createMarkup(arr) {
   const markup = arr
     .map(({ id, url, title, section, abstract, newDateStr, imgUrl }) => {
-        return `
+      return `
          <li class="card  js-card-item" data-target-id="${id}">
       <div class="wrap-image">
           <img
-            src="${imgUrl}"
+            src="${imgUrl === '' ? '../src/images/blank.webp' : imgUrl}"
             alt="photo"
            class="wrap-image__photo"
           />
@@ -62,7 +62,10 @@ export function createMarkup(arr) {
         <p class="card__description">${
           abstract.length > 112 ? abstract.slice(0, 113) + '...' : abstract
         }</p>
-          <p class="wrap-info__time">${newDateStr}</p>
+          <p class="wrap-info__time">${newDateStr
+            .split('-')
+            .reverse()
+            .join('/')}</p>
           <a href="${url}" class="wrap-info__link" target="_blank" rel="noreferrer noopener">Read more</a>
           <p class="wrap-image__active visually-hidden">Already read</p>
       </li>
