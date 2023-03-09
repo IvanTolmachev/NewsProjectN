@@ -1,14 +1,6 @@
-<!-- 1. Зверстати header
-2. Блок навігації з елементами
-3. Поле для пошуку новин 
-4. Перемикач теми -->
 <header class="header">
   <div class="container header-container">
-    <!-- ----------mobile menu ---------- -->
     <include src="./partials/mobile-menu.html"></include>
-    <!-- ----------mobile menu ---------- -->
-
-    <!-- <nav class="header-nav"> -->
     <nav class="container-nav">
       <a class="logo" href="./index.html">News</a>
       <!-- </nav> -->
@@ -35,11 +27,11 @@
           autocomplete="off"
           placeholder="Search "
         />
-        <div type="submit" class="btn-search">
+        <button type="submit" class="btn-search">
           <svg class="menu-icon-btn" width="20px" height="20px">
             <use href="/src/images/icon.svg#icon-bx_search"></use>
           </svg>
-        </div>
+        </button>
       </form>
       <div class="mobile__menu-btn">
         <span></span>
@@ -47,7 +39,6 @@
         <span></span>
       </div>
     </div>
-
     <include src="./partials/toggle-mode.html"></include>
   </div>
 </header>

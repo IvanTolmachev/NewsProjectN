@@ -8,7 +8,7 @@ const weatherWeekList = document.querySelector('.weather__week--list');
 
 const apiKey = 'ac97801f712add3fe97dbc6a96855cd7';
 
-import wIcon from '../images/wether-icons/*.png';
+import wIcon from '../images/wether-icons/*.webp';
 
 // Обновления элементов HTML
 
