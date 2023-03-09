@@ -71,16 +71,17 @@ function renderCalendar() {
     // creating li of all days of current month
     // adding active class to li if the current day, month, and year matched
 
-    // let isToday =
-    //   i === date.getDate() &&
-    //     currMonth === date.getMonth() &&
-    //     currYear === date.getFullYear()
-    //     ? 'current-month-day'
-    //     : '';
-    let isCurrentDay = i === date.getDate() ? 'current-month-day' : '';
+    date = new Date();
+    let isToday =
+      i === date.getDate() &&
+        currMonth === date.getMonth() &&
+        currYear === date.getFullYear()
+        ? 'current-month-day'
+        : '';
+    // let isCurrentDay = i === date.getDate() ? 'current-month-day' : '';
     // liTag += `<li><button type="button" class="button ${isToday} ${isCurrentDay}">${i}</button></li>`;
 
-    liTag += `<li><button type="button" class="button ${isCurrentDay}">${i}</button></li>`;
+    liTag += `<li><button type="button" class="button ${isToday}">${i}</button></li>`;
   }
 
   for (let i = lastDayofMonth; i < 7; i++) {
@@ -107,7 +108,41 @@ function onDaysTagClick(e) {
     currentActiveDate.classList.remove('active');
     calendarIcon.classList.remove('rotate');
   }
-  e.target.classList.add('active');
+
+  selectedDate = `${currYear}/${addLeadingZero(currMonth + 1)}/${addLeadingZero(e.target.textContent)}`;
+  let selectedTime = Number(new Date(selectedDate).getTime())
+  // console.log('selectedDate', selectedDate, selectedTime);
+
+  let currentNowDate = `${new Date().getFullYear()}/${addLeadingZero(new Date().getMonth() + 1)}/${addLeadingZero(new Date().getDate())}`;
+  let currentNowTime = Number(new Date(currentNowDate).getTime());
+  // console.log('currentNow', currentNowDate, currentNowTime);
+
+  if (selectedTime > currentNowTime) {
+    Notiflix.Notify.failure(
+      'Please select a date less than or equal to today!',
+      {
+        opacity: 1,
+        position: 'center-top',
+        timeout: 350,
+        cssAnimationDuration: 2000,
+        cssAnimationStyle: 'from-top',
+      }
+    );
+
+    spanEl.textContent = currentNowDate;
+    date = new Date();
+    currYear = date.getFullYear();
+    currMonth = date.getMonth();
+    currentDate.innerHTML = `${months[currMonth]} ${currYear}`;
+    renderCalendar()
+  }
+
+
+  if (selectedTime <= currentNowTime) {
+    e.target.classList.add('active');
+  }
+
+
 }
 
 // function onTodayBtnClick() {
@@ -126,42 +161,13 @@ function onDaysTagClick(e) {
 function renderBtns(dayBtns) {
   dayBtns.forEach(dayBtn =>
     dayBtn.addEventListener('click', e => {
-      spanEl.textContent = `${addLeadingZero(
-        e.target.textContent
-      )}/${addLeadingZero(currMonth + 1)}/${currYear}`;
+      spanEl.textContent = `${addLeadingZero(e.target.textContent)}/${addLeadingZero(currMonth + 1)}/${currYear}`;
       modalEl.classList.toggle('is-shown');
       btnEl.classList.remove('btn-is-active');
-
-      selectedDate = `${currYear}/${addLeadingZero(
-        currMonth + 1
-      )}/${addLeadingZero(e.target.textContent)}`;
-
-      if (Number(new Date(selectedDate).getTime()) > Number(Date.now())) {
-        Notiflix.Notify.failure(
-          'Please select a date less than or equal to today!',
-          {
-            opacity: 1,
-            position: 'center-top',
-            timeout: 350,
-            cssAnimationDuration: 2000,
-            cssAnimationStyle: 'from-top',
-          }
-        );
-
-        // spanEl.textContent = `${addLeadingZero(
-        //   date.getDate()
-        // )}/${addLeadingZero(date.getMonth() + 1)}/${date.getFullYear()}`;
-        // currentDate.innerHTML = `${months[date.getMonth()]
-        //   } ${date.getFullYear()}`;
-        // date = new Date();
-        // currYear = date.getFullYear();
-        // currMonth = date.getMonth();
-      }
-
-      // onTodayBtnClick();
     })
   );
 }
+
 renderCalendar();
 
 function addLeadingZero(value) {
@@ -185,7 +191,7 @@ function onPrevNextIconClick() {
         date = new Date(); // pass the current date as date value
       }
       renderCalendar(); // calling renderCalendar function
-      renderCurrentDays()
+      // renderCurrentDays()
     });
   });
 }
@@ -195,7 +201,7 @@ function onYearBtnPrevClick() {
   yearBtnPrev.addEventListener('click', () => {
     currYear -= 1;
     renderCalendar();
-    renderCurrentDays();
+    // renderCurrentDays();
   });
 }
 onYearBtnPrevClick();
@@ -204,7 +210,7 @@ function onYearBtnNextClick() {
   yearBtnNext.addEventListener('click', () => {
     currYear += 1;
     renderCalendar();
-    renderCurrentDays();
+    // renderCurrentDays();
   });
 }
 onYearBtnNextClick();
@@ -212,10 +218,6 @@ onYearBtnNextClick();
 function renderCurrentDays() {
   let saveDate = JSON.parse(localStorage.getItem('VALUE'));
   let rendCurrentDays = daysTag.childNodes;
-
-  // console.log(saveDate);
-  // console.log(currMonth);
-  // console.log(currYear);
 
   rendCurrentDays.forEach(el => {
     el.firstChild.classList.remove('active');
