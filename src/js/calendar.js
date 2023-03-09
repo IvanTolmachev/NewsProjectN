@@ -97,8 +97,6 @@ function renderCalendar() {
   const dayBtns = document.querySelectorAll('.button');
   renderBtns(dayBtns);
 
-  // renderCurrentDays()
-
   daysTag.addEventListener('click', onDaysTagClick);
 }
 
@@ -215,13 +213,20 @@ function renderCurrentDays() {
   let saveDate = JSON.parse(localStorage.getItem('VALUE'));
   let rendCurrentDays = daysTag.childNodes;
 
+  // console.log(saveDate);
+  // console.log(currMonth);
+  // console.log(currYear);
+
   rendCurrentDays.forEach(el => {
     el.firstChild.classList.remove('active');
     el.firstChild.classList.remove('current-month-day');
   });
 
   rendCurrentDays.forEach(el => {
-    if (Number(el.textContent) === Number(saveDate)) {
+    if (Number(el.textContent) === Number(saveDate)
+      && currMonth === date.getMonth()
+      && currYear === date.getFullYear()
+    ) {
       el.firstChild.classList.add('current-month-day');
     }
   });
