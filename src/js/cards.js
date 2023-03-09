@@ -15,7 +15,7 @@ const READ_NEWS = 'readNews';
 const STORAGE_KEY_FAVORITE = 'favoriteNews';
 const favoriteNews = JSON.parse(localStorage.getItem(STORAGE_KEY_FAVORITE));
 const iconHeart = new URL('../images/icon.svg', import.meta.url);
-
+const backPhoto = new URL('../images/blank.webp', import.meta.url);
 const refs = {
   gallery: document.querySelector('.gallery'),
 };
@@ -47,7 +47,7 @@ export function createMarkup(arr) {
          <li class="card  js-card-item" data-target-id="${id}">
       <div class="wrap-image">
           <img
-            src="${imgUrl === '' ? '../src/images/blank.webp' : imgUrl}"
+            src="${imgUrl === '' ? backPhoto : imgUrl}"
             alt="photo"
            class="wrap-image__photo"
           />
