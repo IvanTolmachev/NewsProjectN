@@ -1,9 +1,13 @@
 // ---------------------------------------------------------
+
 const menuBtn = document.querySelector('.mobile__menu-btn');
+
 const menu = document.querySelector('.mobile__menu');
 const bodyScroll = document.querySelector('body');
 
-menuBtn.addEventListener('click', function () {
+menuBtn.addEventListener('click', toggleMobileMenu);
+
+function toggleMobileMenu(event) {
   const expanded = menuBtn.getAttribute('aria-expanded') === 'true' || false;
 
   menuBtn.classList.toggle('isMenuOpen');
@@ -11,8 +15,7 @@ menuBtn.addEventListener('click', function () {
 
   menu.classList.toggle('isMenuOpen');
   bodyScroll.classList.toggle('body-scroll');
-});
-
+}
 // -------------------------------------------------------
 
 //  получаем текущий путь страницы с помощью
@@ -29,6 +32,7 @@ links.forEach(link => {
     link.parentElement.classList.add('active');
   }
 });
+// console.log(currentPath);
 
 // ------------------------------------------------------
 // const currentPage = window.location.pathname;

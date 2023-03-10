@@ -8,27 +8,52 @@
   width: 100%;
 }
 
-// .logo {
-//   z-index: 2;
-//   font-family: $primaryFontManrope;
-//   font-style: normal;
-//   font-weight: 700;
-//   font-size: 24px;
-//   line-height: 33px;
-//   color: $primaryTextColor;
-// }
+.logo {
+  // margin-right: auto;
+  color: $primaryTextColor;
+
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.38;
+  cursor: pointer;
+  padding-left: 16px;
+  padding-right: 16px;
+
+
+  // z-index: 2;
+  font-family: $primaryFontManrope;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 33px;
+  color: $primaryTextColor;
+}
 
 .mobile__menu-btn {
   display: block;
   width: 30px;
   height: 30px;
   position: relative;
-  z-index: 2;
+  // position: absolute;
+  // top: 28px;
+  // right: 16px;
+  z-index: 50;
+  // z-index: 2;
   overflow: hidden;
   margin-left: auto;
+  cursor: pointer;
+
   @include tablet {
     display: none;
   }
+
+
+  &.isMenuOpen {
+    position: absolute;
+    top: 28px;
+    right: 16px;
+  }
+
 }
 
 .mobile__menu-btn span {
@@ -39,35 +64,42 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: var(--header-text-color);
-  transition: all 0.5s;
+  transition: transform 0.3s linear 0.4s;
+
 }
 
 .mobile__menu-btn span:nth-of-type(2) {
-  top: calc(50% - 6px);
+  top: calc(50% - 4px);
 }
 
 .mobile__menu-btn span:nth-of-type(3) {
-  top: calc(50% + 6px);
+  top: calc(50% + 4px);
 }
+
+
 
 /* Меню, которое будет появляться */
 .mobile__menu {
   position: fixed;
   top: -100%;
   left: 0;
-  width: 100%;
-  height: 100%;
+  padding-top: 24px;
+  padding-bottom: 18px;
   opacity: 0;
   visibility: hidden;
   transform: translateY(-100%);
-  transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out,
-    transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: opacity 1.5s ease-in-out, visibility 1s ease-in-out,
+    transform 2s cubic-bezier(0.175, 0.885, 0.32, 1.275) 3s;
+
+  @include tablet {
+    display: none;
+  }
 }
 
 .mobile__menu-list {
   display: flex;
   flex-direction: column;
-  margin-top: 131px;
+  margin-top: 68px;
   gap: 24px;
 }
 
@@ -80,8 +112,12 @@
   z-index: 2;
   opacity: 1;
   visibility: visible;
+  // transform: translateY(-100%);
   transform: translateY(0%);
-  transition-delay: 0.4s;
+  transition: opacity 1.5s ease-in-out,
+    // visibility 1s ease-in-out,
+    transform 2s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1s;
+
 }
 
 .isMenuOpen {
@@ -126,31 +162,57 @@
 }
 
 .mobile__menu-icon {
-  margin-left: 16px;
   stroke: none;
+  margin-left: 16px;
 }
 
 .mobile__menu-icon__arrow {
   margin-left: auto;
-  margin-right: 10px;
+  margin-right: 16px;
   fill: none;
 }
 
-// .mobile__menu-link {
-
-// }
 
 /* Меняем гамбургер иконку, когда меню открыто */
+
+
+
 .mobile__menu-btn.isMenuOpen span:nth-of-type(1) {
   display: none;
+
 }
 
 .mobile__menu-btn.isMenuOpen span:nth-of-type(2) {
   top: 50%;
   transform: translate(-50%, 0%) rotate(45deg);
+
 }
 
 .mobile__menu-btn.isMenuOpen span:nth-of-type(3) {
   top: 50%;
   transform: translate(-50%, 0%) rotate(-45deg);
+
+}
+
+
+
+
+
+.container-mobile {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: auto;
+}
+
+.toggleWrapper_mobile {
+  padding-left: 16px;
+  gap: 8px;
+  align-items: center;
+  display: flex;
+}
+
+.mobile__menu-btn>span {
+  pointer-events: none;
 }
