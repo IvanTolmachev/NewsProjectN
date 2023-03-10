@@ -71,48 +71,36 @@ export async function makeSectionNews(url) {
 
 //?===== function  render
 
-function restart() {
+export function restart() {
   const element = document.querySelector('.gallery');
-  // const maxWidth = element.getBoundingClientRect().width;
-  const style = window.getComputedStyle(element, null);
+  const lastSeacrh = loadLS(LS_KEY);
 
-  //countSearch.rowCount = 1;
-  // countSearch.sectionCount = 0;
-  // countSearch.perPage = 4;
+  const style = window.getComputedStyle(element, null);
   valuePage.totalPage = Math.floor(countSearch.newsCount / countSearch.perPage);
 
   if (countSearch.rowCount === +style.getPropertyValue('--countCard')) return;
   countSearch.rowCount = +style.getPropertyValue('--countCard');
-  // if (maxWidth >= 768) {
-  //   countSearch.sectionCount = 4;
-  //   countSearch.rowCount = 2;
-  //   countSearch.perPage = 7;
-  // }
-  // if (maxWidth >= 1280) {
-  //   countSearch.sectionCount = 6;
-  //   countSearch.rowCount = 3;
-  //   countSearch.perPage = 8;
-  // }
 
   switch (countSearch.rowCount) {
     case 1:
       countSearch.sectionCount = 0;
       countSearch.perPage = 4;
+      if ((lastSeacrh.type = 'SEARCHE')) countSearch.newsCount = 400;
       break;
     case 2:
       countSearch.sectionCount = 4;
       countSearch.perPage = 7;
+      if ((lastSeacrh.type = 'SEARCHE')) countSearch.newsCount = 700;
       break;
     case 3:
       countSearch.sectionCount = 6;
       countSearch.perPage = 8;
+      if ((lastSeacrh.type = 'SEARCHE')) countSearch.newsCount = 800;
       break;
   }
   valuePage.totalPage = Math.floor(countSearch.newsCount / countSearch.perPage);
   sortSections();
   makePaginationsBtnMurkUp();
-
-  console.log(countSearch.rowCount);
 }
 
 function sortSections() {
