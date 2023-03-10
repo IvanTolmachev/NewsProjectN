@@ -74,7 +74,7 @@ export function createMarkup(arr) {
          <li class="card  js-card-item" data-target-id="${id}">
       <div class="wrap-image">
           <img
-            src="${imgUrl === '' ? backPhoto : imgUrl}"
+            src="${imgUrl.length === 0 ? backPhoto : imgUrl}"
             alt="photo"
            class="wrap-image__photo"
           />
