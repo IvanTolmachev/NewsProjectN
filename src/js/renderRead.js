@@ -9,7 +9,7 @@ const dataBlock = document.querySelector('.date-block');
 const errorRequest = document.querySelector('.errorRequest');
 const icon = new URL('../images/icon.svg', import.meta.url);
 
-function renderFromLS(key) {
+export function renderFromLS(key) {
   let favoritNews = loadLS(key);
 
   let readDate = '0000/00/00';

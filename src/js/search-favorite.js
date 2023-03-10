@@ -27,8 +27,8 @@ function onSearch(evt) {
           title : `${title}`,
           section: `${section}`,
           abstract : `${abstract}`,
-          newDateStr : newDateStr,
-          imgUrl : imgUrl,})
+          newDateStr : `${newDateStr}`,
+          imgUrl : `${imgUrl}`,})
         } 
         
     })
