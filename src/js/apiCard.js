@@ -69,7 +69,7 @@ export function togleFaforite(e) {
 }
 
 export function addRead(e) {
-  e.preventDefault();
+  // e.preventDefault();
 
   if (e.target.classList.contains('wrap-info__link')) {
     const itemNews = e.target.closest('.js-card-item');
