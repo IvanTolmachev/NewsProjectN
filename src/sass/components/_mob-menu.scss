@@ -74,6 +74,7 @@
 
 /* Меню, которое будет появляться */
 .mobile__menu {
+   background-color: var(--color-bg);
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -82,8 +83,7 @@
   padding-bottom: 18px;
   opacity: 0;
   transform: translateY(-120%);
-  transition: opacity 500ms $timingFunction, transform 500ms $timingFunction;
-
+  transition: opacity 900ms ease-in, transform 900ms ease-in;
   @include tablet {
     display: none;
   }
@@ -106,8 +106,7 @@
   z-index: 2;
   opacity: 1;
   transform: translateY(0%);
-  transition: opacity 1000ms $timingFunction, transform 600ms $timingFunction;
-}
+transition: all 900ms ease-in-out;}
 
 // .isMenuOpen {
 //   background-color: var(--color-bg);
