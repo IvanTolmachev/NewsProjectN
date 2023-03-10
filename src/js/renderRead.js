@@ -9,7 +9,6 @@ const dataBlock = document.querySelector('.date-block');
 const errorRequest = document.querySelector('.errorRequest');
 const icon = new URL('../images/icon.svg', import.meta.url);
 
-
 function renderFromLS(key) {
   let favoritNews = loadLS(key);
 
@@ -29,18 +28,18 @@ function renderFromLS(key) {
   favoritNews.forEach(i => {
     //i.classList.add('inRead');
     if (readDate !== i.readDate) {
-    const dateTitle = document.createElement('div');
+      const dateTitle = document.createElement('div');
       dateTitle.innerHTML = `<span class="btn-span">${readDate}</span>
-                                    <svg class="icon-down-read-pg icon-rotate" width="15" height="9">
+                                    <svg class="icon-down-read-pg icon-rotate" width="15" height="15">
                                          <use href="${icon}#icon-arrow-down"></use>
                                     </svg>`;
       dataBlock.append(dateTitle);
-      const dateBlock = document.createElement('UL'); 
+      const dateBlock = document.createElement('UL');
       // ***********************
-      dateTitle.classList.add('date-title'); 
+      dateTitle.classList.add('date-title');
       // **********************
       dateBlock.classList.add('gallery');
-      dateBlock.classList.add('visually-hidden'); 
+      dateBlock.classList.add('visually-hidden');
       dateBlock.innerHTML = tempBlock.map(createCard).join('');
       dataBlock.append(dateBlock);
       readDate = i.readDate;
@@ -65,4 +64,3 @@ function lostFavorite() {
 
 const readBlock = document.querySelector('#readNews');
 readBlock.addEventListener('click', togleFaforite);
-
