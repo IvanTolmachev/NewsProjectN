@@ -30,12 +30,16 @@ function renderFromLS(key) {
     if (readDate !== i.readDate) {
       const dateTitle = document.createElement('div');
       dateTitle.innerHTML = `<span class="btn-span">${readDate}</span>
-                                    <svg class="icon-down-read-pg" width="15" height="9">
+                                    <svg class="icon-down-read-pg icon-rotate" width="15" height="15">
                                          <use href="${icon}#icon-arrow-down"></use>
                                     </svg>`;
       dataBlock.append(dateTitle);
       const dateBlock = document.createElement('UL');
+      // ***********************
+      dateTitle.classList.add('date-title');
+      // **********************
       dateBlock.classList.add('gallery');
+      dateBlock.classList.add('visually-hidden');
       dateBlock.innerHTML = tempBlock.map(createCard).join('');
       dataBlock.append(dateBlock);
       readDate = i.readDate;

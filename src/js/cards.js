@@ -3,14 +3,22 @@ import axios from 'axios';
 import { KEY } from './api-key';
 import { arrLastData } from './apiNews';
 import { checkRead } from './apiCard';
-import { loadLS } from './lStorage';
+import { loadLS, saveLS } from './lStorage';
 import { checkFavorites } from './apiCard';
+import { valuePage } from './pagination';
+import { makePaginationsBtnMurkUp } from './pagination';
+import { countSearch } from './apiUrl';
+import { restart } from './filter-categories';
+
+let LS_KEY = 'lastSearch';
 
 export async function getCards() {
   const URL = `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=${KEY}`;
-  const requestData = await axios.get(URL);
+  const request = await axios.get(URL);
+  const requestData = request;
   return requestData;
 }
+const gallery = document.querySelector('.gallery');
 const READ_NEWS = 'readNews';
 const STORAGE_KEY_FAVORITE = 'favoriteNews';
 const favoriteNews = JSON.parse(localStorage.getItem(STORAGE_KEY_FAVORITE));
@@ -19,17 +27,38 @@ const backPhoto = new URL('../images/blank.webp', import.meta.url);
 const refs = {
   gallery: document.querySelector('.gallery'),
 };
-export const savedApiData = [];
 
-export async function createCards() {
+export let savedApiData = [];
+
+export async function createCards(page) {
   try {
+    restart();
     const response = await getCards();
-    const data = response.data.results;
-    // console.log(data);
+    let currentPage = page || 1;
+    let cardsPerPage = countSearch.perPage;
+
+    let totalHits = response.data.num_results;
+    valuePage.totalPages = Math.ceil(totalHits / cardsPerPage);
+    const start = (currentPage - 1) * cardsPerPage;
+    const end = start + cardsPerPage;
+    makePaginationsBtnMurkUp();
+    const data = response.data.results.slice(start, end);
+    const weather = document.querySelector('.weather__thumb');
+    savedApiData = [];
+    let someOne = {
+      type: '',
+    };
+
     saveApiData(data);
+    saveLS(LS_KEY, someOne);
+    let lastsearch = loadLS(LS_KEY);
+    lastsearch.type = 'POPULAR';
+    saveLS(LS_KEY, lastsearch);
     arrLastData.length = 0;
     arrLastData.push(...savedApiData);
     const markup = createMarkup(savedApiData);
+    refs.gallery.innerHTML = '';
+    gallery.prepend(weather);
     refs.gallery.insertAdjacentHTML('beforeend', markup);
     checkRead(READ_NEWS);
     checkFavorites(STORAGE_KEY_FAVORITE);
@@ -37,9 +66,7 @@ export async function createCards() {
     console.error('Error from backend:', error);
   }
 }
-
 createCards();
-
 export function createMarkup(arr) {
   const markup = arr
     .map(({ id, url, title, section, abstract, newDateStr, imgUrl }) => {
@@ -91,5 +118,4 @@ function saveApiData(arrey) {
     item['imgUrl'] = imgUrl;
     savedApiData.push(item);
   });
-  // console.log('savedApiData', savedApiData);
 }

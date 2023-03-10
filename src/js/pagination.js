@@ -3,7 +3,7 @@ const btnForward = document.querySelector('.next-page');
 const btnBackPage = document.querySelector('.prev-page');
 const paginContainer = document.querySelector('.pagination');
 import { paginationAll } from './apiPagination.js';
-// import { createCards } from './cards.js';
+import { createCards } from './cards.js';
 
 btnForward.disabled = true;
 function smoothScroll() {
@@ -27,7 +27,6 @@ export const valuePage = {
   },
 };
 
-makePaginationsBtnMurkUp();
 paginContainer.addEventListener('click', e => {
   e.preventDefault();
   if (e.target.classList.contains('pg-link--border')) {
@@ -39,8 +38,9 @@ paginContainer.addEventListener('click', e => {
     smoothScroll();
     handleButton(e.target);
     makePaginationsBtnMurkUp(valuePage);
-    paginationAll(valuePage.curPage);
+    // createCards(valuePage.curPage);
 
+    paginationAll(valuePage.curPage);
     return;
   } else if (!e.target.classList.contains('pg-link')) {
     return;
@@ -48,6 +48,8 @@ paginContainer.addEventListener('click', e => {
   smoothScroll();
   valuePage.curPage = parseInt(e.target.dataset.page);
   makePaginationsBtnMurkUp(valuePage);
+  // createCards(valuePage.curPage);
+
   paginationAll(valuePage.curPage);
 });
 

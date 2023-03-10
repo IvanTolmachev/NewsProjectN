@@ -5,7 +5,8 @@ import {
   dataSectionNormalize,
   arrLastData,
 } from './apiNews';
-import { sectionList, sectionNews, perPage, maxHits } from './apiUrl';
+import { perPage } from './apiUrl';
+import { sectionList, sectionNews, countSearch } from './apiUrl';
 import { saveLS, loadLS } from './lStorage';
 import { valuePage, makePaginationsBtnMurkUp } from './pagination';
 import { savedApiData } from './cards';
@@ -39,6 +40,7 @@ async function makeSection(url) {
     const Data = await makeData(url);
     listShow.innerHTML = Data.map(rendeSection).join('');
     restart();
+    sortSections();
   } catch (error) {}
 }
 
@@ -50,10 +52,11 @@ export async function makeSectionNews(url) {
   savedApiData.length = 0;
 
   try {
-    sectionNews.params.limit = perPage;
+    sectionNews.params.limit = countSearch.perPage;
     const news = await makeData(url);
     arrLastData.push(...news.map(dataSectionNormalize));
     savedApiData.push(...arrLastData);
+    // console.log(arrLastData.length);
     gallery.innerHTML = arrLastData.map(createCard).join('');
     gallery.prepend(weather);
 
@@ -61,7 +64,6 @@ export async function makeSectionNews(url) {
     sectionHome.classList.remove('visually-hidden');
     checkRead(READ_NEWS);
     checkFavorites(FAIVORIT_NEWS);
-    valuePage.curPage = 1;
   } catch (error) {
     console.log(error);
   }
@@ -69,26 +71,51 @@ export async function makeSectionNews(url) {
 
 //?===== function  render
 
-function restart() {
-  let maxWidth = document
-    .querySelector('.categories')
-    .getBoundingClientRect().width;
-  let count = 0;
-  if (maxWidth >= 768) count = 4;
-  if (maxWidth >= 1280) count = 6;
+export function restart() {
+  const element = document.querySelector('.gallery');
+  // const maxWidth = element.getBoundingClientRect().width;
+  const style = window.getComputedStyle(element, null);
 
-  if (!count) {
-    showHideCategoriesBtn.querySelector('span').textContent = 'Categories';
-    categoriesContainer.classList.add('no-categories');
-  } else {
-    showHideCategoriesBtn.querySelector('span').textContent = 'Others';
-    categoriesContainer.classList.remove('no-categories');
+  //countSearch.rowCount = 1;
+  // countSearch.sectionCount = 0;
+  // countSearch.perPage = 4;
+  valuePage.totalPage = Math.floor(countSearch.newsCount / countSearch.perPage);
+
+  if (countSearch.rowCount === +style.getPropertyValue('--countCard')) return;
+  countSearch.rowCount = +style.getPropertyValue('--countCard');
+  // if (maxWidth >= 768) {
+  //   countSearch.sectionCount = 4;
+  //   countSearch.rowCount = 2;
+  //   countSearch.perPage = 7;
+  // }
+  // if (maxWidth >= 1280) {
+  //   countSearch.sectionCount = 6;
+  //   countSearch.rowCount = 3;
+  //   countSearch.perPage = 8;
+  // }
+
+  switch (countSearch.rowCount) {
+    case 1:
+      countSearch.sectionCount = 0;
+      countSearch.perPage = 4;
+      break;
+    case 2:
+      countSearch.sectionCount = 4;
+      countSearch.perPage = 7;
+      break;
+    case 3:
+      countSearch.sectionCount = 6;
+      countSearch.perPage = 8;
+      break;
   }
+  valuePage.totalPage = Math.floor(countSearch.newsCount / countSearch.perPage);
+  sortSections();
+  makePaginationsBtnMurkUp();
 
-  sortSections(count);
+  console.log(countSearch.rowCount);
 }
 
-function sortSections(count) {
+function sortSections() {
   let elementShow = Array.from(
     document.querySelectorAll('#categories-show .categories__item')
   );
@@ -100,11 +127,18 @@ function sortSections(count) {
   const listShow = document.getElementById('categories-show');
   const listHide = document.getElementById('categories-hide');
 
+  if (!countSearch.sectionCount) {
+    showHideCategoriesBtn.querySelector('span').textContent = 'Categories';
+    categoriesContainer.classList.add('no-categories');
+  } else {
+    showHideCategoriesBtn.querySelector('span').textContent = 'Others';
+    categoriesContainer.classList.remove('no-categories');
+  }
   elementShow = [];
   elementHide = [];
 
   for (let i = 0; i < list.length; i++) {
-    if (i < count) {
+    if (i < countSearch.sectionCount) {
       elementShow.push(list[i]);
     } else elementHide.push(list[i]);
   }
@@ -130,6 +164,7 @@ categories.addEventListener('click', e => {
     e.target.nodeName === 'LI' &&
     e.target.classList.contains('categories__item')
   ) {
+    //  console.log(countSearch.perPage);
     const listItem = categories.querySelectorAll('.categories__item');
     listItem.forEach(item => item.classList.remove('activ'));
     e.target.classList.add('activ');
@@ -138,18 +173,20 @@ categories.addEventListener('click', e => {
 
     sectionNews.subUrl = e.target.dataset.section;
     sectionNews.type = 'SECTION';
+    valuePage.curPage = 1;
 
     saveLS(LS_KEY, sectionNews);
 
     (async () => {
       try {
+        sectionNews.params.limit = countSearch.perPage;
         makeSectionNews(sectionNews);
 
-        sectionNews.params.limit = maxHits;
+        sectionNews.params.limit = countSearch.maxHits;
         const news = await makeData(sectionNews);
-        valuePage.totalPage = Math.floor(news.length / perPage);
-        sectionNews.params.limit = perPage;
-
+        countSearch.newsCount = news.length;
+        restart();
+        sortSections();
         makePaginationsBtnMurkUp();
       } catch (error) {
         console.log(error);
@@ -162,7 +199,12 @@ window.addEventListener('load', () => {
   makeSection(sectionList);
 });
 
-window.addEventListener('resize', debounce(restart, 250));
+window.addEventListener(
+  'resize',
+  debounce(() => {
+    restart();
+  }, 250)
+);
 window.addEventListener('click', e => {
   if (
     !e.target.closest('.filter-wrapper') &&

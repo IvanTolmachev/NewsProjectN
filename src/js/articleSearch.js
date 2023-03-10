@@ -4,9 +4,11 @@ import {
   dataArticleSearchNormalize,
   arrLastData,
 } from './apiNews';
-import { articleSearchNews, perPage } from './apiUrl';
+import { articleSearchNews, countSearch } from './apiUrl';
 import { saveLS } from './lStorage';
 import { savedApiData } from './cards';
+import { valuePage, makePaginationsBtnMurkUp } from './pagination';
+//import { restart } from './filter-categories';
 
 const LS_KEY = 'lastSearch';
 const gallery = document.querySelector('.gallery');
@@ -21,23 +23,22 @@ export async function makeArticleSectionNews(url) {
   savedApiData.length = 0;
   try {
     const news = await makeData(url);
-
     arrLastData.push(...news.map(dataArticleSearchNormalize));
-    arrLastData.splice(perPage);
-    savedApiData.push(...arrLastData);
 
+    arrLastData.splice(countSearch.perPage);
+
+    savedApiData.push(...arrLastData);
     gallery.innerHTML = arrLastData.map(createCard).join('');
     gallery.prepend(weather);
     errorRequest.classList.add('visually-hidden');
     sectionHome.classList.remove('visually-hidden');
-    valuePage.curPage = 1;
   } catch (error) {}
 }
 
 searhForm.addEventListener('submit', e => {
   e.preventDefault();
-  const searchNews = e.target.searchQuery.value.trim();
 
+  const searchNews = e.target.searchQuery.value.trim();
   e.currentTarget.reset();
 
   if (!searchNews) {
@@ -61,4 +62,6 @@ searhForm.addEventListener('submit', e => {
   articleSearchNews.type = 'SEARCHE';
   saveLS(LS_KEY, articleSearchNews);
   makeArticleSectionNews(articleSearchNews);
+  valuePage.curPage = 1;
+  makePaginationsBtnMurkUp();
 });

@@ -149,12 +149,13 @@
   padding: 5px 20px 5px 48px;
   box-sizing: border-box;
   border: none;
+  outline: none;
   border: 1px solid $primaryTextColor;
   font-family: 'Poppins';
   font-weight: 400;
   font-size: 14px;
   line-height: 1.71;
-  color: $primaryTextColor;
+  color: var(--header-text-color);
   border-radius: 20px;
 
   // position: absolute;

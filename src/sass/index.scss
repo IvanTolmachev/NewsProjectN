@@ -5,7 +5,6 @@
 @import './utils/base';
 @import './utils/utils';
 @import './utils/container';
-@import './utils/visuallyHiden';
 
 @import './components/header';
 @import './components/mob-menu';
@@ -20,3 +19,5 @@
 @import './components/weather';
 @import './components/toggle-mode';
 @import './components/pre-loader';
+
+@import './utils/visuallyHiden';

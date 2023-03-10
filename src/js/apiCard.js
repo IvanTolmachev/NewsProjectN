@@ -38,7 +38,7 @@ export function togleFaforite(e) {
     const favoriteText = itemNews.querySelector('#favorit-txt');
     const newsId = itemNews.dataset.targetId;
 
-    const favoritNews = loadLS(FAIVORIT_NEWS);
+    let favoritNews = loadLS(FAIVORIT_NEWS);
     let targetNews = arrLastData.find(i => i.id === newsId);
 
     if (!favoritNews) {
@@ -84,8 +84,6 @@ export function addRead(e) {
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
     });
 
     targetNews.readDate = readDate;
