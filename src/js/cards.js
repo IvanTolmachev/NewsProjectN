@@ -12,8 +12,6 @@ import { restart } from './filter-categories';
 
 let LS_KEY = 'lastSearch';
 
-export let indicator = true;
-
 export async function getCards() {
   const URL = `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=${KEY}`;
   const request = await axios.get(URL);
@@ -34,8 +32,8 @@ export let savedApiData = [];
 
 export async function createCards(page) {
   try {
-    const response = await getCards();
     restart();
+    const response = await getCards();
     let currentPage = page || 1;
     let cardsPerPage = countSearch.perPage;
 
@@ -47,7 +45,15 @@ export async function createCards(page) {
     const data = response.data.results.slice(start, end);
     const weather = document.querySelector('.weather__thumb');
     savedApiData = [];
+    let someOne = {
+      type: '',
+    };
+
     saveApiData(data);
+    saveLS(LS_KEY, someOne);
+    let lastsearch = loadLS(LS_KEY);
+    lastsearch.type = 'POPULAR';
+    saveLS(LS_KEY, lastsearch);
     arrLastData.length = 0;
     arrLastData.push(...savedApiData);
     const markup = createMarkup(savedApiData);
@@ -56,9 +62,6 @@ export async function createCards(page) {
     refs.gallery.insertAdjacentHTML('beforeend', markup);
     checkRead(READ_NEWS);
     checkFavorites(STORAGE_KEY_FAVORITE);
-    let lastsearch = loadLS(LS_KEY);
-    lastsearch.type = 'POPULAR';
-    saveLS(LS_KEY, lastsearch);
   } catch (error) {
     console.error('Error from backend:', error);
   }
