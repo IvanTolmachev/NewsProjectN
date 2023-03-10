@@ -19,7 +19,6 @@
   padding-left: 16px;
   padding-right: 16px;
 
-
   // z-index: 2;
   font-family: $primaryFontManrope;
   font-style: normal;
@@ -34,11 +33,7 @@
   width: 30px;
   height: 30px;
   position: relative;
-  // position: absolute;
-  // top: 28px;
-  // right: 16px;
   z-index: 50;
-  // z-index: 2;
   overflow: hidden;
   margin-left: auto;
   cursor: pointer;
@@ -47,13 +42,15 @@
     display: none;
   }
 
-
   &.isMenuOpen {
+    background-color: var(--color-bg);
     position: absolute;
     top: 28px;
     right: 16px;
+    opacity: 1;
+    transform: translateY(0%);
+    transition: opacity 1000ms $timingFunction, transform 600ms $timingFunction;
   }
-
 }
 
 .mobile__menu-btn span {
@@ -64,8 +61,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: var(--header-text-color);
-  transition: transform 0.3s linear 0.4s;
-
+  transition: transform $durationFunction $timingFunction;
 }
 
 .mobile__menu-btn span:nth-of-type(2) {
@@ -76,20 +72,17 @@
   top: calc(50% + 4px);
 }
 
-
-
 /* Меню, которое будет появляться */
 .mobile__menu {
+  width: 100vw;
+  height: 100vh;
   position: fixed;
-  top: -100%;
   left: 0;
   padding-top: 24px;
   padding-bottom: 18px;
   opacity: 0;
-  visibility: hidden;
-  transform: translateY(-100%);
-  transition: opacity 1.5s ease-in-out, visibility 1s ease-in-out,
-    transform 2s cubic-bezier(0.175, 0.885, 0.32, 1.275) 3s;
+  transform: translateY(-120%);
+  transition: opacity 500ms $timingFunction, transform 500ms $timingFunction;
 
   @include tablet {
     display: none;
@@ -104,6 +97,7 @@
 }
 
 .mobile__menu.isMenuOpen {
+  background-color: var(--color-bg);
   position: fixed;
   top: 0;
   width: 100vw;
@@ -111,18 +105,13 @@
   background-color: var(--color-bg);
   z-index: 2;
   opacity: 1;
-  visibility: visible;
-  // transform: translateY(-100%);
   transform: translateY(0%);
-  transition: opacity 1.5s ease-in-out,
-    // visibility 1s ease-in-out,
-    transform 2s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1s;
-
+  transition: opacity 1000ms $timingFunction, transform 600ms $timingFunction;
 }
 
-.isMenuOpen {
-  background-color: var(--color-bg);
-}
+// .isMenuOpen {
+//   background-color: var(--color-bg);
+// }
 
 .mobile__menu-item {
   display: flex;
@@ -172,31 +161,21 @@
   fill: none;
 }
 
-
 /* Меняем гамбургер иконку, когда меню открыто */
-
-
 
 .mobile__menu-btn.isMenuOpen span:nth-of-type(1) {
   display: none;
-
 }
 
 .mobile__menu-btn.isMenuOpen span:nth-of-type(2) {
   top: 50%;
   transform: translate(-50%, 0%) rotate(45deg);
-
 }
 
 .mobile__menu-btn.isMenuOpen span:nth-of-type(3) {
   top: 50%;
   transform: translate(-50%, 0%) rotate(-45deg);
-
 }
-
-
-
-
 
 .container-mobile {
   height: 100%;
@@ -213,6 +192,6 @@
   display: flex;
 }
 
-.mobile__menu-btn>span {
+.mobile__menu-btn > span {
   pointer-events: none;
 }
