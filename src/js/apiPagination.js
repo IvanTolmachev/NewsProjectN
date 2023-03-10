@@ -3,6 +3,7 @@ import { makeSectionNews } from './filter-categories';
 import { makeArticleSectionNews } from './articleSearch';
 const LS_KEY = 'lastSearch';
 import { createCards } from './cards';
+import { countSearch } from './apiUrl';
 
 export function paginationAll(n) {
   const lastSeacrh = loadLS(LS_KEY);

@@ -8,6 +8,7 @@ import { articleSearchNews, countSearch } from './apiUrl';
 import { saveLS } from './lStorage';
 import { savedApiData } from './cards';
 import { valuePage, makePaginationsBtnMurkUp } from './pagination';
+//import { restart } from './filter-categories';
 
 const LS_KEY = 'lastSearch';
 const gallery = document.querySelector('.gallery');
@@ -24,7 +25,9 @@ export async function makeArticleSectionNews(url) {
     const news = await makeData(url);
 
     arrLastData.push(...news.map(dataArticleSearchNormalize));
+
     arrLastData.splice(countSearch.perPage);
+
     savedApiData.push(...arrLastData);
     console.log(arrLastData.length);
     gallery.innerHTML = arrLastData.map(createCard).join('');
@@ -36,8 +39,8 @@ export async function makeArticleSectionNews(url) {
 
 searhForm.addEventListener('submit', e => {
   e.preventDefault();
-  const searchNews = e.target.searchQuery.value.trim();
 
+  const searchNews = e.target.searchQuery.value.trim();
   e.currentTarget.reset();
 
   if (!searchNews) {
@@ -59,7 +62,10 @@ searhForm.addEventListener('submit', e => {
   }
 
   articleSearchNews.type = 'SEARCHE';
+  valuePage.totalPage = 100;
   valuePage.curPage = 1;
   saveLS(LS_KEY, articleSearchNews);
   makeArticleSectionNews(articleSearchNews);
+  //restart();
+  makePaginationsBtnMurkUp();
 });
