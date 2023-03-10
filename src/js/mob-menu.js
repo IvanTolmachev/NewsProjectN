@@ -1,11 +1,13 @@
-
-
 // ---------------------------------------------------------
+
 const menuBtn = document.querySelector('.mobile__menu-btn');
+
 const menu = document.querySelector('.mobile__menu');
 const bodyScroll = document.querySelector('body');
 
-menuBtn.addEventListener('click', function () {
+menuBtn.addEventListener('click', toggleMobileMenu);
+
+function toggleMobileMenu(event) {
   const expanded = menuBtn.getAttribute('aria-expanded') === 'true' || false;
 
   menuBtn.classList.toggle('isMenuOpen');
@@ -13,14 +15,13 @@ menuBtn.addEventListener('click', function () {
 
   menu.classList.toggle('isMenuOpen');
   bodyScroll.classList.toggle('body-scroll');
-});
-
+}
 // -------------------------------------------------------
 
-//  получаем текущий путь страницы с помощью 
-//  window.location.pathname и затем проверяем 
+//  получаем текущий путь страницы с помощью
+//  window.location.pathname и затем проверяем
 //  каждую ссылку на соответствие этому пути.
-//  Если ссылка соответствует текущей странице, 
+//  Если ссылка соответствует текущей странице,
 //  мы добавляем класс.active к родительскому элементу.
 
 const links = document.querySelectorAll('.mobile__menu-link');
@@ -31,8 +32,7 @@ links.forEach(link => {
     link.parentElement.classList.add('active');
   }
 });
-console.log(currentPath);
-
+// console.log(currentPath);
 
 // ------------------------------------------------------
 // const currentPage = window.location.pathname;
@@ -50,4 +50,3 @@ console.log(currentPath);
 // console.log(currentPage);
 
 // -----------------------------------------------------------
-

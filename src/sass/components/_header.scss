@@ -9,10 +9,12 @@
 
   border-bottom: 1px solid $borderHeaderColor;
   width: 100%;
+
   @include tablet {
     padding-top: 32px;
     height: 106px;
   }
+
   @include desktop {
     padding-top: 28px;
     height: 113px;
@@ -30,7 +32,7 @@
 }
 
 .logo {
-  z-index: 555;
+  // z-index: 555;
   margin-right: auto;
   color: $primaryTextColor;
 

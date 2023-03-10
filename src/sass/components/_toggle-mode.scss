@@ -57,17 +57,27 @@
   transition: transform $durationFunction $timingFunction;
 }
 
-.switch__input:focus + .switch__slider,
-.switch__input:hover + .switch__slider {
+.switch__input:focus+.switch__slider,
+.switch__input:hover+.switch__slider {
   box-shadow: 1px 1px 7px $primarySwitchColor;
 }
 
-.switch__input:checked + .switch__slider,
-.switch__input:checked + .switch__slider {
+.switch__input_mobile:focus+.switch__slider,
+.switch__input_mobile:hover+.switch__slider {
+  box-shadow: 1px 1px 7px $primarySwitchColor;
+}
+
+.switch__input:checked+.switch__slider,
+.switch__input:checked+.switch__slider {
   box-shadow: 1px 1px 7px $primaryBgColor;
 }
 
-.switch__input:checked + .switch__slider {
+.switch__input_mobile:checked+.switch__slider,
+.switch__input_mobile:checked+.switch__slider {
+  box-shadow: 1px 1px 7px $primaryBgColor;
+}
+
+.switch__input:checked+.switch__slider {
   background-color: $hoverColor;
   border: 1px solid $witeTextColor;
   border-radius: 20px;
@@ -77,15 +87,39 @@
   }
 }
 
-.switch__input.dark_null + .switch__slider {
+.switch__input_mobile:checked+.switch__slider {
+  background-color: $hoverColor;
+  border: 1px solid $witeTextColor;
+  border-radius: 20px;
+
+  &::before {
+    background-color: $witeTextColor;
+  }
 }
 
-.switch__input:checked.dark_null + .switch__slider::before {
+
+
+.switch__input.dark_null+.switch__slider {}
+
+.switch__input:checked.dark_null+.switch__slider::before {
   transition: none;
   right: 1px;
 }
 
-.switch__input:checked + .switch__slider::before {
+.switch__input_mobile:checked.dark_null+.switch__slider::before {
+  transition: none;
+  right: 1px;
+}
+
+
+.switch__input:checked+.switch__slider::before {
+  transform: translateX(20px);
+  transition: transform $durationFunction $timingFunction;
+}
+
+
+
+.switch__input_mobile:checked+.switch__slider::before {
   transform: translateX(20px);
   transition: transform $durationFunction $timingFunction;
 }
@@ -297,6 +331,7 @@ html.dark .toggle-label.light {
 // }
 
 .input-text {
+  color: var(--search-text);
   background-color: var(--search-bg);
   border: 1px solid var(--search-border);
 }
@@ -335,6 +370,7 @@ html.light {
   --toggle-icon-moon: #5f6775;
   --bthBgColor: #f4f4f4;
   --search-bg: #f4f4f4;
+  --search-text: #111321;
   --search-border: #111321;
   --search-btn-fill: #111321;
   --calendar-border: #111321;
@@ -362,6 +398,7 @@ html.dark {
   --toggle-icon-moon: #4b48db;
   --bthBgColor: #ffffff;
   --search-bg: #2e2e2e;
+  --search-text: #f4f4f4;
   --search-border: #f4f4f4;
   --search-btn-fill: #f4f4f4;
   --calendar-border: #f4f4f4;
