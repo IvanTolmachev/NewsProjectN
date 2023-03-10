@@ -5,25 +5,34 @@
   z-index: -1;
 }
 
-.date-title.rotate .icon-down-read-pg{
+.date-title.rotate .icon-down-read-pg {
   transition: transform $durationFunction $timingFunction;
-    transform: rotate(-180deg);
-  }
-  
-  .section-read {
-    padding: 60px;
-  }
+  transform: rotate(-180deg);
+}
 
-  .date-title {
-    border-bottom: 1px solid #929292;
-    padding-bottom: 12px;
-    margin-bottom: 18px;
-  }       
+.section-read {
+  padding-top: 40px;
+  padding-bottom: 140px;
+  @include tablet {
+    padding-top: 48px;
+    padding-bottom: 180px;
+  }
+  @include desktop {
+    padding-top: 60px;
+    padding-bottom: 210px;
+  }
+}
 
-  .data-block .btn-span {
-    pointer-events: none;
-    z-index: -1;
-  }  
+.date-title {
+  border-bottom: 1px solid #929292;
+  padding-bottom: 12px;
+  margin-bottom: 18px;
+}
+
+.data-block .btn-span {
+  pointer-events: none;
+  z-index: -1;
+}
 
 .btn-span {
   font-size: 14px;
