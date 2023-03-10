@@ -1,6 +1,5 @@
 const STORAGE_KEY_FAVORITE = 'favoriteNews';
 const STORAGE_KEY_READ = 'readNews';
-// const favoriteList = document.querySelector('.gallery');
 const itemListRef = document.querySelector('.item-list');
 
 itemListRef.addEventListener('click', getFavoriteId);
@@ -33,15 +32,11 @@ function removeFromFavorite(id) {
   const favoriteUse = document.querySelector(
     `li[data-target-id='${id}'] use.js-is-favorite`
   );
-  // const galleryItem = document.querySelector(
-  //   `li[data-target-id='${id}']`
-  // );
 
   let storageNews = JSON.parse(localStorage.getItem(STORAGE_KEY_FAVORITE));
   const removedNewIndex = storageNews.findIndex(item => item.id === id);
   storageNews.splice(removedNewIndex, 1);
   localStorage.setItem(STORAGE_KEY_FAVORITE, JSON.stringify(storageNews));
-  //Якщо не має улюблених новин, очищаємо localStorage
   storageNews = JSON.parse(localStorage.getItem(STORAGE_KEY_FAVORITE));
   if (storageNews.length === 0) {
     localStorage.removeItem(STORAGE_KEY_FAVORITE);
@@ -54,8 +49,6 @@ function removeFromFavorite(id) {
   favoriteSvg.classList.replace('js-is-favorite', 'js-tartet-favorite');
   favoriteSvg.classList.replace('fill-heard', 'wrap-image__icon');
   favoriteUse.classList.replace('js-is-favorite', 'js-tartet-favorite');
-
-  // galleryItem.remove()
 }
 
 function saveFavotiteNew(id) {
@@ -76,7 +69,6 @@ function saveFavotiteNew(id) {
   const ReadNews = JSON.parse(localStorage.getItem(STORAGE_KEY_READ));
 
   const favoriteNew = ReadNews.find(item => item.id === id);
-  console.log('🚀 ~ saveFavotiteNew ~ favoriteNew:', favoriteNew);
 
   if (!favoriteNews) {
     const firstNew = [];
@@ -93,6 +85,5 @@ function saveFavotiteNew(id) {
   favoriteUse.classList.replace('js-tartet-favorite', 'js-is-favorite');
 
   favoriteBtnText.textContent = 'Remove from favorite';
-  //favoriteSvg.classList.replace(oldClass, newClass)
   favoriteSvg.classList.replace('wrap-image__icon', 'fill-heard');
 }

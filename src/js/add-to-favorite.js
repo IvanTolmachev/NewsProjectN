@@ -108,8 +108,7 @@ function removeFromFavorite(id) {
   favoriteUse.classList.replace('js-is-favorite', 'js-tartet-favorite');
 
   changeFavoriteBtnText(favoriteBtnText);
-
-  //favoriteSvg.classList.replace(oldClass, newClass)
+  
   favoriteSvg.classList.replace('fill-heard', 'wrap-image__icon');
 }
 

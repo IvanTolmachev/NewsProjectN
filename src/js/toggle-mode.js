@@ -1,5 +1,4 @@
 const switchInputEl = document.querySelector('.switch__input');
-// const switchInputEl = document.querySelector('.switch');
 const switchInputElMobile = document.querySelector('.switch__input_mobile');
 switchInputEl.addEventListener('click', onToggleBtn);
 switchInputElMobile.addEventListener('click', onToggleBtn);

@@ -8,11 +8,5 @@ function iconSearchClick() {
   if (document.documentElement.clientWidth < 768) {
     headerInput.classList.toggle('mob-input');
     iconSearch.classList.toggle('mob-icon-position');
-    // iconSearch.style.position = 'absolute';
-    // iconSearch.style.top = '6px';
-    // iconSearch.style.left = '14px';
-    // }}
-    // if (!headerInput.classList.contains('mob-input')) {
-    //   iconSearch.style.position= '';
   }
 }

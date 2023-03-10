@@ -1,13 +1,11 @@
 const iconHeart = new URL('../images/icon.svg', import.meta.url);
 const btnMoreRead = document.querySelector('.dropbtn');
 const dropIcon = document.querySelector('.icon-down-read-pg');
-// const dateListRef = document.querySelector('.date-list');
 const errorRequest = document.querySelector('.errorRequest');
 const itemListRef = document.querySelector('.item-list');
 
 const STORAGE_KEY = 'readNews';
 const STORAGE_KEY_FAVORITE = 'favoriteNews';
-// ++++++++++++++++++++++++
 
 const storageJson = localStorage.getItem(STORAGE_KEY);
 console.log('🚀 ~ createMarkupRead ~ storageJson:', storageJson);
@@ -34,11 +32,7 @@ export function createMarkupRead(arr) {
         media,
         imgUrl,
       }) => {
-        // let imgUrl = media.map(media => media['media-metadata'][2].url);
         let newDateStr = published_date;
-        //Проверка есть ли эта новость в Favorite
-        // checkIsNewFavorite(id)
-        // console.log("🚀 ~ storageNews:", storageNews)
         if (
           Boolean(favoriteNews) &&
           favoriteNews.some(el => Number(el.id) === Number(id))
@@ -71,7 +65,6 @@ export function createMarkupRead(arr) {
                   <p class="wrap-image__active visually-hidden">Already read</p>
           </li>`;
         }
-        //
         else
           return `
            <li class="card  js-card-item" data-target-id="${id}">
@@ -103,14 +96,10 @@ export function createMarkupRead(arr) {
   itemListRef.insertAdjacentHTML('beforeend', markup);
 }
 
-//createMarkupRead(storageData);
-
 btnMoreRead.addEventListener('click', function () {
   itemListRef.classList.toggle('show');
   dropIcon.classList.toggle('rotate');
 });
-
-//readDateCard(storageData);
 
 function readDateCard(items) {
   console.log(items);
@@ -127,5 +116,3 @@ function readDateCard(items) {
     .join('');
   btnMoreRead.insertAdjacentHTML('beforeend', markup);
 }
-
-// items.sort((a, b) => new Date(b.readDateNew) - new Date(a.readDateNew));

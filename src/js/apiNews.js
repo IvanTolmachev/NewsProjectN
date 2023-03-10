@@ -1,28 +1,9 @@
 import axios from 'axios';
 import { makeURL } from './apiUrl';
 const DEFAULT_PLUG = new URL('../images/blank.webp', import.meta.url);
-//import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-//! масив для якихось цілей. В ньому будуть лежати обєкти
-//! з останньго запиту як в картці
 
 export const arrLastData = [];
-
-//! запит до сервера модифікований
-//! можно використовувати стандартний
-//! timeout можно не задавати, то я робив
-//! для перевірки навантаження з можливістю
-//! примусового збросу запиту
-
-// export async function getData(url, timeout = 5000) {
-//   const controller = new AbortController();
-//   const id = setTimeout(() => controller.abort(), timeout);
-//   const response = await axios.get(url, {
-//     signal: controller.signal,
-//   });
-//   clearTimeout(id);
-//   return response;
-// }
 
 let preLoader = document.querySelector('.preloader');
 preLoader.classList.add('loaded');
@@ -42,11 +23,6 @@ export async function getData(url, timeout = 5000) {
   return response;
 }
 
-//! Отримання данних з серверу
-//! Заточено під сервер api.nytimes.com працює з
-//! усіма розділами сервера
-//! приймає валідний URL та повертає масив з даними
-//!  обробка різних 4хх помилок і відображення відповідної сторінки
 
 export async function makeData(url) {
   const URL = makeURL(url);
@@ -77,17 +53,9 @@ export async function makeData(url) {
   }
 }
 
-//! нормалізація данних від сервера
-//! на вхід іде обєкт з массиву даних від сервера
-//! на виході обєкт з перевіренних данних
-//! для рендеру картки
-//TODO треба нормальна перевірка мультімедіі з обиранням найліпшого варіанта
-//? час та натхнення
-//* ======= розділ Section (категорії)
 export function dataSectionNormalize(item) {
   const { uri, url, title, section, abstract, published_date, multimedia } =
     item;
-  //const id = uri;
   const imgUrl = multimedia !== null ? multimedia[2].url : DEFAULT_PLUG;
   const newDateStr = published_date
     .slice(0, published_date.indexOf('T'))
@@ -98,7 +66,6 @@ export function dataSectionNormalize(item) {
   return { id: uri, url, title, section, abstract, imgUrl, newDateStr };
 }
 
-//* ======= розділ Article Search (пошук по запиту)
 export function dataArticleSearchNormalize(item) {
   const {
     uri,
@@ -131,11 +98,9 @@ export function dataArticleSearchNormalize(item) {
   };
 }
 
-//* ======= розділ Most Popular (популярні новини)
 
 export function dataMostPopularNormalize(item) {
   const { uri, url, title, section, abstract, published_date, media } = item;
-  //const id = uri;
   const imgUrl =
     media.length !== 0 ? media[0]['media-metadata'][2].url : DEFAULT_PLUG;
   const newDateStr = published_date
@@ -147,8 +112,6 @@ export function dataMostPopularNormalize(item) {
   return { id: uri, url, title, section, abstract, imgUrl, newDateStr };
 }
 
-//! рендер картки (сам поцупив)
-//! на вхід треба передати нормалізований обїект
 const iconHeart = new URL('../images/icon.svg', import.meta.url);
 
 export function createCard(item) {

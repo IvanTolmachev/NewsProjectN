@@ -8,7 +8,7 @@ import { articleSearchNews, countSearch } from './apiUrl';
 import { saveLS } from './lStorage';
 import { savedApiData } from './cards';
 import { valuePage, makePaginationsBtnMurkUp } from './pagination';
-//import { restart } from './filter-categories';
+
 
 const LS_KEY = 'lastSearch';
 const gallery = document.querySelector('.gallery');

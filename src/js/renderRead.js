@@ -26,7 +26,6 @@ export function renderFromLS(key) {
   favoritNews.push({ readDate: '0' });
   const tempBlock = [];
   favoritNews.forEach(i => {
-    //i.classList.add('inRead');
     if (readDate !== i.readDate) {
       const dateTitle = document.createElement('div');
       dateTitle.innerHTML = `<span class="btn-span">${readDate}</span>

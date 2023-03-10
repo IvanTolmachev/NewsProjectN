@@ -56,7 +56,6 @@ export async function makeSectionNews(url) {
     const news = await makeData(url);
     arrLastData.push(...news.map(dataSectionNormalize));
     savedApiData.push(...arrLastData);
-    // console.log(arrLastData.length);
     gallery.innerHTML = arrLastData.map(createCard).join('');
     gallery.prepend(weather);
 
@@ -73,26 +72,11 @@ export async function makeSectionNews(url) {
 
 export function restart() {
   const element = document.querySelector('.gallery');
-  // const maxWidth = element.getBoundingClientRect().width;
   const style = window.getComputedStyle(element, null);
-
-  //countSearch.rowCount = 1;
-  // countSearch.sectionCount = 0;
-  // countSearch.perPage = 4;
   valuePage.totalPage = Math.floor(countSearch.newsCount / countSearch.perPage);
 
   if (countSearch.rowCount === +style.getPropertyValue('--countCard')) return;
   countSearch.rowCount = +style.getPropertyValue('--countCard');
-  // if (maxWidth >= 768) {
-  //   countSearch.sectionCount = 4;
-  //   countSearch.rowCount = 2;
-  //   countSearch.perPage = 7;
-  // }
-  // if (maxWidth >= 1280) {
-  //   countSearch.sectionCount = 6;
-  //   countSearch.rowCount = 3;
-  //   countSearch.perPage = 8;
-  // }
 
   switch (countSearch.rowCount) {
     case 1:
@@ -148,8 +132,6 @@ function sortSections() {
   listHide.append(...elementHide);
 }
 
-//!=== listener
-
 showHideCategoriesBtn.addEventListener('click', () => {
   filterItems.classList.toggle('filter-show');
   categoriesIcon.classList.toggle('rotate');
@@ -164,7 +146,6 @@ categories.addEventListener('click', e => {
     e.target.nodeName === 'LI' &&
     e.target.classList.contains('categories__item')
   ) {
-    //  console.log(countSearch.perPage);
     const listItem = categories.querySelectorAll('.categories__item');
     listItem.forEach(item => item.classList.remove('activ'));
     e.target.classList.add('activ');

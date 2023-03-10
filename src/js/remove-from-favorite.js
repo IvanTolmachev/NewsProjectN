@@ -30,7 +30,6 @@ function removeFromFavorite(id) {
   const removedNewIndex = storageNews.findIndex(item => item.id === id);
   storageNews.splice(removedNewIndex, 1);
   localStorage.setItem(STORAGE_KEY_FAVORITE, JSON.stringify(storageNews));
-  //Якщо не має улюблених новин, очищаємо localStorage
   storageNews = JSON.parse(localStorage.getItem(STORAGE_KEY_FAVORITE));
   if (storageNews.length === 0) {
     localStorage.removeItem(STORAGE_KEY_FAVORITE);
