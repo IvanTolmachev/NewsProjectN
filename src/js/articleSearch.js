@@ -8,6 +8,7 @@ import { articleSearchNews, countSearch } from './apiUrl';
 import { saveLS } from './lStorage';
 import { savedApiData } from './cards';
 import { valuePage, makePaginationsBtnMurkUp } from './pagination';
+//import { restart } from './filter-categories';
 
 const LS_KEY = 'lastSearch';
 const gallery = document.querySelector('.gallery');
@@ -23,7 +24,9 @@ export async function makeArticleSectionNews(url) {
   try {
     const news = await makeData(url);
     arrLastData.push(...news.map(dataArticleSearchNormalize));
+
     arrLastData.splice(countSearch.perPage);
+
     savedApiData.push(...arrLastData);
     gallery.innerHTML = arrLastData.map(createCard).join('');
     gallery.prepend(weather);
@@ -34,8 +37,8 @@ export async function makeArticleSectionNews(url) {
 
 searhForm.addEventListener('submit', e => {
   e.preventDefault();
-  const searchNews = e.target.searchQuery.value.trim();
 
+  const searchNews = e.target.searchQuery.value.trim();
   e.currentTarget.reset();
 
   if (!searchNews) {
