@@ -22,11 +22,9 @@ export async function makeArticleSectionNews(url) {
   savedApiData.length = 0;
   try {
     const news = await makeData(url);
-
     arrLastData.push(...news.map(dataArticleSearchNormalize));
     arrLastData.splice(countSearch.perPage);
     savedApiData.push(...arrLastData);
-    console.log(arrLastData.length);
     gallery.innerHTML = arrLastData.map(createCard).join('');
     gallery.prepend(weather);
     errorRequest.classList.add('visually-hidden');
@@ -59,7 +57,8 @@ searhForm.addEventListener('submit', e => {
   }
 
   articleSearchNews.type = 'SEARCHE';
-  valuePage.curPage = 1;
   saveLS(LS_KEY, articleSearchNews);
   makeArticleSectionNews(articleSearchNews);
+  valuePage.curPage = 1;
+  makePaginationsBtnMurkUp();
 });
